@@ -218,7 +218,89 @@
       }
     </style>
   </head>
+  <style>
+    #loading-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: #0c0a0a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.6s ease;
+    }
+    #loading-screen.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+    #loading-video {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+    }
+  </style>
   <body class="font-body-md text-body-md overflow-x-hidden">
+    <!-- Loading screen -->
+    <div id="loading-screen">
+      <video
+        id="loading-video"
+        src="assets/loading.mp4"
+        autoplay
+        muted
+        playsinline
+      ></video>
+    </div>
+
+    <script>
+      (function () {
+        const screen = document.getElementById("loading-screen");
+        const video = document.getElementById("loading-video");
+
+        let pageReady = false;
+        let hasPlayedOnce = false;
+
+        const tryDismiss = () => {
+          if (pageReady && hasPlayedOnce) {
+            screen.classList.add("fade-out");
+            screen.addEventListener(
+              "transitionend",
+              () => {
+                screen.style.display = "none";
+              },
+              { once: true },
+            );
+          }
+        };
+
+        // Track when the page (DOM + subresources) is ready
+        if (document.readyState === "complete") {
+          pageReady = true;
+        } else {
+          window.addEventListener("load", () => {
+            pageReady = true;
+            tryDismiss();
+          });
+        }
+
+        video.addEventListener("ended", () => {
+          hasPlayedOnce = true;
+          if (pageReady) {
+            tryDismiss();
+          } else {
+            // Page not ready yet — loop the video
+            video.loop = true;
+            video.play();
+          }
+        });
+
+        // Fallback: if video fails to play, don't block forever
+        video.addEventListener("error", () => {
+          hasPlayedOnce = true;
+          tryDismiss();
+        });
+      })();
+    </script>
+
     <div class="noise-overlay"></div>
     <!-- TopAppBar -->
     <nav
