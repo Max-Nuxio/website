@@ -23,6 +23,7 @@ exports.handler = async (event) => {
   const resendFrom = process.env.RESEND_FROM || "Nuxio <support@nuxio.nl>";
 
   if (!resendApiKey) {
+    console.error("RESEND_API_KEY missing in function environment");
     return {
       statusCode: 500,
       headers: jsonHeaders,
@@ -37,6 +38,7 @@ exports.handler = async (event) => {
   try {
     payload = JSON.parse(event.body || "{}");
   } catch {
+    console.error("Invalid JSON payload received", event.body);
     return {
       statusCode: 400,
       headers: jsonHeaders,
@@ -55,6 +57,11 @@ exports.handler = async (event) => {
   const message = (payload.message || "").trim();
 
   if (!name || !email || !message) {
+    console.error("Missing required fields", {
+      hasName: Boolean(name),
+      hasEmail: Boolean(email),
+      hasMessage: Boolean(message),
+    });
     return {
       statusCode: 400,
       headers: jsonHeaders,
@@ -121,6 +128,12 @@ exports.handler = async (event) => {
   const resendResult = await resendResponse.json().catch(() => ({}));
 
   if (!resendResponse.ok) {
+    console.error("Resend API request failed", {
+      status: resendResponse.status,
+      response: resendResult,
+      from: resendFrom,
+      to: email,
+    });
     return {
       statusCode: 502,
       headers: jsonHeaders,

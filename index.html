@@ -1268,12 +1268,22 @@
             })
               .then(async (response) => {
                 if (!response.ok) {
-                  throw new Error("confirmation_email_failed");
+                  const errorResult = await response.json().catch(() => null);
+                  throw new Error(
+                    (errorResult && errorResult.message) ||
+                      "confirmation_email_failed",
+                  );
                 }
               })
-              .catch(() => {
+              .catch((error) => {
+                if (offerteError) {
+                  offerteError.textContent =
+                    "Aanvraag ontvangen, maar de bevestigingsmail kon niet worden verzonden. We nemen alsnog contact op.";
+                  offerteError.classList.remove("hidden");
+                }
                 trackEvent("offerte_confirmation_email_error", {
                   reason: "function_failed",
+                  message: error.message || "unknown",
                 });
               });
 
