@@ -4,7 +4,9 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Nuxio | Vakmanschap in digitale precisie</title>
+    <title id="page-title" data-i18n-key="page_title">
+      Nuxio | Vakmanschap in digitale precisie
+    </title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
@@ -236,33 +238,50 @@
             >Nux<span class="text-primary">io</span></span
           >
         </div>
-        <div class="hidden md:flex items-center gap-8">
-          <a
-            class="font-button text-button text-text-muted hover:text-text-primary transition-colors"
-            href="#werkwijze"
-            >Werkwijze</a
+        <div class="flex items-center gap-3 md:gap-6">
+          <label class="sr-only" for="language-select">Taal</label>
+          <select
+            class="bg-surface border border-border-subtle text-text-primary text-sm px-3 py-2 focus:border-primary focus:ring-0"
+            id="language-select"
+            aria-label="Kies taal"
           >
-          <a
-            class="font-button text-button text-text-muted hover:text-text-primary transition-colors"
-            href="#prijzen"
-            >Prijzen</a
-          >
-          <a
-            class="font-button text-button text-text-muted hover:text-text-primary transition-colors"
-            href="#contact"
-            >Contact</a
-          >
-          <button
-            class="bg-primary text-on-primary px-6 py-3 font-button text-button font-bold hover:brightness-110 active:scale-95 transition-all"
-            type="button"
-            data-offerte-cta="true"
-          >
-            Offerte aanvragen
+            <option value="nl">NL</option>
+            <option value="en">EN</option>
+          </select>
+
+          <div class="hidden md:flex items-center gap-8">
+            <a
+              class="font-button text-button text-text-muted hover:text-text-primary transition-colors"
+              href="#werkwijze"
+              data-i18n-key="nav_process"
+              >Werkwijze</a
+            >
+            <a
+              class="font-button text-button text-text-muted hover:text-text-primary transition-colors"
+              href="#prijzen"
+              data-i18n-key="nav_pricing"
+              >Prijzen</a
+            >
+            <a
+              class="font-button text-button text-text-muted hover:text-text-primary transition-colors"
+              href="#contact"
+              data-i18n-key="nav_contact"
+              >Contact</a
+            >
+            <button
+              class="bg-primary text-on-primary px-6 py-3 font-button text-button font-bold hover:brightness-110 active:scale-95 transition-all"
+              type="button"
+              data-offerte-cta="true"
+              data-i18n-key="nav_quote"
+            >
+              Offerte aanvragen
+            </button>
+          </div>
+
+          <button class="md:hidden text-text-primary" aria-label="Open menu">
+            <span class="material-symbols-outlined" data-icon="menu">menu</span>
           </button>
         </div>
-        <button class="md:hidden text-text-primary">
-          <span class="material-symbols-outlined" data-icon="menu">menu</span>
-        </button>
       </div>
     </nav>
     <main class="pt-20">
@@ -1088,6 +1107,62 @@
           });
         });
       });
+
+      // Lightweight language switcher for navbar labels
+      const languageSelect = document.getElementById("language-select");
+      const i18nText = {
+        nl: {
+          page_title: "Nuxio | Vakmanschap in digitale precisie",
+          nav_process: "Werkwijze",
+          nav_pricing: "Prijzen",
+          nav_contact: "Contact",
+          nav_quote: "Offerte aanvragen",
+        },
+        en: {
+          page_title: "Nuxio | Craftsmanship in digital precision",
+          nav_process: "Process",
+          nav_pricing: "Pricing",
+          nav_contact: "Contact",
+          nav_quote: "Request a quote",
+        },
+      };
+
+      const applyLanguage = (language) => {
+        const selectedLanguage = i18nText[language] ? language : "nl";
+        const dictionary = i18nText[selectedLanguage];
+
+        document.documentElement.lang = selectedLanguage;
+
+        Object.keys(dictionary).forEach((key) => {
+          document
+            .querySelectorAll(`[data-i18n-key="${key}"]`)
+            .forEach((element) => {
+              element.textContent = dictionary[key];
+            });
+        });
+
+        if (languageSelect) {
+          languageSelect.value = selectedLanguage;
+          languageSelect.setAttribute(
+            "aria-label",
+            selectedLanguage === "nl" ? "Kies taal" : "Choose language",
+          );
+        }
+
+        window.localStorage.setItem("nuxio-language", selectedLanguage);
+      };
+
+      if (languageSelect) {
+        const savedLanguage =
+          window.localStorage.getItem("nuxio-language") ||
+          document.documentElement.lang ||
+          "nl";
+        applyLanguage(savedLanguage);
+
+        languageSelect.addEventListener("change", (event) => {
+          applyLanguage(event.target.value);
+        });
+      }
 
       // Offerte CTA + form gedrag
       const offerteModal = document.getElementById("offerte-modal");
