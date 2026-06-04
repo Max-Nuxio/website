@@ -254,6 +254,8 @@
           >
           <button
             class="bg-primary text-on-primary px-6 py-3 font-button text-button font-bold hover:brightness-110 active:scale-95 transition-all"
+            type="button"
+            data-offerte-cta="true"
           >
             Offerte aanvragen
           </button>
@@ -288,6 +290,8 @@
         <div class="flex flex-col md:flex-row gap-4 mb-16">
           <button
             class="bg-primary text-on-primary px-10 py-4 font-button text-button font-bold hover:brightness-110 active:scale-95 transition-all"
+            type="button"
+            data-offerte-cta="true"
           >
             Start je project
           </button>
@@ -768,6 +772,8 @@
             </p>
             <button
               class="bg-primary text-on-primary px-12 py-5 font-button text-button font-bold text-lg hover:brightness-110 active:scale-95 transition-all shadow-xl shadow-primary/20"
+              type="button"
+              data-offerte-cta="true"
             >
               Vraag direct een offerte aan
             </button>
@@ -780,6 +786,131 @@
               >
             </p>
           </div>
+        </div>
+      </section>
+
+      <!-- Offerteformulier -->
+      <section
+        class="pb-24 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto"
+        id="offerte-formulier"
+      >
+        <div class="bg-surface border border-border-subtle p-8 md:p-12">
+          <div class="mb-8">
+            <h3 class="font-headline-md text-headline-md mb-2">
+              Vraag je offerte aan
+            </h3>
+            <p class="text-text-muted text-sm md:text-base">
+              Vul hieronder je gegevens in. Je ontvangt binnen 24 uur een
+              heldere offerte op maat.
+            </p>
+          </div>
+
+          <form class="grid grid-cols-1 md:grid-cols-2 gap-5" id="offerteForm">
+            <div>
+              <label class="block text-sm mb-2" for="naam">Naam *</label>
+              <input
+                class="w-full bg-background border border-border-subtle px-4 py-3 focus:border-primary focus:ring-0"
+                id="naam"
+                name="naam"
+                required=""
+                type="text"
+                autocomplete="name"
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm mb-2" for="email">E-mail *</label>
+              <input
+                class="w-full bg-background border border-border-subtle px-4 py-3 focus:border-primary focus:ring-0"
+                id="email"
+                name="email"
+                required=""
+                type="email"
+                autocomplete="email"
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm mb-2" for="telefoon"
+                >Telefoon *</label
+              >
+              <input
+                class="w-full bg-background border border-border-subtle px-4 py-3 focus:border-primary focus:ring-0"
+                id="telefoon"
+                name="telefoon"
+                required=""
+                type="tel"
+                autocomplete="tel"
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm mb-2" for="bedrijf">Bedrijf</label>
+              <input
+                class="w-full bg-background border border-border-subtle px-4 py-3 focus:border-primary focus:ring-0"
+                id="bedrijf"
+                name="bedrijf"
+                type="text"
+                autocomplete="organization"
+              />
+            </div>
+
+            <div class="md:col-span-2">
+              <label class="block text-sm mb-2" for="pakket"
+                >Gewenst pakket *</label
+              >
+              <select
+                class="w-full bg-background border border-border-subtle px-4 py-3 focus:border-primary focus:ring-0"
+                id="pakket"
+                name="pakket"
+                required=""
+              >
+                <option value="">Kies een pakket</option>
+                <option value="starter">Starter (€499)</option>
+                <option value="business">Business (€699)</option>
+                <option value="pro">Pro (€1.199)</option>
+                <option value="maatwerk">Maatwerk</option>
+              </select>
+            </div>
+
+            <div class="md:col-span-2">
+              <label class="block text-sm mb-2" for="toelichting"
+                >Korte toelichting *</label
+              >
+              <textarea
+                class="w-full min-h-32 bg-background border border-border-subtle px-4 py-3 focus:border-primary focus:ring-0"
+                id="toelichting"
+                name="toelichting"
+                required=""
+                placeholder="Wat wil je laten bouwen en wanneer wil je live?"
+              ></textarea>
+            </div>
+
+            <div
+              class="md:col-span-2 flex flex-col sm:flex-row sm:items-center gap-4"
+            >
+              <button
+                class="bg-primary text-on-primary px-8 py-4 font-button text-button font-bold hover:brightness-110 active:scale-95 transition-all"
+                id="offerteSubmit"
+                type="submit"
+              >
+                Verstuur aanvraag
+              </button>
+              <p class="text-xs text-text-muted">
+                Velden met * zijn verplicht.
+              </p>
+            </div>
+
+            <p
+              class="md:col-span-2 text-sm text-primary hidden"
+              id="offerteSuccess"
+              role="status"
+              aria-live="polite"
+            >
+              Bedankt. Je aanvraag is verzonden. We reageren binnen 24 uur met
+              een duidelijke offerte.
+            </p>
+          </form>
         </div>
       </section>
     </main>
@@ -804,7 +935,7 @@
           </div>
           <p class="text-text-muted">
             Snel live. Vaste prijs. Geen gedoe. Wij bouwen high-end websites
-            voor het MKB met de precisie van een ambachtman.
+            voor het MKB met de precisie van een ambachtsman.
           </p>
           <div class="flex gap-4">
             <span
@@ -866,7 +997,7 @@
         class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop py-8 border-t border-border-subtle flex flex-col md:flex-row justify-between items-center gap-4"
       >
         <p class="text-text-muted text-xs">
-          © 2024 Nuxio. Vakmanschap in digitale precisie.
+          © 2026 Nuxio. Vakmanschap in digitale precisie.
         </p>
         <div class="flex items-center gap-2">
           <span class="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
@@ -880,12 +1011,92 @@
       // Smooth scroll for anchors
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         anchor.addEventListener("click", function (e) {
+          const targetSelector = this.getAttribute("href");
+          if (!targetSelector || targetSelector === "#") {
+            return;
+          }
+
+          const target = document.querySelector(targetSelector);
+          if (!target) {
+            return;
+          }
+
           e.preventDefault();
-          document.querySelector(this.getAttribute("href")).scrollIntoView({
+          target.scrollIntoView({
             behavior: "smooth",
           });
         });
       });
+
+      // Offerte CTA + form gedrag
+      const offerteSection = document.getElementById("offerte-formulier");
+      const offerteForm = document.getElementById("offerteForm");
+      const offerteSuccess = document.getElementById("offerteSuccess");
+      const offerteSubmit = document.getElementById("offerteSubmit");
+      const firstInput = document.getElementById("naam");
+
+      const trackEvent = (eventName, eventData = {}) => {
+        if (Array.isArray(window.dataLayer)) {
+          window.dataLayer.push({ event: eventName, ...eventData });
+        }
+        if (window.console && typeof window.console.info === "function") {
+          window.console.info("[tracking]", eventName, eventData);
+        }
+      };
+
+      document.querySelectorAll('[data-offerte-cta="true"]').forEach((btn) => {
+        btn.addEventListener("click", () => {
+          if (!offerteSection) {
+            return;
+          }
+
+          offerteSection.scrollIntoView({ behavior: "smooth" });
+          window.setTimeout(() => {
+            if (firstInput) {
+              firstInput.focus();
+            }
+          }, 450);
+
+          trackEvent("offerte_cta_click", { location: "landing" });
+        });
+      });
+
+      if (offerteForm) {
+        offerteForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+
+          if (!offerteForm.reportValidity()) {
+            trackEvent("offerte_form_validation_error");
+            return;
+          }
+
+          const formData = new FormData(offerteForm);
+          const payload = Object.fromEntries(formData.entries());
+
+          if (offerteSubmit) {
+            offerteSubmit.disabled = true;
+            offerteSubmit.textContent = "Versturen...";
+          }
+
+          window.setTimeout(() => {
+            offerteForm.reset();
+            if (offerteSuccess) {
+              offerteSuccess.classList.remove("hidden");
+            }
+            if (offerteSubmit) {
+              offerteSubmit.disabled = false;
+              offerteSubmit.textContent = "Verstuur aanvraag";
+            }
+            if (firstInput) {
+              firstInput.focus();
+            }
+
+            trackEvent("offerte_form_submit", {
+              pakket: payload.pakket || "onbekend",
+            });
+          }, 500);
+        });
+      }
 
       // Simple scroll reveal effect
       const observerOptions = {
