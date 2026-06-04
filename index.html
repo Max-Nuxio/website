@@ -1103,6 +1103,8 @@
         '[data-offerte-close="true"]',
       );
       const web3formsEndpoint = "https://api.web3forms.com/submit";
+      const confirmationEndpoint =
+        "/.netlify/functions/send-offerte-confirmation";
 
       const trackEvent = (eventName, eventData = {}) => {
         if (Array.isArray(window.dataLayer)) {
@@ -1245,6 +1247,35 @@
             if (offerteSuccess) {
               offerteSuccess.classList.remove("hidden");
             }
+
+            // Try to send a branded confirmation email, but do not fail
+            // the already successful offerte submission if this step fails.
+            const confirmationPayload = {
+              name: payload.name || "",
+              email: payload.email || "",
+              telefoon: payload.telefoon || "",
+              bedrijf: payload.bedrijf || "",
+              pakket: payload.pakket || "",
+              message: payload.message || "",
+            };
+
+            fetch(confirmationEndpoint, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(confirmationPayload),
+            })
+              .then(async (response) => {
+                if (!response.ok) {
+                  throw new Error("confirmation_email_failed");
+                }
+              })
+              .catch(() => {
+                trackEvent("offerte_confirmation_email_error", {
+                  reason: "function_failed",
+                });
+              });
 
             trackEvent("offerte_form_submit", {
               pakket: payload.pakket || "onbekend",

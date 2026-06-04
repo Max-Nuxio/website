@@ -49,6 +49,26 @@ Publiceren kan bijvoorbeeld via:
 - Vercel
 - GitHub Pages
 
+## Netlify autoresponder setup
+
+Voor een mooie bevestigingsmail naar de invuller is in deze repo een Netlify
+Function toegevoegd:
+
+- netlify/functions/send-offerte-confirmation.js
+
+Deze functie verstuurt via Resend een HTML bevestigingsmail naar het e-mailadres
+uit het offerteformulier.
+
+Zet in Netlify bij Site configuration -> Environment variables:
+
+- RESEND_API_KEY: je Resend API key
+- RESEND_FROM: bijvoorbeeld `Nuxio <support@nuxio.nl>`
+
+Belangrijk:
+
+- Verifieer je domein (nuxio.nl) in Resend.
+- Zet SPF, DKIM en DMARC DNS-records goed voor betere deliverability.
+
 ## Git workflow
 
 Kleine wijzigingen worden in aparte commits vastgelegd en gepusht naar main.
