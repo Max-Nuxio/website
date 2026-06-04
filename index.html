@@ -789,128 +789,161 @@
         </div>
       </section>
 
-      <!-- Offerteformulier -->
+      <!-- Offerte modal -->
       <section
-        class="pb-24 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto"
-        id="offerte-formulier"
+        class="hidden fixed inset-0 z-[70]"
+        id="offerte-modal"
+        aria-hidden="true"
       >
-        <div class="bg-surface border border-border-subtle p-8 md:p-12">
-          <div class="mb-8">
-            <h3 class="font-headline-md text-headline-md mb-2">
-              Vraag je offerte aan
-            </h3>
-            <p class="text-text-muted text-sm md:text-base">
-              Vul hieronder je gegevens in. Je ontvangt binnen 24 uur een
-              heldere offerte op maat.
-            </p>
-          </div>
-
-          <form class="grid grid-cols-1 md:grid-cols-2 gap-5" id="offerteForm">
-            <div>
-              <label class="block text-sm mb-2" for="naam">Naam *</label>
-              <input
-                class="w-full bg-background border border-border-subtle px-4 py-3 focus:border-primary focus:ring-0"
-                id="naam"
-                name="naam"
-                required=""
-                type="text"
-                autocomplete="name"
-              />
-            </div>
-
-            <div>
-              <label class="block text-sm mb-2" for="email">E-mail *</label>
-              <input
-                class="w-full bg-background border border-border-subtle px-4 py-3 focus:border-primary focus:ring-0"
-                id="email"
-                name="email"
-                required=""
-                type="email"
-                autocomplete="email"
-              />
-            </div>
-
-            <div>
-              <label class="block text-sm mb-2" for="telefoon"
-                >Telefoon *</label
-              >
-              <input
-                class="w-full bg-background border border-border-subtle px-4 py-3 focus:border-primary focus:ring-0"
-                id="telefoon"
-                name="telefoon"
-                required=""
-                type="tel"
-                autocomplete="tel"
-              />
-            </div>
-
-            <div>
-              <label class="block text-sm mb-2" for="bedrijf">Bedrijf</label>
-              <input
-                class="w-full bg-background border border-border-subtle px-4 py-3 focus:border-primary focus:ring-0"
-                id="bedrijf"
-                name="bedrijf"
-                type="text"
-                autocomplete="organization"
-              />
-            </div>
-
-            <div class="md:col-span-2">
-              <label class="block text-sm mb-2" for="pakket"
-                >Gewenst pakket *</label
-              >
-              <select
-                class="w-full bg-background border border-border-subtle px-4 py-3 focus:border-primary focus:ring-0"
-                id="pakket"
-                name="pakket"
-                required=""
-              >
-                <option value="">Kies een pakket</option>
-                <option value="starter">Starter (€499)</option>
-                <option value="business">Business (€699)</option>
-                <option value="pro">Pro (€1.199)</option>
-                <option value="maatwerk">Maatwerk</option>
-              </select>
-            </div>
-
-            <div class="md:col-span-2">
-              <label class="block text-sm mb-2" for="toelichting"
-                >Korte toelichting *</label
-              >
-              <textarea
-                class="w-full min-h-32 bg-background border border-border-subtle px-4 py-3 focus:border-primary focus:ring-0"
-                id="toelichting"
-                name="toelichting"
-                required=""
-                placeholder="Wat wil je laten bouwen en wanneer wil je live?"
-              ></textarea>
-            </div>
-
-            <div
-              class="md:col-span-2 flex flex-col sm:flex-row sm:items-center gap-4"
-            >
+        <div
+          class="absolute inset-0 bg-black/70 backdrop-blur-sm"
+          data-offerte-close="true"
+        ></div>
+        <div
+          class="relative z-10 h-full w-full overflow-y-auto p-4 md:p-10 flex items-start md:items-center justify-center"
+        >
+          <div
+            class="w-full max-w-4xl bg-surface border border-border-subtle p-8 md:p-12 shadow-2xl shadow-black/40"
+            id="offerte-formulier"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="offerte-title"
+          >
+            <div class="flex items-start justify-between gap-4 mb-8">
+              <div>
+                <h3
+                  class="font-headline-md text-headline-md mb-2"
+                  id="offerte-title"
+                >
+                  Vraag je offerte aan
+                </h3>
+                <p class="text-text-muted text-sm md:text-base">
+                  Vul hieronder je gegevens in. Je ontvangt binnen 24 uur een
+                  heldere offerte op maat.
+                </p>
+              </div>
               <button
-                class="bg-primary text-on-primary px-8 py-4 font-button text-button font-bold hover:brightness-110 active:scale-95 transition-all"
-                id="offerteSubmit"
-                type="submit"
+                class="text-text-muted hover:text-text-primary transition-colors"
+                type="button"
+                data-offerte-close="true"
+                aria-label="Sluit offerteformulier"
               >
-                Verstuur aanvraag
+                <span class="material-symbols-outlined" data-icon="close"
+                  >close</span
+                >
               </button>
-              <p class="text-xs text-text-muted">
-                Velden met * zijn verplicht.
-              </p>
             </div>
 
-            <p
-              class="md:col-span-2 text-sm text-primary hidden"
-              id="offerteSuccess"
-              role="status"
-              aria-live="polite"
+            <form
+              class="grid grid-cols-1 md:grid-cols-2 gap-5"
+              id="offerteForm"
             >
-              Bedankt. Je aanvraag is verzonden. We reageren binnen 24 uur met
-              een duidelijke offerte.
-            </p>
-          </form>
+              <div>
+                <label class="block text-sm mb-2" for="naam">Naam *</label>
+                <input
+                  class="w-full bg-background border border-border-subtle px-4 py-3 focus:border-primary focus:ring-0"
+                  id="naam"
+                  name="naam"
+                  required=""
+                  type="text"
+                  autocomplete="name"
+                />
+              </div>
+
+              <div>
+                <label class="block text-sm mb-2" for="email">E-mail *</label>
+                <input
+                  class="w-full bg-background border border-border-subtle px-4 py-3 focus:border-primary focus:ring-0"
+                  id="email"
+                  name="email"
+                  required=""
+                  type="email"
+                  autocomplete="email"
+                />
+              </div>
+
+              <div>
+                <label class="block text-sm mb-2" for="telefoon"
+                  >Telefoon *</label
+                >
+                <input
+                  class="w-full bg-background border border-border-subtle px-4 py-3 focus:border-primary focus:ring-0"
+                  id="telefoon"
+                  name="telefoon"
+                  required=""
+                  type="tel"
+                  autocomplete="tel"
+                />
+              </div>
+
+              <div>
+                <label class="block text-sm mb-2" for="bedrijf">Bedrijf</label>
+                <input
+                  class="w-full bg-background border border-border-subtle px-4 py-3 focus:border-primary focus:ring-0"
+                  id="bedrijf"
+                  name="bedrijf"
+                  type="text"
+                  autocomplete="organization"
+                />
+              </div>
+
+              <div class="md:col-span-2">
+                <label class="block text-sm mb-2" for="pakket"
+                  >Gewenst pakket *</label
+                >
+                <select
+                  class="w-full bg-background border border-border-subtle px-4 py-3 focus:border-primary focus:ring-0"
+                  id="pakket"
+                  name="pakket"
+                  required=""
+                >
+                  <option value="">Kies een pakket</option>
+                  <option value="starter">Starter (€499)</option>
+                  <option value="business">Business (€699)</option>
+                  <option value="pro">Pro (€1.199)</option>
+                  <option value="maatwerk">Maatwerk</option>
+                </select>
+              </div>
+
+              <div class="md:col-span-2">
+                <label class="block text-sm mb-2" for="toelichting"
+                  >Korte toelichting *</label
+                >
+                <textarea
+                  class="w-full min-h-32 bg-background border border-border-subtle px-4 py-3 focus:border-primary focus:ring-0"
+                  id="toelichting"
+                  name="toelichting"
+                  required=""
+                  placeholder="Wat wil je laten bouwen en wanneer wil je live?"
+                ></textarea>
+              </div>
+
+              <div
+                class="md:col-span-2 flex flex-col sm:flex-row sm:items-center gap-4"
+              >
+                <button
+                  class="bg-primary text-on-primary px-8 py-4 font-button text-button font-bold hover:brightness-110 active:scale-95 transition-all"
+                  id="offerteSubmit"
+                  type="submit"
+                >
+                  Verstuur aanvraag
+                </button>
+                <p class="text-xs text-text-muted">
+                  Velden met * zijn verplicht.
+                </p>
+              </div>
+
+              <p
+                class="md:col-span-2 text-sm text-primary hidden"
+                id="offerteSuccess"
+                role="status"
+                aria-live="polite"
+              >
+                Bedankt. Je aanvraag is verzonden. We reageren binnen 24 uur met
+                een duidelijke offerte.
+              </p>
+            </form>
+          </div>
         </div>
       </section>
     </main>
@@ -1029,11 +1062,14 @@
       });
 
       // Offerte CTA + form gedrag
-      const offerteSection = document.getElementById("offerte-formulier");
+      const offerteModal = document.getElementById("offerte-modal");
       const offerteForm = document.getElementById("offerteForm");
       const offerteSuccess = document.getElementById("offerteSuccess");
       const offerteSubmit = document.getElementById("offerteSubmit");
       const firstInput = document.getElementById("naam");
+      const closeModalButtons = document.querySelectorAll(
+        '[data-offerte-close="true"]',
+      );
 
       const trackEvent = (eventName, eventData = {}) => {
         if (Array.isArray(window.dataLayer)) {
@@ -1044,21 +1080,55 @@
         }
       };
 
+      const openOfferteModal = () => {
+        if (!offerteModal) {
+          return;
+        }
+        offerteModal.classList.remove("hidden");
+        offerteModal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("overflow-hidden");
+
+        if (offerteSuccess) {
+          offerteSuccess.classList.add("hidden");
+        }
+
+        window.setTimeout(() => {
+          if (firstInput) {
+            firstInput.focus();
+          }
+        }, 120);
+      };
+
+      const closeOfferteModal = () => {
+        if (!offerteModal) {
+          return;
+        }
+        offerteModal.classList.add("hidden");
+        offerteModal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("overflow-hidden");
+      };
+
       document.querySelectorAll('[data-offerte-cta="true"]').forEach((btn) => {
         btn.addEventListener("click", () => {
-          if (!offerteSection) {
-            return;
-          }
-
-          offerteSection.scrollIntoView({ behavior: "smooth" });
-          window.setTimeout(() => {
-            if (firstInput) {
-              firstInput.focus();
-            }
-          }, 450);
-
+          openOfferteModal();
           trackEvent("offerte_cta_click", { location: "landing" });
         });
+      });
+
+      closeModalButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          closeOfferteModal();
+        });
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (
+          e.key === "Escape" &&
+          offerteModal &&
+          !offerteModal.classList.contains("hidden")
+        ) {
+          closeOfferteModal();
+        }
       });
 
       if (offerteForm) {
