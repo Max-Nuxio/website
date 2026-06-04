@@ -838,6 +838,16 @@
               class="grid grid-cols-1 md:grid-cols-2 gap-5"
               id="offerteForm"
             >
+              <input
+                id="web3forms-access-key"
+                name="access_key"
+                type="hidden"
+                value="VUL_HIER_JE_WEB3FORMS_ACCESS_KEY_IN"
+              />
+              <input name="subject" type="hidden" value="Nieuwe offerte aanvraag via nuxio.nl" />
+              <input name="from_name" type="hidden" value="Nuxio Website" />
+              <input name="botcheck" type="checkbox" class="hidden" style="display: none" />
+
               <div>
                 <label class="block text-sm mb-2" for="naam">Naam *</label>
                 <input
@@ -942,6 +952,13 @@
                 Bedankt. Je aanvraag is verzonden. We reageren binnen 24 uur met
                 een duidelijke offerte.
               </p>
+
+              <p
+                class="md:col-span-2 text-sm text-error hidden"
+                id="offerteError"
+                role="alert"
+                aria-live="assertive"
+              ></p>
             </form>
           </div>
         </div>
@@ -1065,11 +1082,16 @@
       const offerteModal = document.getElementById("offerte-modal");
       const offerteForm = document.getElementById("offerteForm");
       const offerteSuccess = document.getElementById("offerteSuccess");
+      const offerteError = document.getElementById("offerteError");
       const offerteSubmit = document.getElementById("offerteSubmit");
       const firstInput = document.getElementById("naam");
+      const web3formsAccessKeyInput = document.getElementById(
+        "web3forms-access-key",
+      );
       const closeModalButtons = document.querySelectorAll(
         '[data-offerte-close="true"]',
       );
+      const web3formsEndpoint = "https://api.web3forms.com/submit";
 
       const trackEvent = (eventName, eventData = {}) => {
         if (Array.isArray(window.dataLayer)) {
@@ -1090,6 +1112,10 @@
 
         if (offerteSuccess) {
           offerteSuccess.classList.add("hidden");
+        }
+        if (offerteError) {
+          offerteError.classList.add("hidden");
+          offerteError.textContent = "";
         }
 
         window.setTimeout(() => {
@@ -1132,7 +1158,7 @@
       });
 
       if (offerteForm) {
-        offerteForm.addEventListener("submit", (e) => {
+        offerteForm.addEventListener("submit", async (e) => {
           e.preventDefault();
 
           if (!offerteForm.reportValidity()) {
@@ -1140,19 +1166,87 @@
             return;
           }
 
+          if (offerteSuccess) {
+            offerteSuccess.classList.add("hidden");
+          }
+          if (offerteError) {
+            offerteError.classList.add("hidden");
+            offerteError.textContent = "";
+          }
+
+          const accessKey = web3formsAccessKeyInput
+            ? web3formsAccessKeyInput.value.trim()
+            : "";
+
+          if (!accessKey || accessKey.includes("VUL_HIER")) {
+            if (offerteError) {
+              offerteError.textContent =
+                "Web3Forms key ontbreekt. Vul eerst je access key in het formulier in.";
+              offerteError.classList.remove("hidden");
+            }
+            trackEvent("offerte_form_submit_error", { reason: "missing_access_key" });
+            return;
+          }
+
           const formData = new FormData(offerteForm);
           const payload = Object.fromEntries(formData.entries());
+          formData.set("replyto", payload.email || "");
 
           if (offerteSubmit) {
             offerteSubmit.disabled = true;
             offerteSubmit.textContent = "Versturen...";
           }
 
-          window.setTimeout(() => {
+          try {
+            const response = await fetch(web3formsEndpoint, {
+              method: "POST",
+              body: formData,
+              headers: {
+                Accept: "application/json",
+              },
+            });
+
+            const result = await response.json().catch(() => null);
+            const submitSucceeded =
+              response.ok && result && result.success === true;
+
+            if (!submitSucceeded) {
+              const apiMessage =
+                result && typeof result.message === "string"
+                  ? result.message
+                  : "Er ging iets mis bij het verzenden. Probeer het opnieuw.";
+
+              if (offerteError) {
+                offerteError.textContent = apiMessage;
+                offerteError.classList.remove("hidden");
+              }
+
+              trackEvent("offerte_form_submit_error", {
+                reason: "api_error",
+                message: apiMessage,
+              });
+              return;
+            }
+
             offerteForm.reset();
             if (offerteSuccess) {
               offerteSuccess.classList.remove("hidden");
             }
+
+            trackEvent("offerte_form_submit", {
+              pakket: payload.pakket || "onbekend",
+            });
+          } catch (error) {
+            if (offerteError) {
+              offerteError.textContent =
+                "Netwerkfout bij verzenden. Controleer je verbinding en probeer opnieuw.";
+              offerteError.classList.remove("hidden");
+            }
+
+            trackEvent("offerte_form_submit_error", {
+              reason: "network_error",
+            });
+          } finally {
             if (offerteSubmit) {
               offerteSubmit.disabled = false;
               offerteSubmit.textContent = "Verstuur aanvraag";
@@ -1160,11 +1254,7 @@
             if (firstInput) {
               firstInput.focus();
             }
-
-            trackEvent("offerte_form_submit", {
-              pakket: payload.pakket || "onbekend",
-            });
-          }, 500);
+          }
         });
       }
 
