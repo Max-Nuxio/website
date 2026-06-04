@@ -837,23 +837,34 @@
             <form
               class="grid grid-cols-1 md:grid-cols-2 gap-5"
               id="offerteForm"
+              action="https://api.web3forms.com/submit"
+              method="POST"
             >
               <input
                 id="web3forms-access-key"
                 name="access_key"
                 type="hidden"
-                value="VUL_HIER_JE_WEB3FORMS_ACCESS_KEY_IN"
+                value="0b6888a5-0993-4033-a3b3-6e169d6f7499"
               />
-              <input name="subject" type="hidden" value="Nieuwe offerte aanvraag via nuxio.nl" />
+              <input
+                name="subject"
+                type="hidden"
+                value="Nieuwe offerte aanvraag via nuxio.nl"
+              />
               <input name="from_name" type="hidden" value="Nuxio Website" />
-              <input name="botcheck" type="checkbox" class="hidden" style="display: none" />
+              <input
+                name="botcheck"
+                type="checkbox"
+                class="hidden"
+                style="display: none"
+              />
 
               <div>
                 <label class="block text-sm mb-2" for="naam">Naam *</label>
                 <input
                   class="w-full bg-background border border-border-subtle px-4 py-3 focus:border-primary focus:ring-0"
                   id="naam"
-                  name="naam"
+                  name="name"
                   required=""
                   type="text"
                   autocomplete="name"
@@ -922,7 +933,7 @@
                 <textarea
                   class="w-full min-h-32 bg-background border border-border-subtle px-4 py-3 focus:border-primary focus:ring-0"
                   id="toelichting"
-                  name="toelichting"
+                  name="message"
                   required=""
                   placeholder="Wat wil je laten bouwen en wanneer wil je live?"
                 ></textarea>
@@ -1184,7 +1195,9 @@
                 "Web3Forms key ontbreekt. Vul eerst je access key in het formulier in.";
               offerteError.classList.remove("hidden");
             }
-            trackEvent("offerte_form_submit_error", { reason: "missing_access_key" });
+            trackEvent("offerte_form_submit_error", {
+              reason: "missing_access_key",
+            });
             return;
           }
 
