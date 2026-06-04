@@ -40,7 +40,10 @@ exports.handler = async (event) => {
     return {
       statusCode: 400,
       headers: jsonHeaders,
-      body: JSON.stringify({ success: false, message: "Ongeldige JSON payload." }),
+      body: JSON.stringify({
+        success: false,
+        message: "Ongeldige JSON payload.",
+      }),
     };
   }
 
