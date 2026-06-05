@@ -10,13 +10,13 @@ const escapeHtml = (value = "") =>
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#39;");
 
-exports.handler = async (event) => {
-  if (event.httpMethod !== "POST") {
-    return {
-      statusCode: 405,
-      headers: jsonHeaders,
-      body: JSON.stringify({ success: false, message: "Method Not Allowed" }),
-    };
+module.exports = async (req, res) => {
+  if (req.method !== "POST") {
+    res.setHeader("Content-Type", jsonHeaders["Content-Type"]);
+    return res.status(405).json({
+      success: false,
+      message: "Method Not Allowed",
+    });
   }
 
   const resendApiKey = process.env.RESEND_API_KEY;
@@ -24,42 +24,21 @@ exports.handler = async (event) => {
 
   if (!resendApiKey) {
     console.error("RESEND_API_KEY missing in function environment");
-    return {
-      statusCode: 500,
-      headers: jsonHeaders,
-      body: JSON.stringify({
-        success: false,
-        message: "RESEND_API_KEY ontbreekt in Netlify environment variables.",
-      }),
-    };
+    return res.status(500).json({
+      success: false,
+      message: "RESEND_API_KEY ontbreekt in Vercel environment variables.",
+    });
   }
 
   if (!resendFrom) {
     console.error("RESEND_FROM missing in function environment");
-    return {
-      statusCode: 500,
-      headers: jsonHeaders,
-      body: JSON.stringify({
-        success: false,
-        message: "RESEND_FROM ontbreekt in Netlify environment variables.",
-      }),
-    };
+    return res.status(500).json({
+      success: false,
+      message: "RESEND_FROM ontbreekt in Vercel environment variables.",
+    });
   }
 
-  let payload;
-  try {
-    payload = JSON.parse(event.body || "{}");
-  } catch {
-    console.error("Invalid JSON payload received", event.body);
-    return {
-      statusCode: 400,
-      headers: jsonHeaders,
-      body: JSON.stringify({
-        success: false,
-        message: "Ongeldige JSON payload.",
-      }),
-    };
-  }
+  const payload = req.body && typeof req.body === "object" ? req.body : {};
 
   const name = (payload.name || "").trim();
   const email = (payload.email || "").trim();
@@ -74,14 +53,10 @@ exports.handler = async (event) => {
       hasEmail: Boolean(email),
       hasMessage: Boolean(message),
     });
-    return {
-      statusCode: 400,
-      headers: jsonHeaders,
-      body: JSON.stringify({
-        success: false,
-        message: "Verplichte velden ontbreken voor bevestigingsmail.",
-      }),
-    };
+    return res.status(400).json({
+      success: false,
+      message: "Verplichte velden ontbreken voor bevestigingsmail.",
+    });
   }
 
   const html = `
@@ -146,20 +121,12 @@ exports.handler = async (event) => {
       from: resendFrom,
       to: email,
     });
-    return {
-      statusCode: 502,
-      headers: jsonHeaders,
-      body: JSON.stringify({
-        success: false,
-        message: "Verzenden van bevestigingsmail is mislukt.",
-        details: resendResult,
-      }),
-    };
+    return res.status(502).json({
+      success: false,
+      message: "Verzenden van bevestigingsmail is mislukt.",
+      details: resendResult,
+    });
   }
 
-  return {
-    statusCode: 200,
-    headers: jsonHeaders,
-    body: JSON.stringify({ success: true }),
-  };
+  return res.status(200).json({ success: true });
 };

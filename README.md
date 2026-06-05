@@ -49,17 +49,17 @@ Publiceren kan bijvoorbeeld via:
 - Vercel
 - GitHub Pages
 
-## Netlify autoresponder setup
+## Vercel autoresponder setup
 
-Voor een mooie bevestigingsmail naar de invuller is in deze repo een Netlify
-Function toegevoegd:
+Voor een mooie bevestigingsmail naar de invuller is in deze repo een Vercel
+API route toegevoegd:
 
-- netlify/functions/send-offerte-confirmation.js
+- api/send-offerte-confirmation.js
 
-Deze functie verstuurt via Resend een HTML bevestigingsmail naar het e-mailadres
+Deze route verstuurt via Resend een HTML bevestigingsmail naar het e-mailadres
 uit het offerteformulier.
 
-Zet in Netlify bij Site configuration -> Environment variables:
+Zet in Vercel bij Project Settings -> Environment Variables:
 
 - RESEND_API_KEY: je Resend API key
 - RESEND_FROM: bijvoorbeeld `Nuxio <support@nuxio.nl>`
@@ -68,6 +68,19 @@ Belangrijk:
 
 - Verifieer je domein (nuxio.nl) in Resend.
 - Zet SPF, DKIM en DMARC DNS-records goed voor betere deliverability.
+
+## Migratie van Netlify naar Vercel
+
+De frontend gebruikt nu `/api/send-offerte-confirmation` in plaats van de oude
+Netlify function route.
+
+Als je project nog niet live komt op Vercel:
+
+- controleer dat het Vercel-project naar deze repo en juiste root wijst
+- voeg `nuxio.nl` en `www.nuxio.nl` toe aan hetzelfde Vercel-project
+- zet de Vercel environment variables voor productie opnieuw in Vercel
+- verifieer ownership via de gevraagde `_vercel` TXT-records als het domein nog
+  aan een ander Vercel-account gekoppeld is
 
 ## Git workflow
 

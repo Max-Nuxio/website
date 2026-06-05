@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/.netlify/functions/send-offerte-confirmation",
+      "destination": "/api/send-offerte-confirmation"
+    }
+  ]
+}

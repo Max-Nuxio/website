@@ -1468,8 +1468,6 @@
             "Web3Forms key ontbreekt. Vul eerst je access key in het formulier in.",
           error_submit_generic:
             "Er ging iets mis bij het verzenden. Probeer het opnieuw.",
-          error_confirmation_failed:
-            "Aanvraag ontvangen, maar de bevestigingsmail kon niet worden verzonden. We nemen alsnog contact op.",
           error_network:
             "Netwerkfout bij verzenden. Controleer je verbinding en probeer opnieuw.",
         },
@@ -1577,8 +1575,6 @@
             "Missing Web3Forms key. Add your access key in the form first.",
           error_submit_generic:
             "Something went wrong while sending. Please try again.",
-          error_confirmation_failed:
-            "Request received, but the confirmation email could not be sent. We will still contact you.",
           error_network:
             "Network error while sending. Check your connection and try again.",
         },
@@ -1688,8 +1684,6 @@
             "Web3Forms-Schluessel fehlt. Fuegen Sie zuerst den Access Key ein.",
           error_submit_generic:
             "Beim Senden ist ein Fehler aufgetreten. Bitte erneut versuchen.",
-          error_confirmation_failed:
-            "Anfrage erhalten, aber die Bestaetigungs-E-Mail konnte nicht gesendet werden.",
           error_network:
             "Netzwerkfehler beim Senden. Bitte Verbindung pruefen und erneut versuchen.",
         },
@@ -1798,8 +1792,6 @@
             "Cle Web3Forms manquante. Ajoutez d'abord votre cle d'acces.",
           error_submit_generic:
             "Une err€ est survenue lors de l'envoi. Veuillez reessayer.",
-          error_confirmation_failed:
-            "Demande recue, mais l'e-mail de confirmation n'a pas pu etre envoye.",
           error_network:
             "Err€ reseau pendant l'envoi. Verifiez votre connexion et reessayez.",
         },
@@ -1905,8 +1897,6 @@
           error_missing_access_key:
             "Falta la clave de Web3Forms. Primero agrega tu access key en el formulario.",
           error_submit_generic: "Hubo un error al enviar. Intentalo de nuevo.",
-          error_confirmation_failed:
-            "Solicitud recibida, pero no se pudo enviar el correo de confirmacion.",
           error_network:
             "Error de red al enviar. Revisa tu conexion e intentalo de nuevo.",
         },
@@ -2013,8 +2003,6 @@
             "Chiave Web3Forms mancante. Inserisci prima la tua access key nel modulo.",
           error_submit_generic:
             "Si e verificato un errore durante l'invio. Riprova.",
-          error_confirmation_failed:
-            "Richiesta ricevuta, ma non e stato possibile inviare l'email di conferma.",
           error_network:
             "Errore di rete durante l'invio. Controlla la connessione e riprova.",
         },
@@ -2127,8 +2115,7 @@
         '[data-offerte-close="true"]',
       );
       const web3formsEndpoint = "https://api.web3forms.com/submit";
-      const confirmationEndpoint =
-        "/.netlify/functions/send-offerte-confirmation";
+      const confirmationEndpoint = "/api/send-offerte-confirmation";
 
       const trackEvent = (eventName, eventData = {}) => {
         if (Array.isArray(window.dataLayer)) {
@@ -2313,13 +2300,6 @@
                 }
               })
               .catch((error) => {
-                if (offerteError) {
-                  offerteError.textContent = t(
-                    "error_confirmation_failed",
-                    "Aanvraag ontvangen, maar de bevestigingsmail kon niet worden verzonden. We nemen alsnog contact op.",
-                  );
-                  offerteError.classList.remove("hidden");
-                }
                 trackEvent("offerte_confirmation_email_error", {
                   reason: "function_failed",
                   message: error.message || "unknown",
