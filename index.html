@@ -659,6 +659,9 @@
               <button
                 class="w-full border border-border-subtle py-3 font-button text-button hover:bg-white/5 transition-all"
                 data-i18n-key="choose_starter"
+                type="button"
+                data-offerte-cta="true"
+                data-package="starter"
               >
                 Kies Starter
               </button>
@@ -742,6 +745,9 @@
               <button
                 class="w-full bg-primary text-on-primary py-3 font-button text-button font-bold hover:brightness-110 transition-all"
                 data-i18n-key="choose_business"
+                type="button"
+                data-offerte-cta="true"
+                data-package="business"
               >
                 Kies Business
               </button>
@@ -813,6 +819,9 @@
               <button
                 class="w-full border border-border-subtle py-3 font-button text-button hover:bg-white/5 transition-all"
                 data-i18n-key="choose_pro"
+                type="button"
+                data-offerte-cta="true"
+                data-package="pro"
               >
                 Kies Pro
               </button>
@@ -2110,6 +2119,7 @@
       const offerteError = document.getElementById("offerteError");
       const offerteSubmit = document.getElementById("offerteSubmit");
       const firstInput = document.getElementById("naam");
+      const pakketSelect = document.getElementById("pakket");
       const web3formsAccessKeyInput = document.getElementById(
         "web3forms-access-key",
       );
@@ -2129,13 +2139,17 @@
         }
       };
 
-      const openOfferteModal = () => {
+      const openOfferteModal = (selectedPackage = "") => {
         if (!offerteModal) {
           return;
         }
         offerteModal.classList.remove("hidden");
         offerteModal.setAttribute("aria-hidden", "false");
         document.body.classList.add("overflow-hidden");
+
+        if (pakketSelect) {
+          pakketSelect.value = selectedPackage || "";
+        }
 
         if (offerteSuccess) {
           offerteSuccess.classList.add("hidden");
@@ -2163,8 +2177,12 @@
 
       document.querySelectorAll('[data-offerte-cta="true"]').forEach((btn) => {
         btn.addEventListener("click", () => {
-          openOfferteModal();
-          trackEvent("offerte_cta_click", { location: "landing" });
+          const selectedPackage = btn.getAttribute("data-package") || "";
+          openOfferteModal(selectedPackage);
+          trackEvent("offerte_cta_click", {
+            location: "landing",
+            pakket: selectedPackage || "onbekend",
+          });
         });
       });
 
