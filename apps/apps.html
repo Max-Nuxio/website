@@ -215,7 +215,7 @@
       <div class="max-w-6xl mx-auto px-6 lg:px-8">
         <div class="flex items-center justify-between h-16 lg:h-20">
           <a
-            href="index.html"
+            href="../index.html"
             class="font-display font-extrabold text-2xl tracking-tight text-ink cursor-pointer"
             aria-label="Nuxio home"
             >Nuxio</a
@@ -223,31 +223,31 @@
 
           <div class="hidden md:flex items-center gap-8">
             <a
-              href="index.html"
+              href="../index.html"
               class="text-sm font-medium text-ink hover:text-accent transition-colors duration-180 cursor-pointer"
               data-i18n="nav.home"
               >Home</a
             >
             <a
-              href="index.html#pakketten"
+              href="../index.html#pakketten"
               class="text-sm font-medium text-ink hover:text-accent transition-colors duration-180 cursor-pointer"
               data-i18n="nav.packages"
               >Pakketten</a
             >
             <a
-              href="workshops/workshops.html"
+              href="https://workshops.nuxio.nl"
               class="text-sm font-medium text-ink hover:text-accent transition-colors duration-180 cursor-pointer"
               data-i18n="nav.workshops"
               >Workshops</a
             >
             <a
-              href="apps/apps.html"
+              href="https://apps.nuxio.nl"
               class="text-sm font-medium text-accent transition-colors duration-180 cursor-pointer font-semibold"
               aria-current="page"
               >Apps</a
             >
             <a
-              href="index.html#contact"
+              href="../index.html#contact"
               class="text-sm font-medium text-ink hover:text-accent transition-colors duration-180 cursor-pointer"
               data-i18n="nav.contact"
               >Contact</a
@@ -286,35 +286,36 @@
         <div id="mobile-menu" class="hidden md:hidden pb-4" role="menu">
           <div class="flex flex-col gap-1 pt-2 border-t border-ink/10">
             <a
-              href="index.html"
+              href="../index.html"
               class="block px-3 py-2.5 text-sm font-medium text-ink hover:text-accent hover:bg-accent/5 rounded-lg transition-colors duration-180 cursor-pointer"
               role="menuitem"
               data-i18n="nav.home"
               >Home</a
             >
             <a
-              href="index.html#pakketten"
+              href="../index.html#pakketten"
               class="block px-3 py-2.5 text-sm font-medium text-ink hover:text-accent hover:bg-accent/5 rounded-lg transition-colors duration-180 cursor-pointer"
               role="menuitem"
               data-i18n="nav.packages"
               >Pakketten</a
             >
             <a
-              href="workshops/workshops.html"
+              href="https://workshops.nuxio.nl"
               class="block px-3 py-2.5 text-sm font-medium text-ink hover:text-accent hover:bg-accent/5 rounded-lg transition-colors duration-180 cursor-pointer"
               role="menuitem"
               data-i18n="nav.workshops"
               >Workshops</a
             >
             <a
-              href="apps/apps.html"
+              href="https://apps.nuxio.nl"
               class="block px-3 py-2.5 text-sm font-medium text-accent bg-accent/5 rounded-lg transition-colors duration-180 cursor-pointer"
               role="menuitem"
               aria-current="page"
+              data-i18n="nav.apps"
               >Apps</a
             >
             <a
-              href="index.html#contact"
+              href="../index.html#contact"
               class="block px-3 py-2.5 text-sm font-medium text-ink hover:text-accent hover:bg-accent/5 rounded-lg transition-colors duration-180 cursor-pointer"
               role="menuitem"
               data-i18n="nav.contact"
@@ -1094,7 +1095,11 @@
           action="https://api.web3forms.com/submit"
           method="POST"
         >
-          <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+          <input
+            type="hidden"
+            name="access_key"
+            value="08f64456-5c84-4c5e-b580-6853cf06552b"
+          />
           <input
             type="hidden"
             name="subject"
@@ -1104,7 +1109,7 @@
           <input
             type="hidden"
             name="redirect"
-            value="apps/apps.html?submitted=true"
+            value="https://apps.nuxio.nl?submitted=true"
           />
           <input
             type="checkbox"
@@ -1274,13 +1279,7 @@
         <div
           class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8"
         >
-          <div>
-            <a
-              href="index.html"
-              class="font-display font-extrabold text-2xl tracking-tight text-ink cursor-pointer"
-              aria-label="Nuxio home"
-              >Nuxio</a
-            >
+          <div>            <a href="../index.html" class="font-display font-extrabold text-2xl tracking-tight text-ink cursor-pointer" aria-label="Nuxio home">Nuxio</a>
             <p class="mt-2 text-sm text-muted" data-i18n="footer.slogan">
               Jouw website. Klaar in 5 dagen.
             </p>
@@ -1296,18 +1295,19 @@
                 >Pakketten</a
               >
               <a
-                href="workshops/workshops.html"
+                href="https://workshops.nuxio.nl"
                 class="text-sm text-muted hover:text-ink transition-colors duration-180 cursor-pointer"
                 data-i18n="nav.workshops"
                 >Workshops</a
               >
               <a
-                href="apps/apps.html"
+                href="https://apps.nuxio.nl"
                 class="text-sm text-muted hover:text-ink transition-colors duration-180 cursor-pointer"
+                data-i18n="nav.apps"
                 >Apps</a
               >
               <a
-                href="index.html#contact"
+                href="../index.html#contact"
                 class="text-sm text-muted hover:text-ink transition-colors duration-180 cursor-pointer"
                 data-i18n="nav.contact"
                 >Contact</a
