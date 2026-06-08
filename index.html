@@ -1,2360 +1,1303 @@
 <!doctype html>
-
-<html class="dark" lang="nl">
+<html lang="nl" class="scroll-smooth">
   <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title id="page-title" data-i18n-key="page_title">
-      Nuxio | Vakmanschap in digitale precisie
-    </title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nuxio — Professionele websites voor lokale MKB's</title>
+    <meta
+      name="description"
+      content="Nuxio bouwt professionele websites voor lokale ondernemers in Nederland. Klaar in 5 dagen, vanaf €599."
+    />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Outfit (display) + Figtree (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&amp;family=Inter:wght@400;500;600&amp;display=swap"
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-      rel="stylesheet"
-    />
-    <script id="tailwind-config">
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+    <script>
       tailwind.config = {
-        darkMode: "class",
         theme: {
           extend: {
             colors: {
-              "surface-variant": "#353436",
-              "border-subtle": "rgba(255, 255, 255, 0.07)",
-              "on-secondary": "#303033",
-              secondary: "#c8c5ca",
-              "on-primary": "#0c0a0a",
-              error: "#ffb4ab",
-              "surface-container-low": "#1c1b1c",
-              "surface-bright": "#3a393a",
-              "on-surface-variant": "#bccabb",
-              "on-tertiary": "#4f2500",
-              "on-secondary-fixed-variant": "#47464a",
-              "text-primary": "#f5eeec",
-              "on-primary-fixed-variant": "#0c0a0a",
-              "inverse-surface": "#e5e2e3",
-              primary: "#fb7c5d",
-              "on-tertiary-fixed-variant": "#6c3a0f",
-              "on-primary-fixed": "#0c0a0a",
-              "surface-tint": "#fb7c5d",
-              "secondary-fixed-dim": "#c8c5ca",
-              background: "#0c0a0a",
-              tertiary: "#ffd9c1",
-              "surface-dim": "#131314",
-              "on-tertiary-container": "#794418",
-              "on-surface": "#e5e2e3",
-              surface: "#131010",
-              "surface-container-highest": "#353436",
-              "on-secondary-fixed": "#1b1b1e",
-              "on-tertiary-fixed": "#301400",
-              "on-primary-container": "#0c0a0a",
-              "surface-container-high": "#2a2a2b",
-              "text-muted": "rgba(245, 238, 236, 0.45)",
-              "on-error-container": "#ffdad6",
-              "emerald-glow": "rgba(251, 124, 93, 0.22)",
-              "on-background": "#e5e2e3",
-              "inverse-primary": "#fb7c5d",
-              "tertiary-container": "#ffb47f",
-              "error-container": "#93000a",
-              "tertiary-fixed": "#ffdcc6",
-              "surface-container": "#201f20",
-              "primary-fixed-dim": "#fb7c5d",
-              "secondary-container": "#47464a",
-              "primary-container": "#fb7c5d",
-              "primary-fixed": "#fb7c5d",
-              "outline-variant": "#3d4a3e",
-              "on-secondary-container": "#b7b4b8",
-              "inverse-on-surface": "#313031",
-              "tertiary-fixed-dim": "#ffb784",
-              outline: "#869486",
-              "surface-container-lowest": "#131010",
-              "on-error": "#690005",
-            },
-            borderRadius: {
-              DEFAULT: "0.125rem",
-              lg: "0.25rem",
-              xl: "0.5rem",
-              full: "0.75rem",
-            },
-            spacing: {
-              "margin-mobile": "20px",
-              "max-width": "1200px",
-              base: "8px",
-              "margin-desktop": "80px",
-              gutter: "24px",
+              cream: "#F7F5F0",
+              ink: "#1A1A1A",
+              accent: "#2A5C45",
+              "accent-light": "#3A7A5C",
+              "accent-dark": "#1E4534",
+              muted: "#6B6B6B",
             },
             fontFamily: {
-              "headline-md": ["Outfit"],
-              "body-md": ["Inter"],
-              button: ["Inter"],
-              "label-caps": ["Inter"],
-              "headline-xl": ["Outfit"],
-              "headline-lg": ["Outfit"],
-              "body-lg": ["Inter"],
-              "headline-lg-mobile": ["Outfit"],
-            },
-            fontSize: {
-              "headline-md": [
-                "24px",
-                {
-                  lineHeight: "1.3",
-                  letterSpacing: "-0.02em",
-                  fontWeight: "600",
-                },
-              ],
-              "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
-              button: [
-                "14px",
-                {
-                  lineHeight: "1",
-                  letterSpacing: "-0.01em",
-                  fontWeight: "500",
-                },
-              ],
-              "label-caps": [
-                "12px",
-                { lineHeight: "1", letterSpacing: "0.1em", fontWeight: "600" },
-              ],
-              "headline-xl": [
-                "64px",
-                {
-                  lineHeight: "1.1",
-                  letterSpacing: "-0.04em",
-                  fontWeight: "700",
-                },
-              ],
-              "headline-lg": [
-                "40px",
-                {
-                  lineHeight: "1.2",
-                  letterSpacing: "-0.03em",
-                  fontWeight: "700",
-                },
-              ],
-              "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
-              "headline-lg-mobile": [
-                "32px",
-                {
-                  lineHeight: "1.2",
-                  letterSpacing: "-0.02em",
-                  fontWeight: "700",
-                },
-              ],
+              display: ["Outfit", "sans-serif"],
+              body: ["Figtree", "sans-serif"],
             },
           },
         },
       };
     </script>
+
     <style>
-      :root {
-        --bg: #0c0a0a;
-        --bg-2: #131010;
-        --border: rgba(255, 255, 255, 0.07);
-        --text: #f5eeec;
-        --muted: rgba(245, 238, 236, 0.45);
-        --accent: #fb7c5d;
-        --accent-dim: rgba(251, 124, 93, 0.12);
-        --accent-glow: rgba(251, 124, 93, 0.22);
+      /* Base */
+      * {
+        cursor: default;
+      }
+      a,
+      button,
+      [role="button"],
+      input[type="submit"],
+      label {
+        cursor: pointer;
       }
 
-      .material-symbols-outlined {
-        font-variation-settings:
-          "FILL" 0,
-          "wght" 400,
-          "GRAD" 0,
-          "opsz" 24;
-        vertical-align: middle;
+      /* Scroll-triggered animation classes */
+      .reveal {
+        opacity: 0;
+        transform: translateY(32px);
+        transition:
+          opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
       }
-      body {
-        background-color: var(--bg);
-        color: var(--text);
-        -webkit-font-smoothing: antialiased;
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
       }
-      .noise-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 9999;
-        opacity: 0.02;
-        background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuB8dVuCPVWQvMzrJ1z4SS2epRaYtCGzmxXLPAxIYD-kg6TOJlqGwRSbpwvOZmMf1B2VB7HR8xqy1rDZft6Q6-fAYmQ6zvhbqF3d_qkkQxQhm_3DAliMG9Evp7cZ7yf1mkV7uNi3ZsueHpYi5bKMn3is47Jh7Iz46sHnTgUXGPBrwxTWdrjf4I_fftChRfebbEJnwIirwnE-CQdtE2uhyO5bKEfgGEX10lutpSy3v20k43xSkbU4dmrymizdPxgAsqN1mlVXqfWwbvxn);
+      .reveal-delay-1 { transition-delay: 0.1s; }
+      .reveal-delay-2 { transition-delay: 0.2s; }
+      .reveal-delay-3 { transition-delay: 0.3s; }
+      .reveal-delay-4 { transition-delay: 0.4s; }
+
+      /* Hero staggered entrance */
+      .hero-item {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
       }
-      .emerald-gradient-glow {
-        background: radial-gradient(
-          circle at 50% 50%,
-          var(--accent-dim) 0%,
-          rgba(10, 10, 10, 0) 70%
-        );
+      .hero-item.show {
+        opacity: 1;
+        transform: translateY(0);
       }
-      .custom-underline {
-        position: relative;
-        display: inline-block;
+
+      /* prefers-reduced-motion */
+      @media (prefers-reduced-motion: reduce) {
+        .reveal, .hero-item {
+          opacity: 1 !important;
+          transform: none !important;
+          transition: none !important;
+        }
+        html { scroll-behavior: auto !important; }
       }
-      .custom-underline::after {
+
+      /* Noise texture overlay for hero */
+      .noise-bg::before {
         content: "";
         position: absolute;
-        left: 0;
-        bottom: 4px;
-        width: 100%;
-        height: 4px;
-        background-color: var(--accent);
-        z-index: -1;
+        inset: 0;
+        opacity: 0.035;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        background-repeat: repeat;
+        background-size: 200px 200px;
+        pointer-events: none;
       }
-    </style>
-    <style>
-      body {
-        min-height: max(884px, 100dvh);
+
+      /* Geometric grid pattern for hero */
+      .grid-pattern::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(42, 92, 69, 0.06) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(42, 92, 69, 0.06) 1px, transparent 1px);
+        background-size: 64px 64px;
+        pointer-events: none;
+      }
+
+      /* Focus visible ring */
+      *:focus-visible {
+        outline: 2px solid #2a5c45;
+        outline-offset: 2px;
+      }
+
+      /* Nav scrolled state */
+      #navbar.scrolled {
+        border-bottom: 1px solid rgba(26, 26, 26, 0.1);
+        background: rgba(247, 245, 240, 0.95);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+
+      /* Pricing card hover */
+      .price-card {
+        transition:
+          transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .price-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px rgba(26, 26, 26, 0.1);
+      }
+
+      /* Button hover */
+      .btn-primary {
+        transition:
+          background-color 0.18s ease,
+          transform 0.18s ease,
+          box-shadow 0.18s ease;
+      }
+      .btn-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 16px rgba(42, 92, 69, 0.25);
+      }
+      .btn-primary:active { transform: translateY(0); }
+      .btn-secondary {
+        transition:
+          background-color 0.18s ease,
+          border-color 0.18s ease;
+      }
+      .btn-secondary:hover {
+        background-color: rgba(26, 26, 26, 0.06);
+        border-color: #1a1a1a;
+      }
+
+      /* Pill tag hover */
+      .pill-tag {
+        transition:
+          background-color 0.18s ease,
+          color 0.18s ease,
+          border-color 0.18s ease;
+      }
+      .pill-tag:hover {
+        background-color: #2a5c45;
+        color: #ffffff;
+        border-color: #2a5c45;
+      }
+
+      /* Form select custom arrow */
+      select.form-input::-ms-expand { display: none; }
+
+      /* Language toggle */
+      .lang-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 0;
+        border: 1.5px solid rgba(26, 26, 26, 0.15);
+        border-radius: 8px;
+        overflow: hidden;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        line-height: 1;
+        transition: border-color 0.18s ease;
+      }
+      .lang-toggle:hover { border-color: rgba(26, 26, 26, 0.3); }
+      .lang-toggle button {
+        padding: 6px 10px;
+        cursor: pointer;
+        transition: background-color 0.18s ease, color 0.18s ease;
+        background: transparent;
+        color: #6B6B6B;
+        border: none;
+        font-size: 0.75rem;
+        font-weight: 600;
+        line-height: 1;
+      }
+      .lang-toggle button.active {
+        background-color: #2A5C45;
+        color: #ffffff;
+      }
+      .lang-toggle button:not(.active):hover {
+        background-color: rgba(26, 26, 26, 0.06);
+        color: #1A1A1A;
+      }
+
+      /* Form input styles */
+      .form-input {
+        width: 100%;
+        padding: 12px 16px;
+        border-radius: 8px;
+        border: 2px solid rgba(26, 26, 26, 0.15);
+        background-color: #F7F5F0;
+        color: #1A1A1A;
+        font-size: 0.875rem;
+        transition: border-color 0.18s ease;
+      }
+      .form-input::placeholder { color: rgba(107, 107, 107, 0.6); }
+      .form-input:focus {
+        border-color: #2A5C45;
+        outline: none;
+        box-shadow: none;
       }
     </style>
   </head>
-  <style>
-    #loading-screen {
-      position: fixed;
-      inset: 0;
-      z-index: 99999;
-      background: #0c0a0a;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: opacity 0.6s ease;
-    }
-    #loading-screen.fade-out {
-      opacity: 0;
-      pointer-events: none;
-    }
-    #loading-video {
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
-    }
-  </style>
-  <body class="font-body-md text-body-md overflow-x-hidden">
-    <!-- Loading screen -->
-    <div id="loading-screen">
-      <video
-        id="loading-video"
-        src="assets/loading.mp4"
-        autoplay
-        muted
-        playsinline
-      ></video>
-    </div>
 
-    <script>
-      (function () {
-        const screen = document.getElementById("loading-screen");
-        const video = document.getElementById("loading-video");
-
-        let pageReady = false;
-        let hasPlayedOnce = false;
-
-        const tryDismiss = () => {
-          if (pageReady && hasPlayedOnce) {
-            screen.classList.add("fade-out");
-            screen.addEventListener(
-              "transitionend",
-              () => {
-                screen.style.display = "none";
-              },
-              { once: true },
-            );
-          }
-        };
-
-        // Track when the page (DOM + subresources) is ready
-        if (document.readyState === "complete") {
-          pageReady = true;
-        } else {
-          window.addEventListener("load", () => {
-            pageReady = true;
-            tryDismiss();
-          });
-        }
-
-        video.addEventListener("ended", () => {
-          hasPlayedOnce = true;
-          if (pageReady) {
-            tryDismiss();
-          } else {
-            // Page not ready yet — loop the video
-            video.loop = true;
-            video.play();
-          }
-        });
-
-        // Fallback: if video fails to play, don't block forever
-        video.addEventListener("error", () => {
-          hasPlayedOnce = true;
-          tryDismiss();
-        });
-      })();
-    </script>
-
-    <div class="noise-overlay"></div>
-    <!-- TopAppBar -->
+  <body class="bg-cream text-ink font-body antialiased">
+    <!-- ===== NAVIGATION ===== -->
     <nav
-      class="fixed top-0 w-full z-50 bg-background/80 dark:bg-background/80 backdrop-blur-md border-b border-border-subtle"
+      id="navbar"
+      class="fixed top-0 left-0 right-0 z-50 bg-cream/80 backdrop-blur-sm transition-all duration-300"
+      role="navigation"
+      aria-label="Hoofdnavigatie"
     >
-      <div
-        class="max-w-max-width mx-auto flex justify-between items-center px-margin-mobile md:px-margin-desktop h-20"
-      >
-        <div class="flex items-center gap-2">
-          <img
-            src="assets/logo-transparent-bg.png"
-            alt="Nuxio logo"
-            class="h-7 w-7 object-contain"
-          />
-          <span
-            class="font-headline-md text-headline-md font-bold text-text-primary"
-            >Nux<span class="text-primary">io</span></span
+      <div class="max-w-6xl mx-auto px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16 lg:h-20">
+          <!-- Logo -->
+          <a
+            href="#"
+            class="font-display font-extrabold text-2xl tracking-tight text-ink cursor-pointer"
+            aria-label="Nuxio home"
           >
-        </div>
-        <div class="flex items-center gap-3 md:gap-6">
-          <label
-            class="sr-only"
-            for="language-select"
-            data-i18n-key="lang_label"
-            >Taal</label
-          >
-          <select
-            class="bg-surface border border-border-subtle text-text-primary text-sm px-3 py-2 focus:border-primary focus:ring-0"
-            id="language-select"
-            aria-label="Kies taal"
-          >
-            <option value="nl">🇳🇱 Nederland</option>
-            <option value="en">🇬🇧 Verenigd Koninkrijk</option>
-            <option value="de">🇩🇪 Duitsland</option>
-            <option value="fr">🇫🇷 Frankrijk</option>
-            <option value="es">🇪🇸 Spanje</option>
-            <option value="it">🇮🇹 Italië</option>
-          </select>
+            Nuxio
+          </a>
 
+          <!-- Desktop Nav -->
           <div class="hidden md:flex items-center gap-8">
             <a
-              class="font-button text-button text-text-muted hover:text-text-primary transition-colors"
-              href="#werkwijze"
-              data-i18n-key="nav_process"
-              >Werkwijze</a
-            >
+              href="#pakketten"
+              class="text-sm font-medium text-ink hover:text-accent transition-colors duration-180 cursor-pointer"
+              data-i18n="nav.packages"
+            >Pakketten</a>
             <a
-              class="font-button text-button text-text-muted hover:text-text-primary transition-colors"
-              href="#prijzen"
-              data-i18n-key="nav_pricing"
-              >Prijzen</a
-            >
+              href="workshops.html"
+              class="text-sm font-medium text-ink hover:text-accent transition-colors duration-180 cursor-pointer"
+              data-i18n="nav.workshops"
+            >Workshops</a>
             <a
-              class="font-button text-button text-text-muted hover:text-text-primary transition-colors"
+              href="apps.html"
+              class="text-sm font-medium text-ink hover:text-accent transition-colors duration-180 cursor-pointer"
+              data-i18n="nav.apps"
+            >Apps</a>
+            <a
               href="#contact"
-              data-i18n-key="nav_contact"
-              >Contact</a
+              class="text-sm font-medium text-ink hover:text-accent transition-colors duration-180 cursor-pointer"
+              data-i18n="nav.contact"
+            >Contact</a>
+            <!-- Language toggle -->
+            <div class="lang-toggle" role="group" aria-label="Taal selectie">
+              <button id="lang-nl" class="active" aria-label="Nederlands" data-lang="nl">NL</button>
+              <button id="lang-en" aria-label="English" data-lang="en">EN</button>
+            </div>
+            <a
+              href="mailto:support@nuxio.nl"
+              class="inline-flex items-center gap-2 bg-accent text-white text-sm font-semibold px-5 py-2.5 rounded-lg btn-primary cursor-pointer"
             >
-            <button
-              class="bg-primary text-on-primary px-6 py-3 font-button text-button font-bold hover:brightness-110 active:scale-95 transition-all"
-              type="button"
-              data-offerte-cta="true"
-              data-i18n-key="nav_quote"
-            >
-              Offerte aanvragen
-            </button>
+              <span data-i18n="nav.cta">Vraag een offerte aan</span>
+            </a>
           </div>
 
+          <!-- Mobile Menu Button -->
           <button
-            class="md:hidden text-text-primary"
+            id="menu-toggle"
+            class="md:hidden flex items-center justify-center w-10 h-10 cursor-pointer"
             aria-label="Open menu"
-            data-i18n-aria-label="menu_open"
+            aria-expanded="false"
           >
-            <span class="material-symbols-outlined" data-icon="menu">menu</span>
+            <i data-lucide="menu" class="w-6 h-6 text-ink"></i>
           </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden pb-4" role="menu">
+          <div class="flex flex-col gap-1 pt-2 border-t border-ink/10">
+            <a
+              href="#pakketten"
+              class="block px-3 py-2.5 text-sm font-medium text-ink hover:text-accent hover:bg-accent/5 rounded-lg transition-colors duration-180 cursor-pointer"
+              role="menuitem"
+              data-i18n="nav.packages"
+            >Pakketten</a>
+            <a
+              href="workshops.html"
+              class="block px-3 py-2.5 text-sm font-medium text-ink hover:text-accent hover:bg-accent/5 rounded-lg transition-colors duration-180 cursor-pointer"
+              role="menuitem"
+              data-i18n="nav.workshops"
+            >Workshops</a>
+            <a
+              href="apps.html"
+              class="block px-3 py-2.5 text-sm font-medium text-ink hover:text-accent hover:bg-accent/5 rounded-lg transition-colors duration-180 cursor-pointer"
+              role="menuitem"
+              data-i18n="nav.apps"
+            >Apps</a>
+            <a
+              href="#contact"
+              class="block px-3 py-2.5 text-sm font-medium text-ink hover:text-accent hover:bg-accent/5 rounded-lg transition-colors duration-180 cursor-pointer"
+              role="menuitem"
+              data-i18n="nav.contact"
+            >Contact</a>
+            <!-- Mobile language toggle -->
+            <div class="px-3 py-2">
+              <div class="lang-toggle" role="group" aria-label="Taal selectie">
+                <button id="lang-nl-mobile" class="active" aria-label="Nederlands" data-lang="nl">NL</button>
+                <button id="lang-en-mobile" aria-label="English" data-lang="en">EN</button>
+              </div>
+            </div>
+            <a
+              href="mailto:support@nuxio.nl"
+              class="mt-2 flex items-center justify-center gap-2 bg-accent text-white text-sm font-semibold px-5 py-2.5 rounded-lg btn-primary cursor-pointer"
+              role="menuitem"
+            >
+              <span data-i18n="nav.cta">Vraag een offerte aan</span>
+            </a>
+          </div>
         </div>
       </div>
     </nav>
-    <main class="pt-20">
-      <!-- Hero Section -->
-      <section
-        class="relative min-h-[707px] flex flex-col items-center justify-center text-center px-margin-mobile md:px-margin-desktop py-20 overflow-hidden"
-      >
-        <div class="absolute inset-0 emerald-gradient-glow -z-10"></div>
-        <div
-          class="inline-flex items-center bg-primary/10 border border-primary/20 px-4 py-1 mb-8"
-        >
-          <span
-            class="font-label-caps text-label-caps text-primary"
-            data-i18n-key="hero_badge"
-            >Professionele websites voor jouw bedrijf</span
-          >
-        </div>
-        <h1
-          class="font-headline-xl text-[48px] md:text-headline-xl mb-6 max-w-4xl tracking-tight leading-[1.1]"
-          data-i18n-html="hero_title_html"
-        >
-          Jouw website live in <span class="custom-underline">5 dagen.</span>
-        </h1>
-        <p
-          class="font-body-lg text-body-lg text-text-muted mb-10 max-w-2xl"
-          data-i18n-key="hero_desc"
-        >
-          Geen eindeloze trajecten. Vanaf €499 een professionele website
-          inclusief hosting en beheer. Wij bouwen, jij onderneemt.
-        </p>
-        <div class="flex flex-col md:flex-row gap-4 mb-16">
-          <button
-            class="bg-primary text-on-primary px-10 py-4 font-button text-button font-bold hover:brightness-110 active:scale-95 transition-all"
-            type="button"
-            data-offerte-cta="true"
-            data-i18n-key="hero_cta_primary"
-          >
-            Start je project
-          </button>
-          <button
-            class="border border-border-subtle text-text-primary px-10 py-4 font-button text-button font-bold hover:bg-white/5 active:scale-95 transition-all"
-            data-i18n-key="hero_cta_secondary"
-          >
-            Bekijk werkwijze
-          </button>
-        </div>
-        <div class="flex flex-wrap justify-center gap-6 md:gap-12">
-          <div
-            class="flex items-center gap-2 text-text-primary font-button text-button"
-          >
-            <span
-              class="material-symbols-outlined text-primary"
-              data-icon="check_circle"
-              style="font-variation-settings: &quot;FILL&quot; 1"
-              >check_circle</span
-            >
-            <span data-i18n-key="hero_feature_1">In 5 werkdagen live</span>
-          </div>
-          <div
-            class="flex items-center gap-2 text-text-primary font-button text-button"
-          >
-            <span
-              class="material-symbols-outlined text-primary"
-              data-icon="check_circle"
-              style="font-variation-settings: &quot;FILL&quot; 1"
-              >check_circle</span
-            >
-            <span data-i18n-key="hero_feature_2">Vaste prijs</span>
-          </div>
-          <div
-            class="flex items-center gap-2 text-text-primary font-button text-button"
-          >
-            <span
-              class="material-symbols-outlined text-primary"
-              data-icon="check_circle"
-              style="font-variation-settings: &quot;FILL&quot; 1"
-              >check_circle</span
-            >
-            <span data-i18n-key="hero_feature_3">Mobiel-vriendelijk</span>
-          </div>
-        </div>
-      </section>
-      <!-- How it Works -->
-      <section
-        class="py-24 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto"
-        id="werkwijze"
-      >
-        <h2
-          class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-center mb-20"
-          data-i18n-key="process_title"
-        >
-          Onze aanpak
-        </h2>
-        <div class="relative grid grid-cols-1 md:grid-cols-5 gap-8">
-          <!-- Lines for desktop -->
-          <div
-            class="hidden md:block absolute top-12 left-[10%] right-[10%] h-[1px] bg-border-subtle -z-10"
-          ></div>
-          <!-- Step 1 -->
-          <div class="flex flex-col items-center text-center group">
-            <div
-              class="w-24 h-24 bg-surface border border-border-subtle flex items-center justify-center mb-6 group-hover:border-primary transition-colors"
-            >
-              <span class="font-headline-md text-headline-md text-primary"
-                >01</span
-              >
-            </div>
-            <h3
-              class="font-headline-md text-headline-md mb-2"
-              data-i18n-key="step1_title"
-            >
-              Intake
-            </h3>
-            <p class="text-text-muted text-sm" data-i18n-key="step1_body">
-              We bespreken je wensen en doelen via een kort gesprek.
-            </p>
-          </div>
-          <!-- Step 2 -->
-          <div class="flex flex-col items-center text-center group">
-            <div
-              class="w-24 h-24 bg-surface border border-border-subtle flex items-center justify-center mb-6 group-hover:border-primary transition-colors"
-            >
-              <span class="font-headline-md text-headline-md text-primary"
-                >02</span
-              >
-            </div>
-            <h3
-              class="font-headline-md text-headline-md mb-2"
-              data-i18n-key="step2_title"
-            >
-              Offerte
-            </h3>
-            <p class="text-text-muted text-sm" data-i18n-key="step2_body">
-              Je ontvangt een heldere offerte. Akkoord? Dan gaan we los.
-            </p>
-          </div>
-          <!-- Step 3 -->
-          <div class="flex flex-col items-center text-center group">
-            <div
-              class="w-24 h-24 bg-surface border border-border-subtle flex items-center justify-center mb-6 group-hover:border-primary transition-colors"
-            >
-              <span class="font-headline-md text-headline-md text-primary"
-                >03</span
-              >
-            </div>
-            <h3
-              class="font-headline-md text-headline-md mb-2"
-              data-i18n-key="step3_title"
-            >
-              Bouw
-            </h3>
-            <p class="text-text-muted text-sm" data-i18n-key="step3_body">
-              Wij bouwen jouw unieke website in recordtempo.
-            </p>
-          </div>
-          <!-- Step 4 -->
-          <div class="flex flex-col items-center text-center group">
-            <div
-              class="w-24 h-24 bg-surface border border-border-subtle flex items-center justify-center mb-6 group-hover:border-primary transition-colors"
-            >
-              <span class="font-headline-md text-headline-md text-primary"
-                >04</span
-              >
-            </div>
-            <h3
-              class="font-headline-md text-headline-md mb-2"
-              data-i18n-key="step4_title"
-            >
-              Check
-            </h3>
-            <p class="text-text-muted text-sm" data-i18n-key="step4_body">
-              Jij loopt door de site en geeft de laatste feedback.
-            </p>
-          </div>
-          <!-- Step 5 -->
-          <div class="flex flex-col items-center text-center group">
-            <div
-              class="w-24 h-24 bg-primary flex items-center justify-center mb-6"
-            >
-              <span
-                class="material-symbols-outlined text-on-primary text-3xl"
-                data-icon="rocket_launch"
-                >rocket_launch</span
-              >
-            </div>
-            <h3
-              class="font-headline-md text-headline-md mb-2"
-              data-i18n-key="step5_title"
-            >
-              Live!
-            </h3>
-            <p class="text-text-muted text-sm" data-i18n-key="step5_body">
-              Binnen 5 dagen staat jouw nieuwe website online.
-            </p>
-          </div>
-        </div>
-      </section>
-      <!-- Pricing Section -->
-      <section
-        class="py-24 bg-surface-container-lowest border-y border-border-subtle"
-        id="prijzen"
-      >
-        <div
-          class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop"
-        >
-          <div class="text-center mb-16">
-            <h2
-              class="font-headline-lg text-headline-lg-mobile md:text-headline-lg mb-4"
-              data-i18n-key="pricing_title"
-            >
-              Transparante prijzen
-            </h2>
-            <p
-              class="text-text-muted max-w-xl mx-auto"
-              data-i18n-key="pricing_subtitle"
-            >
-              Kies het pakket dat bij jouw onderneming past. Altijd inclusief
-              onze razendsnelle service.
-            </p>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter items-stretch">
-            <!-- Starter -->
-            <div
-              class="bg-surface border border-border-subtle p-8 flex flex-col"
-            >
-              <h3
-                class="font-headline-md text-headline-md mb-2"
-                data-i18n-key="starter_title"
-              >
-                Starter
-              </h3>
-              <div class="flex items-baseline gap-1 mb-6">
-                <span class="text-3xl font-bold">€499</span>
-                <span class="text-text-muted text-sm" data-i18n-key="price_once"
-                  >eenmalig</span
-                >
-              </div>
-              <ul class="space-y-4 mb-8 flex-grow">
-                <li class="flex items-center gap-2 text-sm">
-                  <span
-                    class="material-symbols-outlined text-primary text-lg"
-                    data-icon="done"
-                    >done</span
-                  >
-                  <span data-i18n-key="starter_feature_1">4 Pagina's</span>
-                </li>
-                <li class="flex items-center gap-2 text-sm">
-                  <span
-                    class="material-symbols-outlined text-primary text-lg"
-                    data-icon="done"
-                    >done</span
-                  >
-                  <span data-i18n-key="starter_feature_2"
-                    >Contactformulier</span
-                  >
-                </li>
-                <li class="flex items-center gap-2 text-sm">
-                  <span
-                    class="material-symbols-outlined text-primary text-lg"
-                    data-icon="done"
-                    >done</span
-                  >
-                  <span data-i18n-key="starter_feature_3"
-                    >Mobiel-vriendelijk</span
-                  >
-                </li>
-                <li
-                  class="flex items-center gap-2 text-sm font-bold text-primary"
-                >
-                  <span
-                    class="material-symbols-outlined text-lg"
-                    data-icon="schedule"
-                    >schedule</span
-                  >
-                  <span data-i18n-key="starter_feature_4"
-                    >5 Werkdagen live</span
-                  >
-                </li>
-              </ul>
-              <button
-                class="w-full border border-border-subtle py-3 font-button text-button hover:bg-white/5 transition-all"
-                data-i18n-key="choose_starter"
-                type="button"
-                data-offerte-cta="true"
-                data-package="starter"
-              >
-                Kies Starter
-              </button>
-            </div>
-            <!-- Business (Featured) -->
-            <div
-              class="bg-surface border-2 border-primary p-8 flex flex-col relative transform md:-translate-y-4 shadow-2xl shadow-primary/10"
-            >
-              <div
-                class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-on-primary px-4 py-1 text-[10px] font-black uppercase tracking-widest"
-                data-i18n-key="popular_badge"
-              >
-                Meest gekozen
-              </div>
-              <h3
-                class="font-headline-md text-headline-md mb-2"
-                data-i18n-key="business_title"
-              >
-                Business
-              </h3>
-              <div class="flex items-baseline gap-1 mb-6">
-                <span class="text-3xl font-bold">€699</span>
-                <span class="text-text-muted text-sm" data-i18n-key="price_once"
-                  >eenmalig</span
-                >
-              </div>
-              <ul class="space-y-4 mb-8 flex-grow">
-                <li class="flex items-center gap-2 text-sm">
-                  <span
-                    class="material-symbols-outlined text-primary text-lg"
-                    data-icon="done"
-                    >done</span
-                  >
-                  <span data-i18n-key="business_feature_1"
-                    >6 Pagina's + Blog</span
-                  >
-                </li>
-                <li class="flex items-center gap-2 text-sm">
-                  <span
-                    class="material-symbols-outlined text-primary text-lg"
-                    data-icon="done"
-                    >done</span
-                  >
-                  <span data-i18n-key="business_feature_2"
-                    >Google Analytics</span
-                  >
-                </li>
-                <li class="flex items-center gap-2 text-sm">
-                  <span
-                    class="material-symbols-outlined text-primary text-lg"
-                    data-icon="done"
-                    >done</span
-                  >
-                  <span data-i18n-key="business_feature_3"
-                    >Basis SEO Optimalisatie</span
-                  >
-                </li>
-                <li class="flex items-center gap-2 text-sm">
-                  <span
-                    class="material-symbols-outlined text-primary text-lg"
-                    data-icon="done"
-                    >done</span
-                  >
-                  <span data-i18n-key="business_feature_4"
-                    >Google Mijn Bedrijf setup</span
-                  >
-                </li>
-                <li
-                  class="flex items-center gap-2 text-sm font-bold text-primary"
-                >
-                  <span
-                    class="material-symbols-outlined text-lg"
-                    data-icon="schedule"
-                    >schedule</span
-                  >
-                  <span data-i18n-key="business_feature_5"
-                    >7 Werkdagen live</span
-                  >
-                </li>
-              </ul>
-              <button
-                class="w-full bg-primary text-on-primary py-3 font-button text-button font-bold hover:brightness-110 transition-all"
-                data-i18n-key="choose_business"
-                type="button"
-                data-offerte-cta="true"
-                data-package="business"
-              >
-                Kies Business
-              </button>
-            </div>
-            <!-- Pro -->
-            <div
-              class="bg-surface border border-border-subtle p-8 flex flex-col"
-            >
-              <h3
-                class="font-headline-md text-headline-md mb-2"
-                data-i18n-key="pro_title"
-              >
-                Pro
-              </h3>
-              <div class="flex items-baseline gap-1 mb-6">
-                <span class="text-3xl font-bold">€1.199</span>
-                <span class="text-text-muted text-sm" data-i18n-key="price_once"
-                  >eenmalig</span
-                >
-              </div>
-              <ul class="space-y-4 mb-8 flex-grow">
-                <li class="flex items-center gap-2 text-sm">
-                  <span
-                    class="material-symbols-outlined text-primary text-lg"
-                    data-icon="done"
-                    >done</span
-                  >
-                  <span data-i18n-key="pro_feature_1">Alles uit Business</span>
-                </li>
-                <li class="flex items-center gap-2 text-sm">
-                  <span
-                    class="material-symbols-outlined text-primary text-lg"
-                    data-icon="done"
-                    >done</span
-                  >
-                  <span data-i18n-key="pro_feature_2"
-                    >Boekingssysteem / Shop</span
-                  >
-                </li>
-                <li class="flex items-center gap-2 text-sm">
-                  <span
-                    class="material-symbols-outlined text-primary text-lg"
-                    data-icon="done"
-                    >done</span
-                  >
-                  <span data-i18n-key="pro_feature_3">Tot 10 Pagina's</span>
-                </li>
-                <li class="flex items-center gap-2 text-sm">
-                  <span
-                    class="material-symbols-outlined text-primary text-lg"
-                    data-icon="done"
-                    >done</span
-                  >
-                  <span data-i18n-key="pro_feature_4"
-                    >Maatwerk functionaliteit</span
-                  >
-                </li>
-                <li
-                  class="flex items-center gap-2 text-sm font-bold text-primary"
-                >
-                  <span
-                    class="material-symbols-outlined text-lg"
-                    data-icon="schedule"
-                    >schedule</span
-                  >
-                  <span data-i18n-key="pro_feature_5">10 Werkdagen live</span>
-                </li>
-              </ul>
-              <button
-                class="w-full border border-border-subtle py-3 font-button text-button hover:bg-white/5 transition-all"
-                data-i18n-key="choose_pro"
-                type="button"
-                data-offerte-cta="true"
-                data-package="pro"
-              >
-                Kies Pro
-              </button>
-            </div>
-          </div>
-          <div
-            class="mt-12 text-center p-6 border border-border-subtle bg-background/50"
-          >
-            <p class="text-text-primary">
-              <span data-i18n-key="maintenance_text"
-                >Onderhoud &amp; hosting incl. domein:</span
-              >
-              <span class="font-bold text-primary">€49/maand</span>
-            </p>
-          </div>
-        </div>
-      </section>
-      <!-- Testimonials -->
-      <section
-        class="py-24 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto"
-      >
-        <h2
-          class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-center mb-16"
-          data-i18n-key="testimonials_title"
-        >
-          Wat onze klanten zeggen
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
-          <div class="bg-surface border border-border-subtle p-10 relative">
-            <div class="flex gap-1 mb-6 text-primary">
-              <span
-                class="material-symbols-outlined"
-                data-icon="star"
-                style="font-variation-settings: &quot;FILL&quot; 1"
-                >star</span
-              >
-              <span
-                class="material-symbols-outlined"
-                data-icon="star"
-                style="font-variation-settings: &quot;FILL&quot; 1"
-                >star</span
-              >
-              <span
-                class="material-symbols-outlined"
-                data-icon="star"
-                style="font-variation-settings: &quot;FILL&quot; 1"
-                >star</span
-              >
-              <span
-                class="material-symbols-outlined"
-                data-icon="star"
-                style="font-variation-settings: &quot;FILL&quot; 1"
-                >star</span
-              >
-              <span
-                class="material-symbols-outlined"
-                data-icon="star"
-                style="font-variation-settings: &quot;FILL&quot; 1"
-                >star</span
-              >
-            </div>
-            <blockquote
-              class="italic text-lg mb-8 text-text-primary leading-relaxed"
-              data-i18n-key="testimonial_1_quote"
-            >
-              "Nuxio maakte hun belofte meer dan waar. Binnen een week stond
-              mijn schildersbedrijf professioneel op de kaart. Direct meer
-              aanvragen gekregen via het formulier!"
-            </blockquote>
-            <div class="flex items-center gap-4">
-              <div
-                class="w-12 h-12 bg-primary/20 flex items-center justify-center text-primary font-bold"
-              >
-                JW
-              </div>
-              <div>
-                <p class="font-bold">Jan-Willem de Groot</p>
-                <p class="text-xs text-text-muted uppercase tracking-wider">
-                  De Groot Schilderwerken
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="bg-surface border border-border-subtle p-10 relative">
-            <div class="flex gap-1 mb-6 text-primary">
-              <span
-                class="material-symbols-outlined"
-                data-icon="star"
-                style="font-variation-settings: &quot;FILL&quot; 1"
-                >star</span
-              >
-              <span
-                class="material-symbols-outlined"
-                data-icon="star"
-                style="font-variation-settings: &quot;FILL&quot; 1"
-                >star</span
-              >
-              <span
-                class="material-symbols-outlined"
-                data-icon="star"
-                style="font-variation-settings: &quot;FILL&quot; 1"
-                >star</span
-              >
-              <span
-                class="material-symbols-outlined"
-                data-icon="star"
-                style="font-variation-settings: &quot;FILL&quot; 1"
-                >star</span
-              >
-              <span
-                class="material-symbols-outlined"
-                data-icon="star"
-                style="font-variation-settings: &quot;FILL&quot; 1"
-                >star</span
-              >
-            </div>
-            <blockquote
-              class="italic text-lg mb-8 text-text-primary leading-relaxed"
-              data-i18n-key="testimonial_2_quote"
-            >
-              "Eindelijk een bureau dat gewoon doet wat ze beloven. Geen vage
-              termen, maar een strakke site die werkt op elke telefoon. De prijs
-              is ook echt wat er op de site staat."
-            </blockquote>
-            <div class="flex items-center gap-4">
-              <div
-                class="w-12 h-12 bg-primary/20 flex items-center justify-center text-primary font-bold"
-              >
-                SM
-              </div>
-              <div>
-                <p class="font-bold">Sanne Meijer</p>
-                <p class="text-xs text-text-muted uppercase tracking-wider">
-                  Bloemenatelier Sanne
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- CTA Banner -->
-      <section
-        class="py-24 px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto mb-20"
-        id="contact"
-      >
-        <div
-          class="bg-surface border border-primary/30 p-12 md:p-20 text-center relative overflow-hidden"
-        >
-          <div class="absolute inset-0 emerald-gradient-glow opacity-50"></div>
-          <div class="relative z-10">
-            <h2
-              class="font-headline-lg text-headline-lg-mobile md:text-headline-lg mb-6"
-              data-i18n-key="cta_title"
-            >
-              Klaar om online te gaan?
-            </h2>
-            <p
-              class="text-text-muted mb-10 max-w-xl mx-auto"
-              data-i18n-key="cta_desc"
-            >
-              Neem vandaag nog contact op en start volgende week al met je
-              nieuwe professionele website.
-            </p>
-            <button
-              class="bg-primary text-on-primary px-12 py-5 font-button text-button font-bold text-lg hover:brightness-110 active:scale-95 transition-all shadow-xl shadow-primary/20"
-              type="button"
-              data-offerte-cta="true"
-              data-i18n-key="cta_button"
-            >
-              Vraag direct een offerte aan
-            </button>
-            <p class="mt-6 text-sm text-text-muted">
-              <span data-i18n-key="cta_email_prefix">Of mail ons via</span>
-              <a
-                class="text-primary hover:underline"
-                href="mailto:support@nuxio.nl"
-                >support@nuxio.nl</a
-              >
-            </p>
-          </div>
-        </div>
-      </section>
 
-      <!-- Offerte modal -->
-      <section
-        class="hidden fixed inset-0 z-[70]"
-        id="offerte-modal"
-        aria-hidden="true"
-      >
-        <div
-          class="absolute inset-0 bg-black/70 backdrop-blur-sm"
-          data-offerte-close="true"
-        ></div>
-        <div
-          class="relative z-10 h-full w-full overflow-y-auto p-4 md:p-10 flex items-start md:items-center justify-center"
-        >
-          <div
-            class="w-full max-w-4xl bg-surface border border-border-subtle p-8 md:p-12 shadow-2xl shadow-black/40"
-            id="offerte-formulier"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="offerte-title"
-          >
-            <div class="flex items-start justify-between gap-4 mb-8">
-              <div>
-                <h3
-                  class="font-headline-md text-headline-md mb-2"
-                  id="offerte-title"
-                  data-i18n-key="modal_title"
-                >
-                  Vraag je offerte aan
-                </h3>
-                <p
-                  class="text-text-muted text-sm md:text-base"
-                  data-i18n-key="modal_subtitle"
-                >
-                  Vul hieronder je gegevens in. Je ontvangt binnen 24 uur een
-                  heldere offerte op maat.
-                </p>
-              </div>
-              <button
-                class="text-text-muted hover:text-text-primary transition-colors"
-                type="button"
-                data-offerte-close="true"
-                aria-label="Sluit offerteformulier"
-                data-i18n-aria-label="modal_close_aria"
-              >
-                <span class="material-symbols-outlined" data-icon="close"
-                  >close</span
-                >
-              </button>
-            </div>
-
-            <form
-              class="grid grid-cols-1 md:grid-cols-2 gap-5"
-              id="offerteForm"
-              action="https://api.web3forms.com/submit"
-              method="POST"
-            >
-              <input
-                id="web3forms-access-key"
-                name="access_key"
-                type="hidden"
-                value="0b6888a5-0993-4033-a3b3-6e169d6f7499"
-              />
-              <input
-                name="subject"
-                type="hidden"
-                value="Nieuwe offerte aanvraag via nuxio.nl"
-                data-i18n-value="form_subject"
-              />
-              <input name="from_name" type="hidden" value="Nuxio Website" />
-              <input
-                name="botcheck"
-                type="checkbox"
-                class="hidden"
-                style="display: none"
-              />
-
-              <div>
-                <label
-                  class="block text-sm mb-2"
-                  for="naam"
-                  data-i18n-key="form_label_name"
-                  >Naam *</label
-                >
-                <input
-                  class="w-full bg-background border border-border-subtle px-4 py-3 focus:border-primary focus:ring-0"
-                  id="naam"
-                  name="name"
-                  required=""
-                  type="text"
-                  autocomplete="name"
-                />
-              </div>
-
-              <div>
-                <label
-                  class="block text-sm mb-2"
-                  for="email"
-                  data-i18n-key="form_label_email"
-                  >E-mail *</label
-                >
-                <input
-                  class="w-full bg-background border border-border-subtle px-4 py-3 focus:border-primary focus:ring-0"
-                  id="email"
-                  name="email"
-                  required=""
-                  type="email"
-                  autocomplete="email"
-                />
-              </div>
-
-              <div>
-                <label
-                  class="block text-sm mb-2"
-                  for="telefoon"
-                  data-i18n-key="form_label_phone"
-                  >Telefoon *</label
-                >
-                <input
-                  class="w-full bg-background border border-border-subtle px-4 py-3 focus:border-primary focus:ring-0"
-                  id="telefoon"
-                  name="telefoon"
-                  required=""
-                  type="tel"
-                  autocomplete="tel"
-                />
-              </div>
-
-              <div>
-                <label
-                  class="block text-sm mb-2"
-                  for="bedrijf"
-                  data-i18n-key="form_label_company"
-                  >Bedrijf</label
-                >
-                <input
-                  class="w-full bg-background border border-border-subtle px-4 py-3 focus:border-primary focus:ring-0"
-                  id="bedrijf"
-                  name="bedrijf"
-                  type="text"
-                  autocomplete="organization"
-                />
-              </div>
-
-              <div class="md:col-span-2">
-                <label
-                  class="block text-sm mb-2"
-                  for="pakket"
-                  data-i18n-key="form_label_package"
-                  >Gewenst pakket *</label
-                >
-                <select
-                  class="w-full bg-background border border-border-subtle px-4 py-3 focus:border-primary focus:ring-0"
-                  id="pakket"
-                  name="pakket"
-                  required=""
-                >
-                  <option value="" data-i18n-key="form_option_choose_package">
-                    Kies een pakket
-                  </option>
-                  <option value="starter" data-i18n-key="form_option_starter">
-                    Starter (€499)
-                  </option>
-                  <option value="business" data-i18n-key="form_option_business">
-                    Business (€699)
-                  </option>
-                  <option value="pro" data-i18n-key="form_option_pro">
-                    Pro (€1.199)
-                  </option>
-                  <option value="maatwerk" data-i18n-key="form_option_custom">
-                    Maatwerk
-                  </option>
-                </select>
-              </div>
-
-              <div class="md:col-span-2">
-                <label
-                  class="block text-sm mb-2"
-                  for="toelichting"
-                  data-i18n-key="form_label_message"
-                  >Korte toelichting *</label
-                >
-                <textarea
-                  class="w-full min-h-32 bg-background border border-border-subtle px-4 py-3 focus:border-primary focus:ring-0"
-                  id="toelichting"
-                  name="message"
-                  required=""
-                  data-i18n-placeholder="form_placeholder_message"
-                  placeholder="Wat wil je laten bouwen en wanneer wil je live?"
-                ></textarea>
-              </div>
-
-              <div
-                class="md:col-span-2 flex flex-col sm:flex-row sm:items-center gap-4"
-              >
-                <button
-                  class="bg-primary text-on-primary px-8 py-4 font-button text-button font-bold hover:brightness-110 active:scale-95 transition-all"
-                  id="offerteSubmit"
-                  type="submit"
-                  data-i18n-key="form_submit"
-                >
-                  Verstuur aanvraag
-                </button>
-                <p
-                  class="text-xs text-text-muted"
-                  data-i18n-key="form_required_note"
-                >
-                  Velden met * zijn verplicht.
-                </p>
-              </div>
-
-              <p
-                class="md:col-span-2 text-sm text-primary hidden"
-                id="offerteSuccess"
-                role="status"
-                aria-live="polite"
-                data-i18n-key="form_success"
-              >
-                Bedankt. Je aanvraag is verzonden. We reageren binnen 24 uur met
-                een duidelijke offerte.
-              </p>
-
-              <p
-                class="md:col-span-2 text-sm text-error hidden"
-                id="offerteError"
-                role="alert"
-                aria-live="assertive"
-              ></p>
-            </form>
-          </div>
-        </div>
-      </section>
-    </main>
-    <!-- Footer -->
-    <footer
-      class="bg-surface-container-lowest border-t border-border-subtle relative"
+    <!-- ===== HERO ===== -->
+    <section
+      id="hero"
+      class="relative min-h-screen flex items-center noise-bg grid-pattern overflow-hidden"
+      aria-label="Hero"
     >
-      <div
-        class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop py-16 flex flex-col md:flex-row justify-between gap-gutter"
-      >
-        <div class="flex flex-col gap-6 md:w-1/3">
-          <div class="flex items-center gap-2">
-            <img
-              src="assets/logo-transparent-bg.png"
-              alt="Nuxio logo"
-              class="h-7 w-7 object-contain"
-            />
-            <span
-              class="font-headline-md text-headline-md font-black text-text-primary"
-              >Nux<span class="text-primary">io</span></span
-            >
-          </div>
-          <p class="text-text-muted" data-i18n-key="footer_desc">
-            Snel live. Vaste prijs. Geen gedoe. Wij bouwen high-end websites
-            voor het MKB met de precisie van een ambachtsman.
+      <div class="relative z-10 max-w-6xl mx-auto px-6 lg:px-8 py-32 lg:py-0">
+        <div class="max-w-3xl">
+          <h1
+            class="hero-item font-display font-extrabold text-5xl sm:text-6xl lg:text-7xl xl:text-[5.25rem] leading-[1.05] tracking-tight text-ink"
+            data-i18n-html="hero.headline"
+          >Jouw website.<br />Klaar in 5&nbsp;dagen.</h1>
+          <p
+            class="hero-item mt-6 text-lg sm:text-xl lg:text-2xl text-muted max-w-xl leading-relaxed"
+            data-i18n="hero.sub"
+          >
+            Professionele websites voor lokale ondernemers — vanaf&nbsp;€599.
+            Geen gedoe, gewoon live.
           </p>
-          <div class="flex gap-4">
-            <span
-              class="material-symbols-outlined text-text-muted hover:text-primary cursor-pointer transition-colors"
-              data-icon="mail"
-              >mail</span
-            >
-            <span
-              class="material-symbols-outlined text-text-muted hover:text-primary cursor-pointer transition-colors"
-              data-icon="call"
-              >call</span
-            >
-            <span
-              class="material-symbols-outlined text-text-muted hover:text-primary cursor-pointer transition-colors"
-              data-icon="share"
-              >share</span
-            >
-          </div>
-        </div>
-        <div class="grid grid-cols-2 md:grid-cols-2 gap-12">
-          <div class="flex flex-col gap-4">
-            <h4 class="font-label-caps text-label-caps text-text-primary">
-              <span data-i18n-key="footer_nav_title">Navigatie</span>
-            </h4>
+          <div
+            class="hero-item mt-10 flex flex-col sm:flex-row gap-4"
+          >
             <a
-              class="text-text-muted hover:text-primary transition-colors text-sm"
-              href="#werkwijze"
-              data-i18n-key="footer_nav_process"
-              >Werkwijze</a
+              href="#pakketten"
+              class="inline-flex items-center justify-center gap-2 bg-accent text-white text-base font-semibold px-7 py-3.5 rounded-lg btn-primary"
+              data-i18n="hero.cta1"
             >
+              Bekijk pakketten
+            </a>
             <a
-              class="text-text-muted hover:text-primary transition-colors text-sm"
-              href="#prijzen"
-              data-i18n-key="footer_nav_pricing"
-              >Prijzen</a
+              href="mailto:support@nuxio.nl"
+              class="inline-flex items-center justify-center gap-2 border-2 border-ink/20 text-ink text-base font-semibold px-7 py-3.5 rounded-lg btn-secondary"
+              data-i18n="hero.cta2"
             >
-            <a
-              class="text-text-muted hover:text-primary transition-colors text-sm"
-              href="#contact"
-              data-i18n-key="footer_nav_contact"
-              >Contact</a
-            >
-          </div>
-          <div class="flex flex-col gap-4">
-            <h4
-              class="font-label-caps text-label-caps text-text-primary"
-              data-i18n-key="footer_legal_title"
-            >
-              Legaal
-            </h4>
-            <a
-              class="text-text-muted hover:text-primary transition-colors text-sm"
-              href="#"
-              data-i18n-key="footer_privacy"
-              >Privacy Policy</a
-            >
-            <a
-              class="text-text-muted hover:text-primary transition-colors text-sm"
-              href="#"
-              data-i18n-key="footer_terms"
-              >Algemene Voorwaarden</a
-            >
+              Neem contact op
+            </a>
           </div>
         </div>
       </div>
+
+      <!-- Decorative geometric element -->
       <div
-        class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop py-8 border-t border-border-subtle flex flex-col md:flex-row justify-between items-center gap-4"
-      >
-        <p class="text-text-muted text-xs" data-i18n-key="footer_copyright">
-          © 2026 Nuxio. Vakmanschap in digitale precisie.
+        class="hidden lg:block absolute top-1/2 -translate-y-1/2 right-12 xl:right-24 w-64 h-64 border-2 border-accent/15 rounded-full"
+        aria-hidden="true"
+      ></div>
+      <div
+        class="hidden lg:block absolute top-1/2 -translate-y-[40%] right-20 xl:right-32 w-40 h-40 border-2 border-accent/10 rotate-45"
+        aria-hidden="true"
+      ></div>
+    </section>
+
+    <!-- ===== VOOR WIE ===== -->
+    <section
+      id="voor-wie"
+      class="py-24 lg:py-32"
+      aria-labelledby="voor-wie-title"
+    >
+      <div class="max-w-6xl mx-auto px-6 lg:px-8">
+        <h2
+          id="voor-wie-title"
+          class="reveal font-display font-bold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-ink text-center"
+          data-i18n="forwhom.title"
+        >
+          Wij bouwen voor lokale ondernemers zoals:
+        </h2>
+
+        <div
+          class="reveal reveal-delay-1 mt-12 flex flex-wrap justify-center gap-3"
+          id="pill-tags"
+        >
+          <!-- Pills are populated by JS based on language -->
+        </div>
+
+        <p class="reveal reveal-delay-2 mt-8 text-center text-muted text-lg" data-i18n="forwhom.support">
+          Geen website? Verouderd design? Wij lossen het op.
         </p>
-        <div class="flex items-center gap-2">
-          <span class="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
-          <span class="text-xs text-text-muted" data-i18n-key="footer_status"
-            >Alle systemen operationeel</span
+      </div>
+    </section>
+
+    <!-- ===== WERKWIJZE ===== -->
+    <section
+      id="werkwijze"
+      class="py-24 lg:py-32 bg-white"
+      aria-labelledby="werkwijze-title"
+    >
+      <div class="max-w-6xl mx-auto px-6 lg:px-8">
+        <h2
+          id="werkwijze-title"
+          class="reveal font-display font-bold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-ink text-center"
+          data-i18n="process.title"
+        >
+          Hoe het werkt
+        </h2>
+
+        <div
+          class="reveal reveal-delay-1 mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12"
+        >
+          <!-- Step 1 -->
+          <div class="relative text-center px-4">
+            <div
+              class="reveal reveal-delay-1 inline-flex items-center justify-center w-14 h-14 rounded-full bg-accent text-white font-display font-bold text-xl mb-6"
+            >
+              1
+            </div>
+            <h3
+              class="reveal reveal-delay-1 font-display font-bold text-xl lg:text-2xl text-ink mb-3"
+              data-i18n="process.step1.title"
+            >
+              Gesprek
+            </h3>
+            <p class="reveal reveal-delay-1 text-muted leading-relaxed" data-i18n="process.step1.desc">
+              Wij luisteren naar jouw wensen en doelen.
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="relative text-center px-4">
+            <div
+              class="reveal reveal-delay-2 inline-flex items-center justify-center w-14 h-14 rounded-full bg-accent text-white font-display font-bold text-xl mb-6"
+            >
+              2
+            </div>
+            <h3
+              class="reveal reveal-delay-2 font-display font-bold text-xl lg:text-2xl text-ink mb-3"
+              data-i18n="process.step2.title"
+            >
+              Bouwen
+            </h3>
+            <p class="reveal reveal-delay-2 text-muted leading-relaxed" data-i18n="process.step2.desc">
+              Max bouwt jouw website op ons bewezen template.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="relative text-center px-4">
+            <div
+              class="reveal reveal-delay-3 inline-flex items-center justify-center w-14 h-14 rounded-full bg-accent text-white font-display font-bold text-xl mb-6"
+            >
+              3
+            </div>
+            <h3
+              class="reveal reveal-delay-3 font-display font-bold text-xl lg:text-2xl text-ink mb-3"
+              data-i18n="process.step3.title"
+            >
+              Live in 5 dagen
+            </h3>
+            <p class="reveal reveal-delay-3 text-muted leading-relaxed" data-i18n="process.step3.desc">
+              Jij krijgt een professionele website, klaar voor gebruik.
+            </p>
+          </div>
+        </div>
+
+        <!-- Horizontal connecting line (desktop) -->
+        <div
+          class="hidden md:block relative mt-[-252px] mb-[200px] mx-auto max-w-2xl"
+          aria-hidden="true"
+        >
+          <div
+            class="absolute top-7 left-[calc(16.67%+28px)] right-[calc(16.67%+28px)] h-[2px] bg-accent/20"
+          ></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PAKKETTEN ===== -->
+    <section
+      id="pakketten"
+      class="py-24 lg:py-32"
+      aria-labelledby="pakketten-title"
+    >
+      <div class="max-w-6xl mx-auto px-6 lg:px-8">
+        <h2
+          id="pakketten-title"
+          class="reveal font-display font-bold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-ink text-center"
+          data-i18n="packages.title"
+        >
+          Kies jouw pakket
+        </h2>
+
+        <div
+          class="reveal reveal-delay-1 mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-start"
+        >
+          <!-- STARTER -->
+          <div
+            class="price-card bg-white border-2 border-ink/10 rounded-2xl p-7 flex flex-col"
           >
+            <span
+              class="text-sm font-semibold text-muted uppercase tracking-wider"
+              data-i18n="packages.starter.label"
+            >Starter</span>
+            <div class="mt-3 flex items-baseline gap-1">
+              <span class="font-display font-extrabold text-4xl text-ink"
+                >€599</span
+              >
+            </div>
+            <ul class="mt-6 space-y-3 flex-1">
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i data-lucide="check" class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"></i>
+                <span data-i18n="packages.starter.f1">4 pagina's</span>
+              </li>
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i data-lucide="check" class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"></i>
+                <span data-i18n="packages.starter.f2">Mobiel-vriendelijk</span>
+              </li>
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i data-lucide="check" class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"></i>
+                <span data-i18n="packages.starter.f3">Contactformulier</span>
+              </li>
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i data-lucide="check" class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"></i>
+                <span data-i18n="packages.starter.f4">Live in 5 dagen</span>
+              </li>
+            </ul>
+            <a
+              href="mailto:support@nuxio.nl?subject=Offerte%20-%20Starter%20pakket"
+              class="mt-8 block w-full text-center border-2 border-ink/15 text-ink text-sm font-semibold px-5 py-3 rounded-lg btn-secondary cursor-pointer"
+              data-i18n="packages.cta"
+            >
+              Kies dit pakket
+            </a>
+          </div>
+
+          <!-- BUSINESS (Most Popular) -->
+          <div
+            class="price-card bg-white border-2 border-accent rounded-2xl p-7 flex flex-col relative shadow-lg shadow-accent/5"
+          >
+            <div
+              class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-accent text-white text-xs font-bold uppercase tracking-wider px-4 py-1 rounded-full whitespace-nowrap"
+              data-i18n="packages.popular"
+            >
+              Meest gekozen
+            </div>
+            <span
+              class="text-sm font-semibold text-accent uppercase tracking-wider"
+              data-i18n="packages.business.label"
+            >Business</span>
+            <div class="mt-3 flex items-baseline gap-1">
+              <span class="font-display font-extrabold text-4xl text-ink"
+                >€899</span
+              >
+            </div>
+            <ul class="mt-6 space-y-3 flex-1">
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i data-lucide="check" class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"></i>
+                <span data-i18n="packages.business.f1">6 pagina's + blog</span>
+              </li>
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i data-lucide="check" class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"></i>
+                <span>Google Analytics</span>
+              </li>
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i data-lucide="check" class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"></i>
+                <span data-i18n="packages.business.f3">SEO-basis</span>
+              </li>
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i data-lucide="check" class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"></i>
+                <span data-i18n="packages.business.f4">Live in 7 dagen</span>
+              </li>
+            </ul>
+            <a
+              href="mailto:support@nuxio.nl?subject=Offerte%20-%20Business%20pakket"
+              class="mt-8 block w-full text-center bg-accent text-white text-sm font-semibold px-5 py-3 rounded-lg btn-primary cursor-pointer"
+              data-i18n="packages.cta"
+            >
+              Kies dit pakket
+            </a>
+          </div>
+
+          <!-- PRO -->
+          <div
+            class="price-card bg-white border-2 border-ink/10 rounded-2xl p-7 flex flex-col"
+          >
+            <span
+              class="text-sm font-semibold text-muted uppercase tracking-wider"
+              data-i18n="packages.pro.label"
+            >Pro</span>
+            <div class="mt-3 flex items-baseline gap-1">
+              <span class="font-display font-extrabold text-4xl text-ink"
+                >€1.399</span
+              >
+            </div>
+            <ul class="mt-6 space-y-3 flex-1">
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i data-lucide="check" class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"></i>
+                <span data-i18n="packages.pro.f1">Alles van Business</span>
+              </li>
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i data-lucide="check" class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"></i>
+                <span data-i18n="packages.pro.f2">Boekingssysteem of webshop (max 20 producten)</span>
+              </li>
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i data-lucide="check" class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"></i>
+                <span data-i18n="packages.pro.f3">Geavanceerde functionaliteit</span>
+              </li>
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i data-lucide="check" class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"></i>
+                <span data-i18n="packages.pro.f4">Prioriteit support</span>
+              </li>
+            </ul>
+            <a
+              href="mailto:support@nuxio.nl?subject=Offerte%20-%20Pro%20pakket"
+              class="mt-8 block w-full text-center border-2 border-ink/15 text-ink text-sm font-semibold px-5 py-3 rounded-lg btn-secondary cursor-pointer"
+              data-i18n="packages.cta"
+            >
+              Kies dit pakket
+            </a>
+          </div>
+
+          <!-- ONDERHOUD (Add-on) -->
+          <div
+            class="price-card bg-ink/[0.03] border-2 border-ink/10 border-dashed rounded-2xl p-7 flex flex-col"
+          >
+            <span
+              class="text-sm font-semibold text-muted uppercase tracking-wider"
+              data-i18n="packages.maintenance.label"
+            >Onderhoud</span>
+            <div class="mt-3 flex items-baseline gap-1">
+              <span class="font-display font-extrabold text-4xl text-ink"
+                >€49</span
+              >
+              <span class="text-muted text-sm font-medium" data-i18n="packages.maintenance.period">/maand</span>
+            </div>
+            <p class="mt-2 text-xs text-muted" data-i18n="packages.maintenance.sub">Add-on bij elk pakket</p>
+            <ul class="mt-6 space-y-3 flex-1">
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i data-lucide="check" class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"></i>
+                <span data-i18n="packages.maintenance.f1">Updates</span>
+              </li>
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i data-lucide="check" class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"></i>
+                <span data-i18n="packages.maintenance.f2">Hosting</span>
+              </li>
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i data-lucide="check" class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"></i>
+                <span data-i18n="packages.maintenance.f3">Backups</span>
+              </li>
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i data-lucide="check" class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"></i>
+                <span data-i18n="packages.maintenance.f4">Domein inbegrepen</span>
+              </li>
+            </ul>
+            <a
+              href="mailto:support@nuxio.nl?subject=Onderhoud%20aanvragen"
+              class="mt-8 block w-full text-center border-2 border-ink/15 text-ink text-sm font-semibold px-5 py-3 rounded-lg btn-secondary cursor-pointer"
+              data-i18n="packages.maintenance.cta"
+            >
+              Voeg toe aan pakket
+            </a>
+          </div>
+        </div>
+
+        <p
+          class="reveal reveal-delay-2 mt-10 text-center text-sm text-muted max-w-2xl mx-auto leading-relaxed"
+          data-i18n="packages.note"
+        >
+          Betaling: 50% vooraf, 50% bij oplevering. Zonder onderhoudscontract
+          regel je het domein en de hosting zelf.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section
+      id="contact"
+      class="py-24 lg:py-32 bg-white"
+      aria-labelledby="contact-title"
+    >
+      <div class="max-w-6xl mx-auto px-6 lg:px-8 text-center">
+        <h2
+          id="contact-title"
+          class="reveal font-display font-bold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-ink"
+          data-i18n="contact.title"
+        >
+          Klaar om te starten?
+        </h2>
+        <p
+          class="reveal reveal-delay-1 mt-4 text-lg text-muted max-w-xl mx-auto leading-relaxed"
+          data-i18n="contact.desc"
+        >
+          Stuur ons een bericht en ontvang binnen een werkdag een offerte op
+          maat.
+        </p>
+
+        <form
+          id="contact-form"
+          class="reveal reveal-delay-2 mt-12 max-w-xl mx-auto text-left"
+          action="https://api.web3forms.com/submit"
+          method="POST"
+        >
+          <!-- TODO: Vul je Web3Forms access key in — aanvragen op https://web3forms.com -->
+          <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+          <input
+            type="hidden"
+            name="subject"
+            value="Nieuw contactformulier via nuxio.nl"
+          />
+          <input type="hidden" name="from_name" value="Nuxio Website" />
+          <input type="hidden" name="redirect" value="#contact?submitted=true" />
+          <!-- Honeypot -->
+          <input
+            type="checkbox"
+            name="botcheck"
+            class="hidden"
+            style="display: none"
+            tabindex="-1"
+            autocomplete="off"
+          />
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+              <label
+                for="name"
+                class="block text-sm font-semibold text-ink mb-1.5"
+                data-i18n="contact.name"
+              >Naam</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                data-i18n-placeholder="contact.name_ph"
+                placeholder="Jouw naam"
+                class="w-full px-4 py-3 rounded-lg border-2 border-ink/15 bg-cream text-ink text-sm placeholder:text-muted/60 focus:border-accent focus:ring-0 focus:outline-none transition-colors duration-180"
+              />
+            </div>
+            <div>
+              <label
+                for="email"
+                class="block text-sm font-semibold text-ink mb-1.5"
+                data-i18n="contact.email"
+              >E-mail</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                data-i18n-placeholder="contact.email_ph"
+                placeholder="jouw@email.nl"
+                class="w-full px-4 py-3 rounded-lg border-2 border-ink/15 bg-cream text-ink text-sm placeholder:text-muted/60 focus:border-accent focus:ring-0 focus:outline-none transition-colors duration-180"
+              />
+            </div>
+          </div>
+
+          <div class="mt-5">
+            <label
+              for="phone"
+              class="block text-sm font-semibold text-ink mb-1.5"
+            >
+              <span data-i18n="contact.phone">Telefoon</span>
+              <span class="text-muted font-normal" data-i18n="contact.phone_opt">(optioneel)</span>
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              data-i18n-placeholder="contact.phone_ph"
+              placeholder="06 - 12345678"
+              class="w-full px-4 py-3 rounded-lg border-2 border-ink/15 bg-cream text-ink text-sm placeholder:text-muted/60 focus:border-accent focus:ring-0 focus:outline-none transition-colors duration-180"
+            />
+          </div>
+
+          <div class="mt-5">
+            <label
+              for="package"
+              class="block text-sm font-semibold text-ink mb-1.5"
+              data-i18n="contact.package"
+            >Welk pakket?</label>
+            <select
+              id="package"
+              name="pakket"
+              class="w-full px-4 py-3 rounded-lg border-2 border-ink/15 bg-cream text-ink text-sm focus:border-accent focus:ring-0 focus:outline-none transition-colors duration-180 appearance-none cursor-pointer"
+              style="
+                background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B6B6B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E&quot;);
+                background-repeat: no-repeat;
+                background-position: right 12px center;
+                background-size: 16px;
+              "
+            >
+              <option value="" data-i18n="contact.pkg_placeholder">Kies een pakket...</option>
+              <option value="starter">Starter — €599</option>
+              <option value="business">Business — €899</option>
+              <option value="pro">Pro — €1.399</option>
+              <option value="onderhoud">Onderhoud — €49/maand</option>
+              <option value="anders" data-i18n="contact.pkg_unknown">Weet ik nog niet / Anders</option>
+            </select>
+          </div>
+
+          <div class="mt-5">
+            <label
+              for="message"
+              class="block text-sm font-semibold text-ink mb-1.5"
+              data-i18n="contact.message"
+            >Bericht</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              required
+              data-i18n-placeholder="contact.message_ph"
+              placeholder="Vertel ons over jouw bedrijf en wat je zoekt..."
+              class="w-full px-4 py-3 rounded-lg border-2 border-ink/15 bg-cream text-ink text-sm placeholder:text-muted/60 focus:border-accent focus:ring-0 focus:outline-none transition-colors duration-180 resize-none"
+            ></textarea>
+          </div>
+
+          <div class="mt-8">
+            <button
+              type="submit"
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-accent text-white text-base font-semibold px-8 py-3.5 rounded-lg btn-primary cursor-pointer"
+            >
+              <i data-lucide="send" class="w-4.5 h-4.5"></i>
+              <span data-i18n="contact.submit">Verstuur bericht</span>
+            </button>
+          </div>
+
+          <p class="mt-4 text-xs text-muted">
+            <span data-i18n="contact.or_email">Of mail direct naar</span>
+            <a
+              href="mailto:support@nuxio.nl"
+              class="underline hover:text-ink transition-colors duration-180"
+              >support@nuxio.nl</a
+            >.
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="border-t border-ink/10 py-12 lg:py-16" role="contentinfo">
+      <div class="max-w-6xl mx-auto px-6 lg:px-8">
+        <div
+          class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8"
+        >
+          <div>
+            <a
+              href="#"
+              class="font-display font-extrabold text-2xl tracking-tight text-ink cursor-pointer"
+              aria-label="Nuxio home"
+            >
+              Nuxio
+            </a>
+            <p class="mt-2 text-sm text-muted" data-i18n="footer.slogan">
+              Jouw website. Klaar in 5 dagen.
+            </p>
+          </div>
+
+          <div
+            class="flex flex-col sm:flex-row items-start sm:items-center gap-6"
+          >
+            <nav aria-label="Footer navigatie" class="flex gap-6">
+              <a
+                href="#pakketten"
+                class="text-sm text-muted hover:text-ink transition-colors duration-180 cursor-pointer"
+                data-i18n="nav.packages"
+              >Pakketten</a>
+              <a
+                href="workshops.html"
+                class="text-sm text-muted hover:text-ink transition-colors duration-180 cursor-pointer"
+                data-i18n="nav.workshops"
+              >Workshops</a>
+              <a
+                href="apps.html"
+                class="text-sm text-muted hover:text-ink transition-colors duration-180 cursor-pointer"
+                data-i18n="nav.apps"
+              >Apps</a>
+              <a
+                href="#contact"
+                class="text-sm text-muted hover:text-ink transition-colors duration-180 cursor-pointer"
+                data-i18n="nav.contact"
+              >Contact</a>
+            </nav>
+            <a
+              href="mailto:support@nuxio.nl"
+              class="text-sm text-muted hover:text-ink transition-colors duration-180 flex items-center gap-1.5 cursor-pointer"
+            >
+              <i data-lucide="mail" class="w-4 h-4"></i>
+              support@nuxio.nl
+            </a>
+          </div>
+        </div>
+
+        <div class="mt-10 pt-6 border-t border-ink/10">
+          <p class="text-xs text-muted">
+            &copy; 2025 Nuxio — VOF | Max &amp; Raman
+          </p>
         </div>
       </div>
     </footer>
+
+    <!-- ===== SCRIPTS ===== -->
     <script>
-      // Smooth scroll for anchors
+      // ===== TRANSLATIONS =====
+      const translations = {
+        nl: {
+          // Nav
+          "nav.packages": "Pakketten",
+          "nav.forwhom": "Voor wie",
+          "nav.process": "Werkwijze",
+          "nav.workshops": "Workshops",
+          "nav.apps": "Apps",
+          "nav.contact": "Contact",
+          "nav.cta": "Vraag een offerte aan",
+
+          // Hero
+          "hero.headline": "Jouw website.<br>Klaar in 5\u00a0dagen.",
+          "hero.sub": "Professionele websites voor lokale ondernemers \u2014 vanaf\u00a0\u20ac599. Geen gedoe, gewoon live.",
+          "hero.cta1": "Bekijk pakketten",
+          "hero.cta2": "Neem contact op",
+
+          // Voor wie
+          "forwhom.title": "Wij bouwen voor lokale ondernemers zoals:",
+          "forwhom.pills": [
+            "Restaurants & caf\u00e9s",
+            "Kappers & beauty",
+            "Sportclubs",
+            "Fysiotherapeuten",
+            "Tandartsen",
+            "Lokale winkels",
+            "Coaches",
+            "Schoonheidsspecialisten"
+          ],
+          "forwhom.support": "Geen website? Verouderd design? Wij lossen het op.",
+
+          // Werkwijze
+          "process.title": "Hoe het werkt",
+          "process.step1.title": "Gesprek",
+          "process.step1.desc": "Wij luisteren naar jouw wensen en doelen.",
+          "process.step2.title": "Bouwen",
+          "process.step2.desc": "Max bouwt jouw website op ons bewezen template.",
+          "process.step3.title": "Live in 5 dagen",
+          "process.step3.desc": "Jij krijgt een professionele website, klaar voor gebruik.",
+
+          // Pakketten
+          "packages.title": "Kies jouw pakket",
+          "packages.popular": "Meest gekozen",
+          "packages.cta": "Kies dit pakket",
+          "packages.note": "Betaling: 50% vooraf, 50% bij oplevering. Zonder onderhoudscontract regel je het domein en de hosting zelf.",
+          "packages.starter.label": "Starter",
+          "packages.starter.f1": "4 pagina\u2019s",
+          "packages.starter.f2": "Mobiel-vriendelijk",
+          "packages.starter.f3": "Contactformulier",
+          "packages.starter.f4": "Live in 5 dagen",
+          "packages.business.label": "Business",
+          "packages.business.f1": "6 pagina\u2019s + blog",
+          "packages.business.f3": "SEO-basis",
+          "packages.business.f4": "Live in 7 dagen",
+          "packages.pro.label": "Pro",
+          "packages.pro.f1": "Alles van Business",
+          "packages.pro.f2": "Boekingssysteem of webshop (max 20 producten)",
+          "packages.pro.f3": "Geavanceerde functionaliteit",
+          "packages.pro.f4": "Prioriteit support",
+          "packages.maintenance.label": "Onderhoud",
+          "packages.maintenance.period": "/maand",
+          "packages.maintenance.sub": "Add-on bij elk pakket",
+          "packages.maintenance.f1": "Updates",
+          "packages.maintenance.f2": "Hosting",
+          "packages.maintenance.f3": "Backups",
+          "packages.maintenance.f4": "Domein inbegrepen",
+          "packages.maintenance.cta": "Voeg toe aan pakket",
+
+          // Contact
+          "contact.title": "Klaar om te starten?",
+          "contact.desc": "Stuur ons een bericht en ontvang binnen een werkdag een offerte op maat.",
+          "contact.name": "Naam",
+          "contact.name_ph": "Jouw naam",
+          "contact.email": "E-mail",
+          "contact.email_ph": "jouw@email.nl",
+          "contact.phone": "Telefoon",
+          "contact.phone_opt": "(optioneel)",
+          "contact.phone_ph": "06 - 12345678",
+          "contact.package": "Welk pakket?",
+          "contact.pkg_placeholder": "Kies een pakket...",
+          "contact.pkg_unknown": "Weet ik nog niet / Anders",
+          "contact.message": "Bericht",
+          "contact.message_ph": "Vertel ons over jouw bedrijf en wat je zoekt...",
+          "contact.submit": "Verstuur bericht",
+          "contact.or_email": "Of mail direct naar",
+
+          // Footer
+          "footer.slogan": "Jouw website. Klaar in 5 dagen."
+        },
+
+        en: {
+          // Nav
+          "nav.packages": "Packages",
+          "nav.forwhom": "Who we serve",
+          "nav.process": "Process",
+          "nav.workshops": "Workshops",
+          "nav.apps": "Apps",
+          "nav.contact": "Contact",
+          "nav.cta": "Request a quote",
+
+          // Hero
+          "hero.headline": "Your website.<br>Ready in 5\u00a0days.",
+          "hero.sub": "Professional websites for local entrepreneurs \u2014 starting at\u00a0\u20ac599. No hassle, just live.",
+          "hero.cta1": "View packages",
+          "hero.cta2": "Get in touch",
+
+          // Voor wie
+          "forwhom.title": "We build for local entrepreneurs like:",
+          "forwhom.pills": [
+            "Restaurants & caf\u00e9s",
+            "Barbers & beauty",
+            "Sports clubs",
+            "Physiotherapists",
+            "Dentists",
+            "Local shops",
+            "Coaches",
+            "Beauty specialists"
+          ],
+          "forwhom.support": "No website? Outdated design? We\u2019ll fix it.",
+
+          // Werkwijze
+          "process.title": "How it works",
+          "process.step1.title": "Consultation",
+          "process.step1.desc": "We listen to your wishes and goals.",
+          "process.step2.title": "Building",
+          "process.step2.desc": "Max builds your website on our proven template.",
+          "process.step3.title": "Live in 5 days",
+          "process.step3.desc": "You get a professional website, ready to use.",
+
+          // Pakketten
+          "packages.title": "Choose your package",
+          "packages.popular": "Most popular",
+          "packages.cta": "Choose this package",
+          "packages.note": "Payment: 50% upfront, 50% on delivery. Without a maintenance plan, you arrange domain and hosting yourself.",
+          "packages.starter.label": "Starter",
+          "packages.starter.f1": "4 pages",
+          "packages.starter.f2": "Mobile-friendly",
+          "packages.starter.f3": "Contact form",
+          "packages.starter.f4": "Live in 5 days",
+          "packages.business.label": "Business",
+          "packages.business.f1": "6 pages + blog",
+          "packages.business.f3": "Basic SEO",
+          "packages.business.f4": "Live in 7 days",
+          "packages.pro.label": "Pro",
+          "packages.pro.f1": "Everything in Business",
+          "packages.pro.f2": "Booking system or webshop (max 20 products)",
+          "packages.pro.f3": "Advanced functionality",
+          "packages.pro.f4": "Priority support",
+          "packages.maintenance.label": "Maintenance",
+          "packages.maintenance.period": "/month",
+          "packages.maintenance.sub": "Add-on with any package",
+          "packages.maintenance.f1": "Updates",
+          "packages.maintenance.f2": "Hosting",
+          "packages.maintenance.f3": "Backups",
+          "packages.maintenance.f4": "Domain included",
+          "packages.maintenance.cta": "Add to package",
+
+          // Contact
+          "contact.title": "Ready to get started?",
+          "contact.desc": "Send us a message and receive a custom quote within one business day.",
+          "contact.name": "Name",
+          "contact.name_ph": "Your name",
+          "contact.email": "Email",
+          "contact.email_ph": "you@email.com",
+          "contact.phone": "Phone",
+          "contact.phone_opt": "(optional)",
+          "contact.phone_ph": "06 - 12345678",
+          "contact.package": "Which package?",
+          "contact.pkg_placeholder": "Choose a package...",
+          "contact.pkg_unknown": "Not sure yet / Other",
+          "contact.message": "Message",
+          "contact.message_ph": "Tell us about your business and what you\u2019re looking for...",
+          "contact.submit": "Send message",
+          "contact.or_email": "Or email us directly at",
+
+          // Footer
+          "footer.slogan": "Your website. Ready in 5 days."
+        }
+      };
+
+      // ===== LANGUAGE SWITCHER =====
+      let currentLang = localStorage.getItem("nuxio-lang") || "nl";
+
+      function setLanguage(lang) {
+        currentLang = lang;
+        localStorage.setItem("nuxio-lang", lang);
+        document.documentElement.lang = lang;
+
+        const t = translations[lang];
+
+        // Update text content for data-i18n elements
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          const key = el.getAttribute("data-i18n");
+          if (t[key] !== undefined) {
+            el.textContent = t[key];
+          }
+        });
+
+        // Update innerHTML for elements with HTML content (hero headline)
+        document.querySelectorAll("[data-i18n-html]").forEach((el) => {
+          const key = el.getAttribute("data-i18n-html");
+          if (t[key] !== undefined) {
+            el.innerHTML = t[key];
+          }
+        });
+
+        // Update placeholders
+        document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+          const key = el.getAttribute("data-i18n-placeholder");
+          if (t[key] !== undefined) {
+            el.placeholder = t[key];
+          }
+        });
+
+        // Update pill tags
+        const pillContainer = document.getElementById("pill-tags");
+        if (pillContainer && t["forwhom.pills"]) {
+          pillContainer.innerHTML = t["forwhom.pills"]
+            .map(
+              (pill) =>
+                `<span class="pill-tag inline-flex items-center gap-2 px-5 py-2.5 rounded-full border-2 border-ink/15 text-sm font-semibold text-ink bg-transparent cursor-pointer">${pill}</span>`
+            )
+            .join("");
+        }
+
+        // Update lang toggle buttons
+        document.querySelectorAll("[data-lang]").forEach((btn) => {
+          btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
+        });
+
+        // Update page title
+        if (lang === "en") {
+          document.title = "Nuxio — Professional websites for local businesses";
+        } else {
+          document.title = "Nuxio — Professionele websites voor lokale MKB\u2019s";
+        }
+      }
+
+      // Initialize language toggle buttons
+      document.querySelectorAll("[data-lang]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          setLanguage(btn.getAttribute("data-lang"));
+        });
+      });
+
+      // Apply saved/default language on load
+      setLanguage(currentLang);
+
+      // ===== Initialize Lucide icons =====
+      lucide.createIcons();
+
+      // ===== Sticky navbar scroll effect =====
+      const navbar = document.getElementById("navbar");
+      window.addEventListener(
+        "scroll",
+        () => {
+          if (window.scrollY > 10) {
+            navbar.classList.add("scrolled");
+          } else {
+            navbar.classList.remove("scrolled");
+          }
+        },
+        { passive: true }
+      );
+
+      // ===== Mobile menu toggle =====
+      const menuToggle = document.getElementById("menu-toggle");
+      const mobileMenu = document.getElementById("mobile-menu");
+      let menuOpen = false;
+
+      menuToggle.addEventListener("click", () => {
+        menuOpen = !menuOpen;
+        mobileMenu.classList.toggle("hidden", !menuOpen);
+        menuToggle.setAttribute("aria-expanded", menuOpen.toString());
+      });
+
+      // Close mobile menu on link click
+      mobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          menuOpen = false;
+          mobileMenu.classList.add("hidden");
+          menuToggle.setAttribute("aria-expanded", "false");
+        });
+      });
+
+      // ===== Hero entrance animation =====
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      if (!prefersReducedMotion) {
+        const heroItems = document.querySelectorAll(".hero-item");
+        heroItems.forEach((item, i) => {
+          setTimeout(() => {
+            item.classList.add("show");
+          }, 200 + i * 150);
+        });
+      } else {
+        document.querySelectorAll(".hero-item").forEach((item) => {
+          item.classList.add("show");
+        });
+      }
+
+      // ===== Scroll-triggered reveal animations =====
+      const revealElements = document.querySelectorAll(".reveal");
+
+      if (!prefersReducedMotion) {
+        const revealObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                revealObserver.unobserve(entry.target);
+              }
+            });
+          },
+          {
+            threshold: 0.15,
+            rootMargin: "0px 0px -40px 0px",
+          }
+        );
+
+        revealElements.forEach((el) => revealObserver.observe(el));
+      } else {
+        revealElements.forEach((el) => el.classList.add("visible"));
+      }
+
+      // ===== Contact form success message =====
+      if (window.location.search.includes("submitted=true")) {
+        const form = document.getElementById("contact-form");
+        if (form) {
+          const successBanner = document.createElement("div");
+          successBanner.className =
+            "mb-6 bg-accent/10 border-2 border-accent/30 rounded-xl p-5 text-center";
+          if (currentLang === "en") {
+            successBanner.innerHTML =
+              '<p class="font-display font-bold text-lg text-accent">Message sent!</p><p class="mt-1 text-sm text-ink/70">We will contact you within one business day.</p>';
+          } else {
+            successBanner.innerHTML =
+              '<p class="font-display font-bold text-lg text-accent">Bericht verzonden!</p><p class="mt-1 text-sm text-ink/70">Wij nemen binnen een werkdag contact met je op.</p>';
+          }
+          form.parentNode.insertBefore(successBanner, form);
+          history.replaceState(null, '', window.location.pathname);
+        }
+      }
+
+      // ===== Smooth scroll for anchor links =====
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         anchor.addEventListener("click", function (e) {
-          const targetSelector = this.getAttribute("href");
-          if (!targetSelector || targetSelector === "#") {
-            return;
-          }
-
-          const target = document.querySelector(targetSelector);
-          if (!target) {
-            return;
-          }
-
-          e.preventDefault();
-          target.scrollIntoView({
-            behavior: "smooth",
-          });
-        });
-      });
-
-      // Full-page language switcher
-      const languageSelect = document.getElementById("language-select");
-      let activeLanguage = "nl";
-      const i18nText = {
-        nl: {
-          page_title: "Nuxio | Vakmanschap in digitale precisie",
-          lang_label: "Taal",
-          lang_aria: "Kies taal",
-          menu_open: "Open menu",
-          nav_process: "Werkwijze",
-          nav_pricing: "Prijzen",
-          nav_contact: "Contact",
-          nav_quote: "Offerte aanvragen",
-          hero_badge: "Professionele websites voor jouw bedrijf",
-          hero_title_html:
-            'Jouw website live in <span class="custom-underline">5 dagen.</span>',
-          hero_desc:
-            "Geen eindeloze trajecten. Vanaf €499 een professionele website inclusief hosting en beheer. Wij bouwen, jij onderneemt.",
-          hero_cta_primary: "Start je project",
-          hero_cta_secondary: "Bekijk werkwijze",
-          hero_feature_1: "In 5 werkdagen live",
-          hero_feature_2: "Vaste prijs",
-          hero_feature_3: "Mobiel-vriendelijk",
-          process_title: "Onze aanpak",
-          step1_title: "Intake",
-          step1_body: "We bespreken je wensen en doelen via een kort gesprek.",
-          step2_title: "Offerte",
-          step2_body:
-            "Je ontvangt een heldere offerte. Akkoord? Dan gaan we los.",
-          step3_title: "Bouw",
-          step3_body: "Wij bouwen jouw unieke website in recordtempo.",
-          step4_title: "Check",
-          step4_body: "Jij loopt door de site en geeft de laatste feedback.",
-          step5_title: "Live!",
-          step5_body: "Binnen 5 dagen staat jouw nieuwe website online.",
-          pricing_title: "Transparante prijzen",
-          pricing_subtitle:
-            "Kies het pakket dat bij jouw onderneming past. Altijd inclusief onze razendsnelle service.",
-          starter_title: "Starter",
-          price_once: "eenmalig",
-          starter_feature_1: "4 Pagina's",
-          starter_feature_2: "Contactformulier",
-          starter_feature_3: "Mobiel-vriendelijk",
-          starter_feature_4: "5 Werkdagen live",
-          choose_starter: "Kies Starter",
-          popular_badge: "Meest gekozen",
-          business_title: "Business",
-          business_feature_1: "6 Pagina's + Blog",
-          business_feature_2: "Google Analytics",
-          business_feature_3: "Basis SEO Optimalisatie",
-          business_feature_4: "Google Mijn Bedrijf setup",
-          business_feature_5: "7 Werkdagen live",
-          choose_business: "Kies Business",
-          pro_title: "Pro",
-          pro_feature_1: "Alles uit Business",
-          pro_feature_2: "Boekingssysteem / Shop",
-          pro_feature_3: "Tot 10 Pagina's",
-          pro_feature_4: "Maatwerk functionaliteit",
-          pro_feature_5: "10 Werkdagen live",
-          choose_pro: "Kies Pro",
-          maintenance_text: "Onderhoud & hosting incl. domein:",
-          testimonials_title: "Wat onze klanten zeggen",
-          testimonial_1_quote:
-            '"Nuxio maakte hun belofte meer dan waar. Binnen een week stond mijn schildersbedrijf professioneel op de kaart. Direct meer aanvragen gekregen via het formulier!"',
-          testimonial_2_quote:
-            '"Eindelijk een bureau dat gewoon doet wat ze beloven. Geen vage termen, maar een strakke site die werkt op elke telefoon. De prijs is ook echt wat er op de site staat."',
-          cta_title: "Klaar om online te gaan?",
-          cta_desc:
-            "Neem vandaag nog contact op en start volgende week al met je nieuwe professionele website.",
-          cta_button: "Vraag direct een offerte aan",
-          cta_email_prefix: "Of mail ons via",
-          modal_title: "Vraag je offerte aan",
-          modal_subtitle:
-            "Vul hieronder je gegevens in. Je ontvangt binnen 24 uur een heldere offerte op maat.",
-          modal_close_aria: "Sluit offerteformulier",
-          form_subject: "Nieuwe offerte aanvraag via nuxio.nl",
-          form_label_name: "Naam *",
-          form_label_email: "E-mail *",
-          form_label_phone: "Telefoon *",
-          form_label_company: "Bedrijf",
-          form_label_package: "Gewenst pakket *",
-          form_option_choose_package: "Kies een pakket",
-          form_option_starter: "Starter (€499)",
-          form_option_business: "Business (€699)",
-          form_option_pro: "Pro (€1.199)",
-          form_option_custom: "Maatwerk",
-          form_label_message: "Korte toelichting *",
-          form_placeholder_message:
-            "Wat wil je laten bouwen en wanneer wil je live?",
-          form_submit: "Verstuur aanvraag",
-          form_submitting: "Versturen...",
-          form_required_note: "Velden met * zijn verplicht.",
-          form_success:
-            "Bedankt. Je aanvraag is verzonden. We reageren binnen 24 uur met een duidelijke offerte.",
-          footer_desc:
-            "Snel live. Vaste prijs. Geen gedoe. Wij bouwen high-end websites voor het MKB met de precisie van een ambachtsman.",
-          footer_nav_title: "Navigatie",
-          footer_nav_process: "Werkwijze",
-          footer_nav_pricing: "Prijzen",
-          footer_nav_contact: "Contact",
-          footer_legal_title: "Legaal",
-          footer_privacy: "Privacybeleid",
-          footer_terms: "Algemene Voorwaarden",
-          footer_copyright: "© 2026 Nuxio. Vakmanschap in digitale precisie.",
-          footer_status: "Alle systemen operationeel",
-          error_missing_access_key:
-            "Web3Forms key ontbreekt. Vul eerst je access key in het formulier in.",
-          error_submit_generic:
-            "Er ging iets mis bij het verzenden. Probeer het opnieuw.",
-          error_network:
-            "Netwerkfout bij verzenden. Controleer je verbinding en probeer opnieuw.",
-        },
-        en: {
-          page_title: "Nuxio | Craftsmanship in digital precision",
-          lang_label: "Language",
-          lang_aria: "Choose language",
-          menu_open: "Open menu",
-          nav_process: "Process",
-          nav_pricing: "Pricing",
-          nav_contact: "Contact",
-          nav_quote: "Request a quote",
-          hero_badge: "Professional websites for your business",
-          hero_title_html:
-            'Your website live in <span class="custom-underline">5 days.</span>',
-          hero_desc:
-            "No endless projects. From €499 for a professional website including hosting and management. We build, you grow.",
-          hero_cta_primary: "Start your project",
-          hero_cta_secondary: "View process",
-          hero_feature_1: "Live in 5 business days",
-          hero_feature_2: "Fixed price",
-          hero_feature_3: "Mobile-friendly",
-          process_title: "Our process",
-          step1_title: "Intake",
-          step1_body: "We discuss your wishes and goals in a short call.",
-          step2_title: "Quote",
-          step2_body: "You receive a clear quote. Approved? We get started.",
-          step3_title: "Build",
-          step3_body: "We build your unique website at record speed.",
-          step4_title: "Review",
-          step4_body: "You review the site and share your final feedback.",
-          step5_title: "Live!",
-          step5_body: "Your new website is online within 5 days.",
-          pricing_title: "Transparent pricing",
-          pricing_subtitle:
-            "Choose the package that fits your business. Always includes our lightning-fast service.",
-          starter_title: "Starter",
-          price_once: "one-time",
-          starter_feature_1: "4 Pages",
-          starter_feature_2: "Contact form",
-          starter_feature_3: "Mobile-friendly",
-          starter_feature_4: "Live in 5 business days",
-          choose_starter: "Choose Starter",
-          popular_badge: "Most popular",
-          business_title: "Business",
-          business_feature_1: "6 Pages + Blog",
-          business_feature_2: "Google Analytics",
-          business_feature_3: "Basic SEO optimization",
-          business_feature_4: "Google Business Profile setup",
-          business_feature_5: "Live in 7 business days",
-          choose_business: "Choose Business",
-          pro_title: "Pro",
-          pro_feature_1: "Everything in Business",
-          pro_feature_2: "Booking system / Shop",
-          pro_feature_3: "Up to 10 Pages",
-          pro_feature_4: "Custom functionality",
-          pro_feature_5: "Live in 10 business days",
-          choose_pro: "Choose Pro",
-          maintenance_text: "Maintenance & hosting incl. domain:",
-          testimonials_title: "What our clients say",
-          testimonial_1_quote:
-            '"Nuxio more than delivered on their promise. Within a week my painting business had a professional online presence. We got more requests through the form right away!"',
-          testimonial_2_quote:
-            '"Finally an agency that does what they promise. No vague terms, just a solid website that works on every phone. The price is exactly what is shown on the site."',
-          cta_title: "Ready to go online?",
-          cta_desc:
-            "Get in touch today and start next week with your new professional website.",
-          cta_button: "Request a quote now",
-          cta_email_prefix: "Or email us at",
-          modal_title: "Request your quote",
-          modal_subtitle:
-            "Fill in your details below. You will receive a clear custom quote within 24 hours.",
-          modal_close_aria: "Close quote form",
-          form_subject: "New quote request via nuxio.nl",
-          form_label_name: "Name *",
-          form_label_email: "Email *",
-          form_label_phone: "Phone *",
-          form_label_company: "Company",
-          form_label_package: "Desired package *",
-          form_option_choose_package: "Choose a package",
-          form_option_starter: "Starter (€499)",
-          form_option_business: "Business (€699)",
-          form_option_pro: "Pro (€1,199)",
-          form_option_custom: "Custom",
-          form_label_message: "Short brief *",
-          form_placeholder_message:
-            "What do you want to build and when do you want to launch?",
-          form_submit: "Send request",
-          form_submitting: "Sending...",
-          form_required_note: "Fields marked with * are required.",
-          form_success:
-            "Thank you. Your request has been sent. We will respond within 24 hours with a clear quote.",
-          footer_desc:
-            "Live fast. Fixed price. No hassle. We build high-end websites for SMBs with the precision of a craftsman.",
-          footer_nav_title: "Navigation",
-          footer_nav_process: "Process",
-          footer_nav_pricing: "Pricing",
-          footer_nav_contact: "Contact",
-          footer_legal_title: "Legal",
-          footer_privacy: "Privacy Policy",
-          footer_terms: "Terms and Conditions",
-          footer_copyright: "© 2026 Nuxio. Craftsmanship in digital precision.",
-          footer_status: "All systems operational",
-          error_missing_access_key:
-            "Missing Web3Forms key. Add your access key in the form first.",
-          error_submit_generic:
-            "Something went wrong while sending. Please try again.",
-          error_network:
-            "Network error while sending. Check your connection and try again.",
-        },
-        de: {
-          page_title: "Nuxio | Handwerkliche digitale Praezision",
-          lang_label: "Sprache",
-          lang_aria: "Sprache waehlen",
-          menu_open: "Menue oeffnen",
-          nav_process: "Ablauf",
-          nav_pricing: "Preise",
-          nav_contact: "Kontakt",
-          nav_quote: "Angebot anfragen",
-          hero_badge: "Professionelle Websites fuer Ihr Unternehmen",
-          hero_title_html:
-            'Ihre Website live in <span class="custom-underline">5 Tagen.</span>',
-          hero_desc:
-            "Keine endlosen Projekte. Ab €499 fuer eine professionelle Website inklusive Hosting und Verwaltung.",
-          hero_cta_primary: "Projekt starten",
-          hero_cta_secondary: "Ablauf ansehen",
-          hero_feature_1: "In 5 Werktagen live",
-          hero_feature_2: "Festpreis",
-          hero_feature_3: "Mobilfreundlich",
-          process_title: "Unser Ablauf",
-          step1_title: "Intake",
-          step1_body:
-            "Wir besprechen Ihre Wuensche und Ziele in einem kurzen Gespraech.",
-          step2_title: "Angebot",
-          step2_body:
-            "Sie erhalten ein klares Angebot. Einverstanden? Dann legen wir los.",
-          step3_title: "Umsetzung",
-          step3_body: "Wir bauen Ihre individuelle Website in Rekordzeit.",
-          step4_title: "Pruefung",
-          step4_body: "Sie pruefen die Website und geben finales Feedback.",
-          step5_title: "Live!",
-          step5_body: "Ihre neue Website ist innerhalb von 5 Tagen online.",
-          pricing_title: "Transparente Preise",
-          pricing_subtitle:
-            "Waehlen Sie das Paket, das zu Ihrem Unternehmen passt.",
-          starter_title: "Starter",
-          price_once: "einmalig",
-          starter_feature_1: "4 Seiten",
-          starter_feature_2: "Kontaktformular",
-          starter_feature_3: "Mobilfreundlich",
-          starter_feature_4: "In 5 Werktagen live",
-          choose_starter: "Starter waehlen",
-          popular_badge: "Am beliebtesten",
-          business_title: "Business",
-          business_feature_1: "6 Seiten + Blog",
-          business_feature_2: "Google Analytics",
-          business_feature_3: "Basis-SEO-Optimierung",
-          business_feature_4: "Google Business Profil Einrichtung",
-          business_feature_5: "In 7 Werktagen live",
-          choose_business: "Business waehlen",
-          pro_title: "Pro",
-          pro_feature_1: "Alles aus Business",
-          pro_feature_2: "Buchungssystem / Shop",
-          pro_feature_3: "Bis zu 10 Seiten",
-          pro_feature_4: "Individuelle Funktionen",
-          pro_feature_5: "In 10 Werktagen live",
-          choose_pro: "Pro waehlen",
-          maintenance_text: "Wartung & Hosting inkl. Domain:",
-          testimonials_title: "Was unsere Kunden sagen",
-          testimonial_1_quote:
-            '"Nuxio hat mehr als geliefert. Innerhalb einer Woche hatte mein Malerbetrieb einen professionellen Auftritt."',
-          testimonial_2_quote:
-            '"Endlich eine Agentur, die haelt, was sie verspricht. Eine starke Website, die auf jedem Handy funktioniert."',
-          cta_title: "Bereit fuer Ihren Online-Auftritt?",
-          cta_desc:
-            "Kontaktieren Sie uns noch heute und starten Sie naechste Woche mit Ihrer neuen professionellen Website.",
-          cta_button: "Jetzt Angebot anfragen",
-          cta_email_prefix: "Oder schreiben Sie uns an",
-          modal_title: "Angebot anfragen",
-          modal_subtitle:
-            "Tragen Sie unten Ihre Daten ein. Sie erhalten innerhalb von 24 Stunden ein klares Angebot.",
-          modal_close_aria: "Angebotsformular schliessen",
-          form_subject: "Neue Angebotsanfrage ueber nuxio.nl",
-          form_label_name: "Name *",
-          form_label_email: "E-Mail *",
-          form_label_phone: "Telefon *",
-          form_label_company: "Unternehmen",
-          form_label_package: "Gewuenschtes Paket *",
-          form_option_choose_package: "Paket waehlen",
-          form_option_starter: "Starter (€499)",
-          form_option_business: "Business (€699)",
-          form_option_pro: "Pro (€1.199)",
-          form_option_custom: "Individuell",
-          form_label_message: "Kurze Beschreibung *",
-          form_placeholder_message:
-            "Was moechten Sie bauen und wann soll es live gehen?",
-          form_submit: "Anfrage senden",
-          form_submitting: "Wird gesendet...",
-          form_required_note: "Felder mit * sind erforderlich.",
-          form_success:
-            "Danke. Ihre Anfrage wurde versendet. Wir antworten innerhalb von 24 Stunden.",
-          footer_desc:
-            "Schnell live. Festpreis. Kein Aufwand. Wir bauen hochwertige Websites fuer KMU.",
-          footer_nav_title: "Navigation",
-          footer_nav_process: "Ablauf",
-          footer_nav_pricing: "Preise",
-          footer_nav_contact: "Kontakt",
-          footer_legal_title: "Rechtliches",
-          footer_privacy: "Datenschutz",
-          footer_terms: "Allgemeine Geschaeftsbedingungen",
-          footer_copyright: "© 2026 Nuxio. Handwerkliche digitale Praezision.",
-          footer_status: "Alle Systeme betriebsbereit",
-          error_missing_access_key:
-            "Web3Forms-Schluessel fehlt. Fuegen Sie zuerst den Access Key ein.",
-          error_submit_generic:
-            "Beim Senden ist ein Fehler aufgetreten. Bitte erneut versuchen.",
-          error_network:
-            "Netzwerkfehler beim Senden. Bitte Verbindung pruefen und erneut versuchen.",
-        },
-        fr: {
-          page_title: "Nuxio | Precision numerique artisanale",
-          lang_label: "Langue",
-          lang_aria: "Choisir la langue",
-          menu_open: "Ouvrir le menu",
-          nav_process: "Processus",
-          nav_pricing: "Tarifs",
-          nav_contact: "Contact",
-          nav_quote: "Demander un devis",
-          hero_badge: "Sites web professionnels pour votre entreprise",
-          hero_title_html:
-            'Votre site en ligne en <span class="custom-underline">5 jours.</span>',
-          hero_desc:
-            "Pas de projets interminables. A partir de 499 € pour un site professionnel avec hebergement et gestion.",
-          hero_cta_primary: "Demarrer votre projet",
-          hero_cta_secondary: "Voir le processus",
-          hero_feature_1: "En ligne en 5 jours ouvrables",
-          hero_feature_2: "Prix fixe",
-          hero_feature_3: "Compatible mobile",
-          process_title: "Notre approche",
-          step1_title: "Brief",
-          step1_body:
-            "Nous discutons de vos besoins et objectifs lors d'un court entretien.",
-          step2_title: "Devis",
-          step2_body:
-            "Vous recevez un devis clair. Accord? On lance le projet.",
-          step3_title: "Creation",
-          step3_body: "Nous creons votre site unique a grande vitesse.",
-          step4_title: "Validation",
-          step4_body: "Vous verifiez le site et donnez votre dernier retour.",
-          step5_title: "En ligne!",
-          step5_body: "Votre nouveau site est en ligne sous 5 jours.",
-          pricing_title: "Tarifs transparents",
-          pricing_subtitle: "Choisissez l'offre adaptee a votre entreprise.",
-          starter_title: "Starter",
-          price_once: "paiement unique",
-          starter_feature_1: "4 pages",
-          starter_feature_2: "Formulaire de contact",
-          starter_feature_3: "Compatible mobile",
-          starter_feature_4: "En ligne en 5 jours ouvrables",
-          choose_starter: "Choisir Starter",
-          popular_badge: "Le plus choisi",
-          business_title: "Business",
-          business_feature_1: "6 pages + blog",
-          business_feature_2: "Google Analytics",
-          business_feature_3: "SEO de base",
-          business_feature_4: "Configuration Google Business Profile",
-          business_feature_5: "En ligne en 7 jours ouvrables",
-          choose_business: "Choisir Business",
-          pro_title: "Pro",
-          pro_feature_1: "Tout de Business",
-          pro_feature_2: "Systeme de reservation / Boutique",
-          pro_feature_3: "Jusqu'a 10 pages",
-          pro_feature_4: "Fonctionnalites sur mesure",
-          pro_feature_5: "En ligne en 10 jours ouvrables",
-          choose_pro: "Choisir Pro",
-          maintenance_text: "Maintenance & hebergement incl. domaine:",
-          testimonials_title: "Ce que disent nos clients",
-          testimonial_1_quote:
-            '"Nuxio a tenu sa promesse. En une semaine, mon entreprise etait visible de facon professionnelle."',
-          testimonial_2_quote:
-            '"Enfin une agence qui fait ce qu elle promet. Site clair et efficace sur tous les telephones."',
-          cta_title: "Pret a passer en ligne?",
-          cta_desc:
-            "Contactez-nous aujourd'hui et commencez la semaine prochaine avec votre nouveau site.",
-          cta_button: "Demander un devis",
-          cta_email_prefix: "Ou ecrivez-nous a",
-          modal_title: "Demander votre devis",
-          modal_subtitle:
-            "Renseignez vos coordonnees. Vous recevrez un devis clair sous 24 h€es.",
-          modal_close_aria: "Fermer le formulaire",
-          form_subject: "Nouvelle demande de devis via nuxio.nl",
-          form_label_name: "Nom *",
-          form_label_email: "E-mail *",
-          form_label_phone: "Telephone *",
-          form_label_company: "Entreprise",
-          form_label_package: "Offre souhaitee *",
-          form_option_choose_package: "Choisir une offre",
-          form_option_starter: "Starter (€499)",
-          form_option_business: "Business (€699)",
-          form_option_pro: "Pro (€1 199)",
-          form_option_custom: "Sur mesure",
-          form_label_message: "Courte description *",
-          form_placeholder_message:
-            "Que souhaitez-vous faire creer et quand voulez-vous etre en ligne?",
-          form_submit: "Envoyer la demande",
-          form_submitting: "Envoi...",
-          form_required_note: "Les champs avec * sont obligatoires.",
-          form_success:
-            "Merci. Votre demande est envoyee. Nous repondons sous 24 h€es.",
-          footer_desc:
-            "Mise en ligne rapide. Prix fixe. Sans tracas. Nous creons des sites premium pour PME.",
-          footer_nav_title: "Navigation",
-          footer_nav_process: "Processus",
-          footer_nav_pricing: "Tarifs",
-          footer_nav_contact: "Contact",
-          footer_legal_title: "Legal",
-          footer_privacy: "Politique de confidentialite",
-          footer_terms: "Conditions generales",
-          footer_copyright: "© 2026 Nuxio. Precision numerique artisanale.",
-          footer_status: "Tous les systemes operationnels",
-          error_missing_access_key:
-            "Cle Web3Forms manquante. Ajoutez d'abord votre cle d'acces.",
-          error_submit_generic:
-            "Une err€ est survenue lors de l'envoi. Veuillez reessayer.",
-          error_network:
-            "Err€ reseau pendant l'envoi. Verifiez votre connexion et reessayez.",
-        },
-        es: {
-          page_title: "Nuxio | Precision digital artesanal",
-          lang_label: "Idioma",
-          lang_aria: "Elegir idioma",
-          menu_open: "Abrir menu",
-          nav_process: "Proceso",
-          nav_pricing: "Precios",
-          nav_contact: "Contacto",
-          nav_quote: "Solicitar presupuesto",
-          hero_badge: "Webs profesionales para tu empresa",
-          hero_title_html:
-            'Tu web online en <span class="custom-underline">5 dias.</span>',
-          hero_desc:
-            "Sin procesos interminables. Desde 499 € por una web profesional con hosting y gestion.",
-          hero_cta_primary: "Empieza tu proyecto",
-          hero_cta_secondary: "Ver proceso",
-          hero_feature_1: "Online en 5 dias laborables",
-          hero_feature_2: "Precio fijo",
-          hero_feature_3: "Adaptada a moviles",
-          process_title: "Nuestro enfoque",
-          step1_title: "Briefing",
-          step1_body: "Hablamos de tus objetivos en una breve llamada.",
-          step2_title: "Presupuesto",
-          step2_body: "Recibes un presupuesto claro. Aprobado? Empezamos.",
-          step3_title: "Desarrollo",
-          step3_body: "Construimos tu web unica a gran velocidad.",
-          step4_title: "Revision",
-          step4_body: "Revisas la web y das el feedback final.",
-          step5_title: "Online!",
-          step5_body: "Tu nueva web estara online en 5 dias.",
-          pricing_title: "Precios transparentes",
-          pricing_subtitle: "Elige el plan que mejor se adapte a tu negocio.",
-          starter_title: "Starter",
-          price_once: "pago unico",
-          starter_feature_1: "4 paginas",
-          starter_feature_2: "Formulario de contacto",
-          starter_feature_3: "Adaptada a moviles",
-          starter_feature_4: "Online en 5 dias laborables",
-          choose_starter: "Elegir Starter",
-          popular_badge: "Mas elegido",
-          business_title: "Business",
-          business_feature_1: "6 paginas + blog",
-          business_feature_2: "Google Analytics",
-          business_feature_3: "SEO basico",
-          business_feature_4: "Configuracion de Google Business Profile",
-          business_feature_5: "Online en 7 dias laborables",
-          choose_business: "Elegir Business",
-          pro_title: "Pro",
-          pro_feature_1: "Todo de Business",
-          pro_feature_2: "Sistema de reservas / Tienda",
-          pro_feature_3: "Hasta 10 paginas",
-          pro_feature_4: "Funcionalidad a medida",
-          pro_feature_5: "Online en 10 dias laborables",
-          choose_pro: "Elegir Pro",
-          maintenance_text: "Mantenimiento y hosting incl. dominio:",
-          testimonials_title: "Lo que dicen nuestros clientes",
-          testimonial_1_quote:
-            '"Nuxio cumplio mas de lo prometido. En una semana mi empresa tenia una presencia profesional."',
-          testimonial_2_quote:
-            '"Por fin una agencia que hace lo que promete. Sitio limpio que funciona en cualquier movil."',
-          cta_title: "Listo para estar online?",
-          cta_desc:
-            "Contacta hoy y empieza la semana que viene con tu nueva web profesional.",
-          cta_button: "Solicita presupuesto ahora",
-          cta_email_prefix: "O escribenos a",
-          modal_title: "Solicita tu presupuesto",
-          modal_subtitle:
-            "Completa tus datos abajo. Recibiras un presupuesto claro en 24 horas.",
-          modal_close_aria: "Cerrar formulario",
-          form_subject: "Nueva solicitud de presupuesto via nuxio.nl",
-          form_label_name: "Nombre *",
-          form_label_email: "Correo electronico *",
-          form_label_phone: "Telefono *",
-          form_label_company: "Empresa",
-          form_label_package: "Plan deseado *",
-          form_option_choose_package: "Elige un plan",
-          form_option_starter: "Starter (€499)",
-          form_option_business: "Business (€699)",
-          form_option_pro: "Pro (€1.199)",
-          form_option_custom: "A medida",
-          form_label_message: "Breve descripcion *",
-          form_placeholder_message:
-            "Que quieres construir y cuando quieres estar online?",
-          form_submit: "Enviar solicitud",
-          form_submitting: "Enviando...",
-          form_required_note: "Los campos con * son obligatorios.",
-          form_success:
-            "Gracias. Tu solicitud ha sido enviada. Respondemos en 24 horas.",
-          footer_desc:
-            "Online rapido. Precio fijo. Sin complicaciones. Construimos webs premium para pymes.",
-          footer_nav_title: "Navegacion",
-          footer_nav_process: "Proceso",
-          footer_nav_pricing: "Precios",
-          footer_nav_contact: "Contacto",
-          footer_legal_title: "Legal",
-          footer_privacy: "Politica de privacidad",
-          footer_terms: "Terminos y condiciones",
-          footer_copyright: "© 2026 Nuxio. Precision digital artesanal.",
-          footer_status: "Todos los sistemas operativos",
-          error_missing_access_key:
-            "Falta la clave de Web3Forms. Primero agrega tu access key en el formulario.",
-          error_submit_generic: "Hubo un error al enviar. Intentalo de nuevo.",
-          error_network:
-            "Error de red al enviar. Revisa tu conexion e intentalo de nuevo.",
-        },
-        it: {
-          page_title: "Nuxio | Precisione digitale artigianale",
-          lang_label: "Lingua",
-          lang_aria: "Scegli lingua",
-          menu_open: "Apri menu",
-          nav_process: "Processo",
-          nav_pricing: "Prezzi",
-          nav_contact: "Contatto",
-          nav_quote: "Richiedi preventivo",
-          hero_badge: "Siti web professionali per la tua azienda",
-          hero_title_html:
-            'Il tuo sito online in <span class="custom-underline">5 giorni.</span>',
-          hero_desc:
-            "Niente progetti infiniti. Da €499 per un sito professionale con hosting e gestione.",
-          hero_cta_primary: "Inizia il tuo progetto",
-          hero_cta_secondary: "Vedi processo",
-          hero_feature_1: "Online in 5 giorni lavorativi",
-          hero_feature_2: "Prezzo fisso",
-          hero_feature_3: "Ottimizzato mobile",
-          process_title: "Il nostro approccio",
-          step1_title: "Brief",
-          step1_body: "Discutiamo obiettivi e necessita in una breve call.",
-          step2_title: "Preventivo",
-          step2_body: "Ricevi un preventivo chiaro. Approvi? Partiamo.",
-          step3_title: "Sviluppo",
-          step3_body: "Costruiamo il tuo sito unico in tempi record.",
-          step4_title: "Revisione",
-          step4_body: "Rivedi il sito e invii il feedback finale.",
-          step5_title: "Online!",
-          step5_body: "Il tuo nuovo sito sara online entro 5 giorni.",
-          pricing_title: "Prezzi trasparenti",
-          pricing_subtitle: "Scegli il pacchetto giusto per la tua attivita.",
-          starter_title: "Starter",
-          price_once: "una tantum",
-          starter_feature_1: "4 pagine",
-          starter_feature_2: "Modulo contatto",
-          starter_feature_3: "Ottimizzato mobile",
-          starter_feature_4: "Online in 5 giorni lavorativi",
-          choose_starter: "Scegli Starter",
-          popular_badge: "Piu scelto",
-          business_title: "Business",
-          business_feature_1: "6 pagine + blog",
-          business_feature_2: "Google Analytics",
-          business_feature_3: "SEO base",
-          business_feature_4: "Setup Google Business Profile",
-          business_feature_5: "Online in 7 giorni lavorativi",
-          choose_business: "Scegli Business",
-          pro_title: "Pro",
-          pro_feature_1: "Tutto di Business",
-          pro_feature_2: "Sistema prenotazioni / Shop",
-          pro_feature_3: "Fino a 10 pagine",
-          pro_feature_4: "Funzionalita su misura",
-          pro_feature_5: "Online in 10 giorni lavorativi",
-          choose_pro: "Scegli Pro",
-          maintenance_text: "Manutenzione e hosting incl. dominio:",
-          testimonials_title: "Cosa dicono i clienti",
-          testimonial_1_quote:
-            '"Nuxio ha mantenuto la promessa. In una settimana la mia attivita era online in modo professionale."',
-          testimonial_2_quote:
-            '"Finalmente una agenzia che fa cio che promette. Sito pulito e perfetto su ogni telefono."',
-          cta_title: "Pronto ad andare online?",
-          cta_desc:
-            "Contattaci oggi e parti la prossima settimana con il tuo nuovo sito professionale.",
-          cta_button: "Richiedi subito un preventivo",
-          cta_email_prefix: "Oppure scrivici a",
-          modal_title: "Richiedi il tuo preventivo",
-          modal_subtitle:
-            "Compila i tuoi dati qui sotto. Riceverai un preventivo chiaro entro 24 ore.",
-          modal_close_aria: "Chiudi modulo preventivo",
-          form_subject: "Nuova richiesta preventivo tramite nuxio.nl",
-          form_label_name: "Nome *",
-          form_label_email: "Email *",
-          form_label_phone: "Telefono *",
-          form_label_company: "Azienda",
-          form_label_package: "Pacchetto desiderato *",
-          form_option_choose_package: "Scegli un pacchetto",
-          form_option_starter: "Starter (€499)",
-          form_option_business: "Business (€699)",
-          form_option_pro: "Pro (€1.199)",
-          form_option_custom: "Personalizzato",
-          form_label_message: "Breve descrizione *",
-          form_placeholder_message:
-            "Cosa vuoi realizzare e quando vuoi andare online?",
-          form_submit: "Invia richiesta",
-          form_submitting: "Invio...",
-          form_required_note: "I campi con * sono obbligatori.",
-          form_success:
-            "Grazie. La tua richiesta e stata inviata. Risponderemo entro 24 ore.",
-          footer_desc:
-            "Online veloce. Prezzo fisso. Zero stress. Realizziamo siti premium per PMI.",
-          footer_nav_title: "Navigazione",
-          footer_nav_process: "Processo",
-          footer_nav_pricing: "Prezzi",
-          footer_nav_contact: "Contatto",
-          footer_legal_title: "Legale",
-          footer_privacy: "Privacy Policy",
-          footer_terms: "Termini e condizioni",
-          footer_copyright: "© 2026 Nuxio. Precisione digitale artigianale.",
-          footer_status: "Tutti i sistemi operativi",
-          error_missing_access_key:
-            "Chiave Web3Forms mancante. Inserisci prima la tua access key nel modulo.",
-          error_submit_generic:
-            "Si e verificato un errore durante l'invio. Riprova.",
-          error_network:
-            "Errore di rete durante l'invio. Controlla la connessione e riprova.",
-        },
-      };
-
-      const t = (key, fallback = "") => {
-        const currentDictionary = i18nText[activeLanguage] || i18nText.nl;
-        const fallbackDictionary = i18nText.nl;
-        return currentDictionary[key] || fallbackDictionary[key] || fallback;
-      };
-
-      const detectPreferredLanguage = () => {
-        const browserLanguages = Array.isArray(window.navigator.languages)
-          ? window.navigator.languages
-          : [window.navigator.language];
-
-        for (const locale of browserLanguages) {
-          const shortCode = (locale || "").toLowerCase().split("-")[0];
-          if (i18nText[shortCode]) {
-            return shortCode;
-          }
-        }
-
-        return "nl";
-      };
-
-      const applyLanguage = (language) => {
-        const selectedLanguage = i18nText[language] ? language : "nl";
-        activeLanguage = selectedLanguage;
-        const dictionary = i18nText[selectedLanguage];
-
-        document.documentElement.lang = selectedLanguage;
-
-        Object.keys(dictionary).forEach((key) => {
-          document
-            .querySelectorAll(`[data-i18n-key="${key}"]`)
-            .forEach((element) => {
-              element.textContent = dictionary[key];
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({
+              behavior: prefersReducedMotion ? "auto" : "smooth",
             });
-        });
-
-        document.querySelectorAll("[data-i18n-html]").forEach((element) => {
-          const key = element.getAttribute("data-i18n-html");
-          if (key && dictionary[key]) {
-            element.innerHTML = dictionary[key];
           }
         });
-
-        document
-          .querySelectorAll("[data-i18n-placeholder]")
-          .forEach((element) => {
-            const key = element.getAttribute("data-i18n-placeholder");
-            if (key && dictionary[key]) {
-              element.setAttribute("placeholder", dictionary[key]);
-            }
-          });
-
-        document
-          .querySelectorAll("[data-i18n-aria-label]")
-          .forEach((element) => {
-            const key = element.getAttribute("data-i18n-aria-label");
-            if (key && dictionary[key]) {
-              element.setAttribute("aria-label", dictionary[key]);
-            }
-          });
-
-        document.querySelectorAll("[data-i18n-value]").forEach((element) => {
-          const key = element.getAttribute("data-i18n-value");
-          if (key && dictionary[key]) {
-            element.setAttribute("value", dictionary[key]);
-          }
-        });
-
-        if (languageSelect) {
-          languageSelect.value = selectedLanguage;
-          languageSelect.setAttribute(
-            "aria-label",
-            t("lang_aria", "Choose language"),
-          );
-        }
-
-        window.localStorage.setItem("nuxio-language", selectedLanguage);
-      };
-
-      if (languageSelect) {
-        const savedLanguage = window.localStorage.getItem("nuxio-language");
-        const initialLanguage =
-          (savedLanguage && i18nText[savedLanguage] && savedLanguage) ||
-          detectPreferredLanguage();
-
-        applyLanguage(initialLanguage);
-
-        languageSelect.addEventListener("change", (event) => {
-          applyLanguage(event.target.value);
-        });
-      }
-
-      // Offerte CTA + form gedrag
-      const offerteModal = document.getElementById("offerte-modal");
-      const offerteForm = document.getElementById("offerteForm");
-      const offerteSuccess = document.getElementById("offerteSuccess");
-      const offerteError = document.getElementById("offerteError");
-      const offerteSubmit = document.getElementById("offerteSubmit");
-      const firstInput = document.getElementById("naam");
-      const pakketSelect = document.getElementById("pakket");
-      const web3formsAccessKeyInput = document.getElementById(
-        "web3forms-access-key",
-      );
-      const closeModalButtons = document.querySelectorAll(
-        '[data-offerte-close="true"]',
-      );
-      const web3formsEndpoint = "https://api.web3forms.com/submit";
-      const confirmationEndpoint = "/api/send-offerte-confirmation";
-
-      const trackEvent = (eventName, eventData = {}) => {
-        if (Array.isArray(window.dataLayer)) {
-          window.dataLayer.push({ event: eventName, ...eventData });
-        }
-        if (window.console && typeof window.console.info === "function") {
-          window.console.info("[tracking]", eventName, eventData);
-        }
-      };
-
-      const openOfferteModal = (selectedPackage = "") => {
-        if (!offerteModal) {
-          return;
-        }
-        offerteModal.classList.remove("hidden");
-        offerteModal.setAttribute("aria-hidden", "false");
-        document.body.classList.add("overflow-hidden");
-
-        if (pakketSelect) {
-          pakketSelect.value = selectedPackage || "";
-        }
-
-        if (offerteSuccess) {
-          offerteSuccess.classList.add("hidden");
-        }
-        if (offerteError) {
-          offerteError.classList.add("hidden");
-          offerteError.textContent = "";
-        }
-
-        window.setTimeout(() => {
-          if (firstInput) {
-            firstInput.focus();
-          }
-        }, 120);
-      };
-
-      const closeOfferteModal = () => {
-        if (!offerteModal) {
-          return;
-        }
-        offerteModal.classList.add("hidden");
-        offerteModal.setAttribute("aria-hidden", "true");
-        document.body.classList.remove("overflow-hidden");
-      };
-
-      document.querySelectorAll('[data-offerte-cta="true"]').forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const selectedPackage = btn.getAttribute("data-package") || "";
-          openOfferteModal(selectedPackage);
-          trackEvent("offerte_cta_click", {
-            location: "landing",
-            pakket: selectedPackage || "onbekend",
-          });
-        });
-      });
-
-      closeModalButtons.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          closeOfferteModal();
-        });
-      });
-
-      document.addEventListener("keydown", (e) => {
-        if (
-          e.key === "Escape" &&
-          offerteModal &&
-          !offerteModal.classList.contains("hidden")
-        ) {
-          closeOfferteModal();
-        }
-      });
-
-      if (offerteForm) {
-        offerteForm.addEventListener("submit", async (e) => {
-          e.preventDefault();
-
-          if (!offerteForm.reportValidity()) {
-            trackEvent("offerte_form_validation_error");
-            return;
-          }
-
-          if (offerteSuccess) {
-            offerteSuccess.classList.add("hidden");
-          }
-          if (offerteError) {
-            offerteError.classList.add("hidden");
-            offerteError.textContent = "";
-          }
-
-          const accessKey = web3formsAccessKeyInput
-            ? web3formsAccessKeyInput.value.trim()
-            : "";
-
-          if (!accessKey || accessKey.includes("VUL_HIER")) {
-            if (offerteError) {
-              offerteError.textContent = t(
-                "error_missing_access_key",
-                "Web3Forms key ontbreekt. Vul eerst je access key in het formulier in.",
-              );
-              offerteError.classList.remove("hidden");
-            }
-            trackEvent("offerte_form_submit_error", {
-              reason: "missing_access_key",
-            });
-            return;
-          }
-
-          const formData = new FormData(offerteForm);
-          const payload = Object.fromEntries(formData.entries());
-          formData.set("replyto", payload.email || "");
-
-          if (offerteSubmit) {
-            offerteSubmit.disabled = true;
-            offerteSubmit.textContent = t("form_submitting", "Versturen...");
-          }
-
-          try {
-            const response = await fetch(web3formsEndpoint, {
-              method: "POST",
-              body: formData,
-              headers: {
-                Accept: "application/json",
-              },
-            });
-
-            const result = await response.json().catch(() => null);
-            const submitSucceeded =
-              response.ok && result && result.success === true;
-
-            if (!submitSucceeded) {
-              const apiMessage =
-                result && typeof result.message === "string"
-                  ? result.message
-                  : t(
-                      "error_submit_generic",
-                      "Er ging iets mis bij het verzenden. Probeer het opnieuw.",
-                    );
-
-              if (offerteError) {
-                offerteError.textContent = apiMessage;
-                offerteError.classList.remove("hidden");
-              }
-
-              trackEvent("offerte_form_submit_error", {
-                reason: "api_error",
-                message: apiMessage,
-              });
-              return;
-            }
-
-            offerteForm.reset();
-            if (offerteSuccess) {
-              offerteSuccess.classList.remove("hidden");
-            }
-
-            // Try to send a branded confirmation email, but do not fail
-            // the already successful offerte submission if this step fails.
-            const confirmationPayload = {
-              name: payload.name || "",
-              email: payload.email || "",
-              telefoon: payload.telefoon || "",
-              bedrijf: payload.bedrijf || "",
-              pakket: payload.pakket || "",
-              message: payload.message || "",
-            };
-
-            fetch(confirmationEndpoint, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(confirmationPayload),
-            })
-              .then(async (response) => {
-                if (!response.ok) {
-                  const errorResult = await response.json().catch(() => null);
-                  throw new Error(
-                    (errorResult && errorResult.message) ||
-                      "confirmation_email_failed",
-                  );
-                }
-              })
-              .catch((error) => {
-                trackEvent("offerte_confirmation_email_error", {
-                  reason: "function_failed",
-                  message: error.message || "unknown",
-                });
-              });
-
-            trackEvent("offerte_form_submit", {
-              pakket: payload.pakket || "onbekend",
-            });
-          } catch (error) {
-            if (offerteError) {
-              offerteError.textContent = t(
-                "error_network",
-                "Netwerkfout bij verzenden. Controleer je verbinding en probeer opnieuw.",
-              );
-              offerteError.classList.remove("hidden");
-            }
-
-            trackEvent("offerte_form_submit_error", {
-              reason: "network_error",
-            });
-          } finally {
-            if (offerteSubmit) {
-              offerteSubmit.disabled = false;
-              offerteSubmit.textContent = t("form_submit", "Verstuur aanvraag");
-            }
-            if (firstInput) {
-              firstInput.focus();
-            }
-          }
-        });
-      }
-
-      // Simple scroll reveal effect
-      const observerOptions = {
-        threshold: 0.1,
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("opacity-100", "translate-y-0");
-            entry.target.classList.remove("opacity-0", "translate-y-10");
-          }
-        });
-      }, observerOptions);
-
-      document.querySelectorAll("section").forEach((section) => {
-        section.classList.add(
-          "transition-all",
-          "duration-700",
-          "opacity-0",
-          "translate-y-10",
-        );
-        observer.observe(section);
       });
     </script>
   </body>

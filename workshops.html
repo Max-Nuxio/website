@@ -1,0 +1,1445 @@
+<!doctype html>
+<html lang="nl" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nuxio — Workshops voor ondernemers</title>
+    <meta
+      name="description"
+      content="Nuxio biedt praktische workshops voor lokale ondernemers. Leer zelf je website beheren, SEO, social media en meer."
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: "#F7F5F0",
+              ink: "#1A1A1A",
+              accent: "#2A5C45",
+              "accent-light": "#3A7A5C",
+              "accent-dark": "#1E4534",
+              muted: "#6B6B6B",
+            },
+            fontFamily: {
+              display: ["Outfit", "sans-serif"],
+              body: ["Figtree", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      * {
+        cursor: default;
+      }
+      a,
+      button,
+      [role="button"],
+      input[type="submit"],
+      label {
+        cursor: pointer;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(32px);
+        transition:
+          opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .reveal-delay-1 {
+        transition-delay: 0.1s;
+      }
+      .reveal-delay-2 {
+        transition-delay: 0.2s;
+      }
+      .reveal-delay-3 {
+        transition-delay: 0.3s;
+      }
+
+      .hero-item {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .hero-item.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .reveal,
+        .hero-item {
+          opacity: 1 !important;
+          transform: none !important;
+          transition: none !important;
+        }
+        html {
+          scroll-behavior: auto !important;
+        }
+      }
+
+      .noise-bg::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        opacity: 0.035;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        background-repeat: repeat;
+        background-size: 200px 200px;
+        pointer-events: none;
+      }
+
+      .grid-pattern::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(42, 92, 69, 0.06) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(42, 92, 69, 0.06) 1px, transparent 1px);
+        background-size: 64px 64px;
+        pointer-events: none;
+      }
+
+      *:focus-visible {
+        outline: 2px solid #2a5c45;
+        outline-offset: 2px;
+      }
+
+      #navbar.scrolled {
+        border-bottom: 1px solid rgba(26, 26, 26, 0.1);
+        background: rgba(247, 245, 240, 0.95);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+
+      .card-hover {
+        transition:
+          transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .card-hover:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px rgba(26, 26, 26, 0.1);
+      }
+
+      .btn-primary {
+        transition:
+          background-color 0.18s ease,
+          transform 0.18s ease,
+          box-shadow 0.18s ease;
+      }
+      .btn-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 16px rgba(42, 92, 69, 0.25);
+      }
+      .btn-primary:active {
+        transform: translateY(0);
+      }
+
+      .btn-secondary {
+        transition:
+          background-color 0.18s ease,
+          border-color 0.18s ease;
+      }
+      .btn-secondary:hover {
+        background-color: rgba(26, 26, 26, 0.06);
+        border-color: #1a1a1a;
+      }
+
+      .lang-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 0;
+        border: 1.5px solid rgba(26, 26, 26, 0.15);
+        border-radius: 8px;
+        overflow: hidden;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        line-height: 1;
+        transition: border-color 0.18s ease;
+      }
+      .lang-toggle:hover {
+        border-color: rgba(26, 26, 26, 0.3);
+      }
+      .lang-toggle button {
+        padding: 6px 10px;
+        cursor: pointer;
+        transition:
+          background-color 0.18s ease,
+          color 0.18s ease;
+        background: transparent;
+        color: #6b6b6b;
+        border: none;
+        font-size: 0.75rem;
+        font-weight: 600;
+        line-height: 1;
+      }
+      .lang-toggle button.active {
+        background-color: #2a5c45;
+        color: #ffffff;
+      }
+      .lang-toggle button:not(.active):hover {
+        background-color: rgba(26, 26, 26, 0.06);
+        color: #1a1a1a;
+      }
+    </style>
+  </head>
+
+  <body class="bg-cream text-ink font-body antialiased">
+    <!-- ===== NAVIGATION ===== -->
+    <nav
+      id="navbar"
+      class="fixed top-0 left-0 right-0 z-50 bg-cream/80 backdrop-blur-sm transition-all duration-300"
+      role="navigation"
+      aria-label="Hoofdnavigatie"
+    >
+      <div class="max-w-6xl mx-auto px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16 lg:h-20">
+          <a
+            href="index.html"
+            class="font-display font-extrabold text-2xl tracking-tight text-ink cursor-pointer"
+            aria-label="Nuxio home"
+            >Nuxio</a
+          >
+
+          <div class="hidden md:flex items-center gap-8">
+            <a
+              href="index.html"
+              class="text-sm font-medium text-ink hover:text-accent transition-colors duration-180 cursor-pointer"
+              data-i18n="nav.home"
+              >Home</a
+            >
+            <a
+              href="index.html#pakketten"
+              class="text-sm font-medium text-ink hover:text-accent transition-colors duration-180 cursor-pointer"
+              data-i18n="nav.packages"
+              >Pakketten</a
+            >
+            <a
+              href="workshops.html"
+              class="text-sm font-medium text-accent transition-colors duration-180 cursor-pointer font-semibold"
+              aria-current="page"
+              >Workshops</a
+            >
+            <a
+              href="apps.html"
+              class="text-sm font-medium text-ink hover:text-accent transition-colors duration-180 cursor-pointer"
+              data-i18n="nav.apps"
+              >Apps</a
+            >
+            <a
+              href="index.html#contact"
+              class="text-sm font-medium text-ink hover:text-accent transition-colors duration-180 cursor-pointer"
+              data-i18n="nav.contact"
+              >Contact</a
+            >
+            <div class="lang-toggle" role="group" aria-label="Taal selectie">
+              <button
+                id="lang-nl"
+                class="active"
+                aria-label="Nederlands"
+                data-lang="nl"
+              >
+                NL
+              </button>
+              <button id="lang-en" aria-label="English" data-lang="en">
+                EN
+              </button>
+            </div>
+            <a
+              href="mailto:support@nuxio.nl"
+              class="inline-flex items-center gap-2 bg-accent text-white text-sm font-semibold px-5 py-2.5 rounded-lg btn-primary cursor-pointer"
+            >
+              <span data-i18n="nav.cta">Vraag een offerte aan</span>
+            </a>
+          </div>
+
+          <button
+            id="menu-toggle"
+            class="md:hidden flex items-center justify-center w-10 h-10 cursor-pointer"
+            aria-label="Open menu"
+            aria-expanded="false"
+          >
+            <i data-lucide="menu" class="w-6 h-6 text-ink"></i>
+          </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden pb-4" role="menu">
+          <div class="flex flex-col gap-1 pt-2 border-t border-ink/10">
+            <a
+              href="index.html"
+              class="block px-3 py-2.5 text-sm font-medium text-ink hover:text-accent hover:bg-accent/5 rounded-lg transition-colors duration-180 cursor-pointer"
+              role="menuitem"
+              data-i18n="nav.home"
+              >Home</a
+            >
+            <a
+              href="index.html#pakketten"
+              class="block px-3 py-2.5 text-sm font-medium text-ink hover:text-accent hover:bg-accent/5 rounded-lg transition-colors duration-180 cursor-pointer"
+              role="menuitem"
+              data-i18n="nav.packages"
+              >Pakketten</a
+            >
+            <a
+              href="workshops.html"
+              class="block px-3 py-2.5 text-sm font-medium text-accent bg-accent/5 rounded-lg transition-colors duration-180 cursor-pointer"
+              role="menuitem"
+              aria-current="page"
+              >Workshops</a
+            >
+            <a
+              href="apps.html"
+              class="block px-3 py-2.5 text-sm font-medium text-ink hover:text-accent hover:bg-accent/5 rounded-lg transition-colors duration-180 cursor-pointer"
+              role="menuitem"
+              data-i18n="nav.apps"
+              >Apps</a
+            >
+            <a
+              href="index.html#contact"
+              class="block px-3 py-2.5 text-sm font-medium text-ink hover:text-accent hover:bg-accent/5 rounded-lg transition-colors duration-180 cursor-pointer"
+              role="menuitem"
+              data-i18n="nav.contact"
+              >Contact</a
+            >
+            <div class="px-3 py-2">
+              <div class="lang-toggle" role="group" aria-label="Taal selectie">
+                <button
+                  id="lang-nl-mobile"
+                  class="active"
+                  aria-label="Nederlands"
+                  data-lang="nl"
+                >
+                  NL
+                </button>
+                <button id="lang-en-mobile" aria-label="English" data-lang="en">
+                  EN
+                </button>
+              </div>
+            </div>
+            <a
+              href="mailto:support@nuxio.nl"
+              class="mt-2 flex items-center justify-center gap-2 bg-accent text-white text-sm font-semibold px-5 py-2.5 rounded-lg btn-primary cursor-pointer"
+              role="menuitem"
+            >
+              <span data-i18n="nav.cta">Vraag een offerte aan</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section
+      id="hero"
+      class="relative min-h-screen flex items-center noise-bg grid-pattern overflow-hidden"
+      aria-label="Hero"
+    >
+      <div class="relative z-10 max-w-6xl mx-auto px-6 lg:px-8 py-32 lg:py-0">
+        <div class="max-w-3xl">
+          <h1
+            class="hero-item font-display font-extrabold text-5xl sm:text-6xl lg:text-7xl leading-[1.05] tracking-tight text-ink"
+            data-i18n-html="workshops.hero.headline"
+          >
+            Leer zelf je website<br />beheren.
+          </h1>
+          <p
+            class="hero-item mt-6 text-lg sm:text-xl lg:text-2xl text-muted max-w-xl leading-relaxed"
+            data-i18n="workshops.hero.sub"
+          >
+            Praktische workshops voor ondernemers die meer willen weten over
+            websites, SEO en online zichtbaarheid.
+          </p>
+          <div class="hero-item mt-10 flex flex-col sm:flex-row gap-4">
+            <a
+              href="#workshops"
+              class="inline-flex items-center justify-center gap-2 bg-accent text-white text-base font-semibold px-7 py-3.5 rounded-lg btn-primary"
+              data-i18n="workshops.hero.cta1"
+            >
+              Bekijk workshops
+            </a>
+            <a
+              href="#inschrijven"
+              class="inline-flex items-center justify-center gap-2 border-2 border-ink/20 text-ink text-base font-semibold px-7 py-3.5 rounded-lg btn-secondary"
+              data-i18n="workshops.hero.cta2"
+            >
+              Schrijf je in
+            </a>
+          </div>
+        </div>
+      </div>
+      <div
+        class="hidden lg:block absolute top-1/2 -translate-y-1/2 right-12 xl:right-24 w-64 h-64 border-2 border-accent/15 rounded-full"
+        aria-hidden="true"
+      ></div>
+      <div
+        class="hidden lg:block absolute top-1/2 -translate-y-[40%] right-20 xl:right-32 w-40 h-40 border-2 border-accent/10 rotate-45"
+        aria-hidden="true"
+      ></div>
+    </section>
+
+    <!-- ===== WORKSHOPS ===== -->
+    <section
+      id="workshops"
+      class="py-24 lg:py-32"
+      aria-labelledby="workshops-title"
+    >
+      <div class="max-w-6xl mx-auto px-6 lg:px-8">
+        <h2
+          id="workshops-title"
+          class="reveal font-display font-bold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-ink text-center"
+          data-i18n="workshops.list.title"
+        >
+          Onze workshops
+        </h2>
+        <p
+          class="reveal reveal-delay-1 mt-4 text-center text-muted text-lg max-w-2xl mx-auto"
+          data-i18n="workshops.list.sub"
+        >
+          Korte, praktische sessies die je direct kunt toepassen op jouw
+          bedrijf.
+        </p>
+
+        <div
+          class="reveal reveal-delay-1 mt-16 grid grid-cols-1 md:grid-cols-2 gap-6"
+        >
+          <!-- Workshop 1 -->
+          <div
+            class="card-hover bg-white border-2 border-ink/10 rounded-2xl p-7"
+          >
+            <div class="flex items-start gap-4">
+              <div
+                class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-accent/10 flex-shrink-0"
+              >
+                <i data-lucide="layout" class="w-6 h-6 text-accent"></i>
+              </div>
+              <div>
+                <h3
+                  class="font-display font-bold text-xl text-ink"
+                  data-i18n="workshops.w1.title"
+                >
+                  WordPress voor beginners
+                </h3>
+                <p
+                  class="mt-2 text-sm text-muted leading-relaxed"
+                  data-i18n="workshops.w1.desc"
+                >
+                  Leer de basis van WordPress: pagina's aanmaken, afbeeldingen
+                  plaatsen, menu's instellen en basisinstellingen aanpassen.
+                </p>
+                <div class="mt-4 flex flex-wrap gap-3">
+                  <span
+                    class="inline-flex items-center gap-1.5 text-xs font-semibold text-accent bg-accent/10 px-3 py-1 rounded-full"
+                  >
+                    <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+                    <span data-i18n="workshops.w1.duration">3 uur</span>
+                  </span>
+                  <span
+                    class="inline-flex items-center gap-1.5 text-xs font-semibold text-ink/70 bg-ink/5 px-3 py-1 rounded-full"
+                    data-i18n="workshops.w1.level"
+                    >Beginner</span
+                  >
+                  <span
+                    class="inline-flex items-center gap-1.5 text-xs font-semibold text-ink bg-ink/5 px-3 py-1 rounded-full"
+                  >
+                    <i data-lucide="users" class="w-3.5 h-3.5"></i>
+                    <span data-i18n="workshops.w1.group">Max 8 personen</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Workshop 2 -->
+          <div
+            class="card-hover bg-white border-2 border-ink/10 rounded-2xl p-7"
+          >
+            <div class="flex items-start gap-4">
+              <div
+                class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-accent/10 flex-shrink-0"
+              >
+                <i data-lucide="search" class="w-6 h-6 text-accent"></i>
+              </div>
+              <div>
+                <h3
+                  class="font-display font-bold text-xl text-ink"
+                  data-i18n="workshops.w2.title"
+                >
+                  SEO voor lokale ondernemers
+                </h3>
+                <p
+                  class="mt-2 text-sm text-muted leading-relaxed"
+                  data-i18n="workshops.w2.desc"
+                >
+                  Hoe zorg je dat jouw bedrijf gevonden wordt in Google? Leer de
+                  basis van zoekmachineoptimalisatie voor lokale bedrijven.
+                </p>
+                <div class="mt-4 flex flex-wrap gap-3">
+                  <span
+                    class="inline-flex items-center gap-1.5 text-xs font-semibold text-accent bg-accent/10 px-3 py-1 rounded-full"
+                  >
+                    <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+                    <span data-i18n="workshops.w2.duration">2,5 uur</span>
+                  </span>
+                  <span
+                    class="inline-flex items-center gap-1.5 text-xs font-semibold text-ink/70 bg-ink/5 px-3 py-1 rounded-full"
+                    data-i18n="workshops.w2.level"
+                    >Beginner tot gemiddeld</span
+                  >
+                  <span
+                    class="inline-flex items-center gap-1.5 text-xs font-semibold text-ink bg-ink/5 px-3 py-1 rounded-full"
+                  >
+                    <i data-lucide="users" class="w-3.5 h-3.5"></i>
+                    <span data-i18n="workshops.w2.group">Max 6 personen</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Workshop 3 -->
+          <div
+            class="card-hover bg-white border-2 border-ink/10 rounded-2xl p-7"
+          >
+            <div class="flex items-start gap-4">
+              <div
+                class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-accent/10 flex-shrink-0"
+              >
+                <i data-lucide="share-2" class="w-6 h-6 text-accent"></i>
+              </div>
+              <div>
+                <h3
+                  class="font-display font-bold text-xl text-ink"
+                  data-i18n="workshops.w3.title"
+                >
+                  Social media voor MKB
+                </h3>
+                <p
+                  class="mt-2 text-sm text-muted leading-relaxed"
+                  data-i18n="workshops.w3.desc"
+                >
+                  Maak een effectieve social media strategie voor jouw bedrijf.
+                  Van contentplanning tot advertenties op Instagram en Facebook.
+                </p>
+                <div class="mt-4 flex flex-wrap gap-3">
+                  <span
+                    class="inline-flex items-center gap-1.5 text-xs font-semibold text-accent bg-accent/10 px-3 py-1 rounded-full"
+                  >
+                    <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+                    <span data-i18n="workshops.w3.duration">3 uur</span>
+                  </span>
+                  <span
+                    class="inline-flex items-center gap-1.5 text-xs font-semibold text-ink/70 bg-ink/5 px-3 py-1 rounded-full"
+                    data-i18n="workshops.w3.level"
+                    >Alle niveaus</span
+                  >
+                  <span
+                    class="inline-flex items-center gap-1.5 text-xs font-semibold text-ink bg-ink/5 px-3 py-1 rounded-full"
+                  >
+                    <i data-lucide="users" class="w-3.5 h-3.5"></i>
+                    <span data-i18n="workshops.w3.group">Max 10 personen</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Workshop 4 -->
+          <div
+            class="card-hover bg-white border-2 border-ink/10 rounded-2xl p-7"
+          >
+            <div class="flex items-start gap-4">
+              <div
+                class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-accent/10 flex-shrink-0"
+              >
+                <i data-lucide="bar-chart-3" class="w-6 h-6 text-accent"></i>
+              </div>
+              <div>
+                <h3
+                  class="font-display font-bold text-xl text-ink"
+                  data-i18n="workshops.w4.title"
+                >
+                  Google Analytics uitleggen
+                </h3>
+                <p
+                  class="mt-2 text-sm text-muted leading-relaxed"
+                  data-i18n="workshops.w4.desc"
+                >
+                  Ontdek wie jouw website bezoekt, waar ze vandaan komen en wat
+                  ze doen. Leer de belangrijkste rapporten lezen en
+                  interpreteren.
+                </p>
+                <div class="mt-4 flex flex-wrap gap-3">
+                  <span
+                    class="inline-flex items-center gap-1.5 text-xs font-semibold text-accent bg-accent/10 px-3 py-1 rounded-full"
+                  >
+                    <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+                    <span data-i18n="workshops.w4.duration">2 uur</span>
+                  </span>
+                  <span
+                    class="inline-flex items-center gap-1.5 text-xs font-semibold text-ink/70 bg-ink/5 px-3 py-1 rounded-full"
+                    data-i18n="workshops.w4.level"
+                    >Beginner</span
+                  >
+                  <span
+                    class="inline-flex items-center gap-1.5 text-xs font-semibold text-ink bg-ink/5 px-3 py-1 rounded-full"
+                  >
+                    <i data-lucide="users" class="w-3.5 h-3.5"></i>
+                    <span data-i18n="workshops.w4.group">Max 8 personen</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== WAT KRIJG JE ===== -->
+    <section class="py-24 lg:py-32 bg-white" aria-labelledby="included-title">
+      <div class="max-w-6xl mx-auto px-6 lg:px-8">
+        <h2
+          id="included-title"
+          class="reveal font-display font-bold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-ink text-center"
+          data-i18n="workshops.included.title"
+        >
+          Wat krijg je bij elke workshop?
+        </h2>
+        <div
+          class="reveal reveal-delay-1 mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          <div class="text-center">
+            <div
+              class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-accent/10 mb-5"
+            >
+              <i data-lucide="file-text" class="w-7 h-7 text-accent"></i>
+            </div>
+            <h3
+              class="font-display font-bold text-lg text-ink"
+              data-i18n="workshops.included.f1.title"
+            >
+              Werkboek
+            </h3>
+            <p
+              class="mt-2 text-sm text-muted leading-relaxed"
+              data-i18n="workshops.included.f1.desc"
+            >
+              Een overzichtelijk werkboek met alle stappen die je hebt geleerd.
+            </p>
+          </div>
+          <div class="text-center">
+            <div
+              class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-accent/10 mb-5"
+            >
+              <i data-lucide="video" class="w-7 h-7 text-accent"></i>
+            </div>
+            <h3
+              class="font-display font-bold text-lg text-ink"
+              data-i18n="workshops.included.f2.title"
+            >
+              Opname
+            </h3>
+            <p
+              class="mt-2 text-sm text-muted leading-relaxed"
+              data-i18n="workshops.included.f2.desc"
+            >
+              Je ontvangt een video-opname zodat je alles rustig kunt
+              terugkijken.
+            </p>
+          </div>
+          <div class="text-center">
+            <div
+              class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-accent/10 mb-5"
+            >
+              <i data-lucide="message-circle" class="w-7 h-7 text-accent"></i>
+            </div>
+            <h3
+              class="font-display font-bold text-lg text-ink"
+              data-i18n="workshops.included.f3.title"
+            >
+              Nazorg
+            </h3>
+            <p
+              class="mt-2 text-sm text-muted leading-relaxed"
+              data-i18n="workshops.included.f3.desc"
+            >
+              Twee weken lang kun je al je vragen stellen via e-mail.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PRIJZEN ===== -->
+    <section
+      id="prijzen"
+      class="py-24 lg:py-32"
+      aria-labelledby="pricing-title"
+    >
+      <div class="max-w-6xl mx-auto px-6 lg:px-8 text-center">
+        <h2
+          id="pricing-title"
+          class="reveal font-display font-bold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-ink"
+          data-i18n="workshops.pricing.title"
+        >
+          Investering
+        </h2>
+        <p
+          class="reveal reveal-delay-1 mt-4 text-lg text-muted max-w-xl mx-auto"
+          data-i18n="workshops.pricing.sub"
+        >
+          Betaalbaar, praktisch en direct toepasbaar.
+        </p>
+
+        <div
+          class="reveal reveal-delay-2 mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto items-start"
+        >
+          <!-- Single workshop -->
+          <div
+            class="card-hover bg-white border-2 border-ink/10 rounded-2xl p-7 text-left"
+          >
+            <span
+              class="text-sm font-semibold text-muted uppercase tracking-wider"
+              data-i18n="workshops.pricing.single.label"
+              >Losse workshop</span
+            >
+            <div class="mt-3 flex items-baseline gap-1">
+              <span class="font-display font-extrabold text-4xl text-ink"
+                >€79</span
+              >
+              <span
+                class="text-muted text-sm font-medium"
+                data-i18n="workshops.pricing.single.per"
+                >/persoon</span
+              >
+            </div>
+            <ul class="mt-6 space-y-3">
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i
+                  data-lucide="check"
+                  class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"
+                ></i>
+                <span data-i18n="workshops.pricing.single.f1"
+                  >1 workshop naar keuze</span
+                >
+              </li>
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i
+                  data-lucide="check"
+                  class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"
+                ></i>
+                <span data-i18n="workshops.pricing.single.f2"
+                  >Werkboek inbegrepen</span
+                >
+              </li>
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i
+                  data-lucide="check"
+                  class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"
+                ></i>
+                <span data-i18n="workshops.pricing.single.f3"
+                  >Koffie & thee</span
+                >
+              </li>
+            </ul>
+            <a
+              href="#inschrijven"
+              class="mt-8 block w-full text-center border-2 border-ink/15 text-ink text-sm font-semibold px-5 py-3 rounded-lg btn-secondary cursor-pointer"
+              data-i18n="workshops.pricing.single.cta"
+            >
+              Schrijf je in
+            </a>
+          </div>
+
+          <!-- Workshop card (popular) -->
+          <div
+            class="card-hover bg-white border-2 border-accent rounded-2xl p-7 text-left relative shadow-lg shadow-accent/5"
+          >
+            <div
+              class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-accent text-white text-xs font-bold uppercase tracking-wider px-4 py-1 rounded-full whitespace-nowrap"
+              data-i18n="workshops.pricing.popular"
+            >
+              Meest gekozen
+            </div>
+            <span
+              class="text-sm font-semibold text-accent uppercase tracking-wider"
+              data-i18n="workshops.pricing.bundle.label"
+              >Workshop-bundel</span
+            >
+            <div class="mt-3 flex items-baseline gap-1">
+              <span class="font-display font-extrabold text-4xl text-ink"
+                >€199</span
+              >
+              <span
+                class="text-muted text-sm font-medium"
+                data-i18n="workshops.pricing.bundle.per"
+                >/3 workshops</span
+              >
+            </div>
+            <ul class="mt-6 space-y-3">
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i
+                  data-lucide="check"
+                  class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"
+                ></i>
+                <span data-i18n="workshops.pricing.bundle.f1"
+                  >3 workshops naar keuze</span
+                >
+              </li>
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i
+                  data-lucide="check"
+                  class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"
+                ></i>
+                <span data-i18n="workshops.pricing.bundle.f2"
+                  >€38 korting t.o.v. los</span
+                >
+              </li>
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i
+                  data-lucide="check"
+                  class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"
+                ></i>
+                <span data-i18n="workshops.pricing.bundle.f3"
+                  >Video-opnames inbegrepen</span
+                >
+              </li>
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i
+                  data-lucide="check"
+                  class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"
+                ></i>
+                <span data-i18n="workshops.pricing.bundle.f4"
+                  >2 weken nazorg</span
+                >
+              </li>
+            </ul>
+            <a
+              href="#inschrijven"
+              class="mt-8 block w-full text-center bg-accent text-white text-sm font-semibold px-5 py-3 rounded-lg btn-primary cursor-pointer"
+              data-i18n="workshops.pricing.bundle.cta"
+            >
+              Kies deze bundel
+            </a>
+          </div>
+
+          <!-- In-company -->
+          <div
+            class="card-hover bg-white border-2 border-ink/10 rounded-2xl p-7 text-left"
+          >
+            <span
+              class="text-sm font-semibold text-muted uppercase tracking-wider"
+              data-i18n="workshops.pricing.company.label"
+              >In-company</span
+            >
+            <div class="mt-3 flex items-baseline gap-1">
+              <span class="font-display font-extrabold text-4xl text-ink"
+                >Op maat</span
+              >
+            </div>
+            <p
+              class="mt-2 text-xs text-muted"
+              data-i18n="workshops.pricing.company.sub"
+            >
+              Voor teams van 5+ personen
+            </p>
+            <ul class="mt-6 space-y-3">
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i
+                  data-lucide="check"
+                  class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"
+                ></i>
+                <span data-i18n="workshops.pricing.company.f1"
+                  >Workshop op jouw locatie</span
+                >
+              </li>
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i
+                  data-lucide="check"
+                  class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"
+                ></i>
+                <span data-i18n="workshops.pricing.company.f2"
+                  >Op maat gemaakt</span
+                >
+              </li>
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i
+                  data-lucide="check"
+                  class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"
+                ></i>
+                <span data-i18n="workshops.pricing.company.f3"
+                  >Incl. presentatie + materiaal</span
+                >
+              </li>
+            </ul>
+            <a
+              href="mailto:support@nuxio.nl?subject=In-company%20workshop%20aanvraag"
+              class="mt-8 block w-full text-center border-2 border-ink/15 text-ink text-sm font-semibold px-5 py-3 rounded-lg btn-secondary cursor-pointer"
+              data-i18n="workshops.pricing.company.cta"
+            >
+              Neem contact op
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== INSCHRIJVEN ===== -->
+    <section
+      id="inschrijven"
+      class="py-24 lg:py-32 bg-white"
+      aria-labelledby="signup-title"
+    >
+      <div class="max-w-6xl mx-auto px-6 lg:px-8 text-center">
+        <h2
+          id="signup-title"
+          class="reveal font-display font-bold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-ink"
+          data-i18n="workshops.signup.title"
+        >
+          Schrijf je in
+        </h2>
+        <p
+          class="reveal reveal-delay-1 mt-4 text-lg text-muted max-w-xl mx-auto"
+          data-i18n="workshops.signup.desc"
+        >
+          Kies een workshop en meld je aan. Wij nemen binnen een werkdag contact
+          met je op.
+        </p>
+
+        <form
+          id="workshop-form"
+          class="reveal reveal-delay-2 mt-12 max-w-xl mx-auto text-left"
+          action="https://api.web3forms.com/submit"
+          method="POST"
+        >
+          <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+          <input
+            type="hidden"
+            name="subject"
+            value="Workshop inschrijving via nuxio.nl"
+          />
+          <input type="hidden" name="from_name" value="Nuxio Website" />
+          <input
+            type="hidden"
+            name="redirect"
+            value="workshops.html?submitted=true"
+          />
+          <input
+            type="checkbox"
+            name="botcheck"
+            class="hidden"
+            style="display: none"
+            tabindex="-1"
+            autocomplete="off"
+          />
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+              <label
+                for="ws-name"
+                class="block text-sm font-semibold text-ink mb-1.5"
+                data-i18n="workshops.signup.name"
+                >Naam</label
+              >
+              <input
+                type="text"
+                id="ws-name"
+                name="name"
+                required
+                placeholder="Jouw naam"
+                class="w-full px-4 py-3 rounded-lg border-2 border-ink/15 bg-cream text-ink text-sm placeholder:text-muted/60 focus:border-accent focus:ring-0 focus:outline-none transition-colors duration-180"
+              />
+            </div>
+            <div>
+              <label
+                for="ws-email"
+                class="block text-sm font-semibold text-ink mb-1.5"
+                data-i18n="workshops.signup.email"
+                >E-mail</label
+              >
+              <input
+                type="email"
+                id="ws-email"
+                name="email"
+                required
+                placeholder="jouw@email.nl"
+                class="w-full px-4 py-3 rounded-lg border-2 border-ink/15 bg-cream text-ink text-sm placeholder:text-muted/60 focus:border-accent focus:ring-0 focus:outline-none transition-colors duration-180"
+              />
+            </div>
+          </div>
+
+          <div class="mt-5">
+            <label
+              for="ws-workshop"
+              class="block text-sm font-semibold text-ink mb-1.5"
+              data-i18n="workshops.signup.workshop"
+              >Welke workshop?</label
+            >
+            <select
+              id="ws-workshop"
+              name="workshop"
+              class="w-full px-4 py-3 rounded-lg border-2 border-ink/15 bg-cream text-ink text-sm focus:border-accent focus:ring-0 focus:outline-none transition-colors duration-180 appearance-none cursor-pointer"
+              style="
+                background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B6B6B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E&quot;);
+                background-repeat: no-repeat;
+                background-position: right 12px center;
+                background-size: 16px;
+              "
+            >
+              <option value="" data-i18n="workshops.signup.ws_placeholder">
+                Kies een workshop...
+              </option>
+              <option
+                value="wordpress"
+                data-i18n="workshops.signup.ws_wordpress"
+              >
+                WordPress voor beginners
+              </option>
+              <option value="seo" data-i18n="workshops.signup.ws_seo">
+                SEO voor lokale ondernemers
+              </option>
+              <option value="social" data-i18n="workshops.signup.ws_social">
+                Social media voor MKB
+              </option>
+              <option
+                value="analytics"
+                data-i18n="workshops.signup.ws_analytics"
+              >
+                Google Analytics uitleggen
+              </option>
+              <option value="anders" data-i18n="workshops.signup.ws_other">
+                Weet ik nog niet / Anders
+              </option>
+            </select>
+          </div>
+
+          <div class="mt-5">
+            <label
+              for="ws-message"
+              class="block text-sm font-semibold text-ink mb-1.5"
+              data-i18n="workshops.signup.message"
+              >Bericht
+              <span class="text-muted font-normal">(optioneel)</span></label
+            >
+            <textarea
+              id="ws-message"
+              name="message"
+              rows="3"
+              placeholder="Vragen of opmerkingen..."
+              class="w-full px-4 py-3 rounded-lg border-2 border-ink/15 bg-cream text-ink text-sm placeholder:text-muted/60 focus:border-accent focus:ring-0 focus:outline-none transition-colors duration-180 resize-none"
+            ></textarea>
+          </div>
+
+          <div class="mt-8">
+            <button
+              type="submit"
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-accent text-white text-base font-semibold px-8 py-3.5 rounded-lg btn-primary cursor-pointer"
+            >
+              <i data-lucide="send" class="w-4.5 h-4.5"></i>
+              <span data-i18n="workshops.signup.submit">Meld je aan</span>
+            </button>
+          </div>
+
+          <p class="mt-4 text-xs text-muted">
+            <span data-i18n="workshops.signup.or_email"
+              >Of mail direct naar</span
+            >
+            <a
+              href="mailto:support@nuxio.nl"
+              class="underline hover:text-ink transition-colors duration-180"
+              >support@nuxio.nl</a
+            >.
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="border-t border-ink/10 py-12 lg:py-16" role="contentinfo">
+      <div class="max-w-6xl mx-auto px-6 lg:px-8">
+        <div
+          class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8"
+        >
+          <div>
+            <a
+              href="index.html"
+              class="font-display font-extrabold text-2xl tracking-tight text-ink cursor-pointer"
+              aria-label="Nuxio home"
+              >Nuxio</a
+            >
+            <p class="mt-2 text-sm text-muted" data-i18n="footer.slogan">
+              Jouw website. Klaar in 5 dagen.
+            </p>
+          </div>
+          <div
+            class="flex flex-col sm:flex-row items-start sm:items-center gap-6"
+          >
+            <nav aria-label="Footer navigatie" class="flex gap-6">
+              <a
+                href="#prijzen"
+                class="text-sm text-muted hover:text-ink transition-colors duration-180 cursor-pointer"
+                data-i18n="nav.packages"
+                >Pakketten</a
+              >
+              <a
+                href="workshops.html"
+                class="text-sm text-muted hover:text-ink transition-colors duration-180 cursor-pointer"
+                >Workshops</a
+              >
+              <a
+                href="apps.html"
+                class="text-sm text-muted hover:text-ink transition-colors duration-180 cursor-pointer"
+                data-i18n="nav.apps"
+                >Apps</a
+              >
+              <a
+                href="index.html#contact"
+                class="text-sm text-muted hover:text-ink transition-colors duration-180 cursor-pointer"
+                data-i18n="nav.contact"
+                >Contact</a
+              >
+            </nav>
+            <a
+              href="mailto:support@nuxio.nl"
+              class="text-sm text-muted hover:text-ink transition-colors duration-180 flex items-center gap-1.5 cursor-pointer"
+            >
+              <i data-lucide="mail" class="w-4 h-4"></i> support@nuxio.nl
+            </a>
+          </div>
+        </div>
+        <div class="mt-10 pt-6 border-t border-ink/10">
+          <p class="text-xs text-muted">
+            &copy; 2025 Nuxio — VOF | Max &amp; Raman
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+      const translations = {
+        nl: {
+          "nav.home": "Home",
+          "nav.packages": "Pakketten",
+          "nav.forwhom": "Voor wie",
+          "nav.process": "Werkwijze",
+          "nav.apps": "Apps",
+          "nav.contact": "Contact",
+          "nav.cta": "Vraag een offerte aan",
+          "workshops.hero.headline": "Leer zelf je website<br>beheren.",
+          "workshops.hero.sub":
+            "Praktische workshops voor ondernemers die meer willen weten over websites, SEO en online zichtbaarheid.",
+          "workshops.hero.cta1": "Bekijk workshops",
+          "workshops.hero.cta2": "Schrijf je in",
+          "workshops.list.title": "Onze workshops",
+          "workshops.list.sub":
+            "Korte, praktische sessies die je direct kunt toepassen op jouw bedrijf.",
+          "workshops.w1.title": "WordPress voor beginners",
+          "workshops.w1.desc":
+            "Leer de basis van WordPress: pagina's aanmaken, afbeeldingen plaatsen, menu's instellen en basisinstellingen aanpassen.",
+          "workshops.w1.duration": "3 uur",
+          "workshops.w1.level": "Beginner",
+          "workshops.w1.group": "Max 8 personen",
+          "workshops.w2.title": "SEO voor lokale ondernemers",
+          "workshops.w2.desc":
+            "Hoe zorg je dat jouw bedrijf gevonden wordt in Google? Leer de basis van zoekmachineoptimalisatie voor lokale bedrijven.",
+          "workshops.w2.duration": "2,5 uur",
+          "workshops.w2.level": "Beginner tot gemiddeld",
+          "workshops.w2.group": "Max 6 personen",
+          "workshops.w3.title": "Social media voor MKB",
+          "workshops.w3.desc":
+            "Maak een effectieve social media strategie voor jouw bedrijf. Van contentplanning tot advertenties op Instagram en Facebook.",
+          "workshops.w3.duration": "3 uur",
+          "workshops.w3.level": "Alle niveaus",
+          "workshops.w3.group": "Max 10 personen",
+          "workshops.w4.title": "Google Analytics uitleggen",
+          "workshops.w4.desc":
+            "Ontdek wie jouw website bezoekt, waar ze vandaan komen en wat ze doen. Leer de belangrijkste rapporten lezen en interpreteren.",
+          "workshops.w4.duration": "2 uur",
+          "workshops.w4.level": "Beginner",
+          "workshops.w4.group": "Max 8 personen",
+          "workshops.included.title": "Wat krijg je bij elke workshop?",
+          "workshops.included.f1.title": "Werkboek",
+          "workshops.included.f1.desc":
+            "Een overzichtelijk werkboek met alle stappen die je hebt geleerd.",
+          "workshops.included.f2.title": "Opname",
+          "workshops.included.f2.desc":
+            "Je ontvangt een video-opname zodat je alles rustig kunt terugkijken.",
+          "workshops.included.f3.title": "Nazorg",
+          "workshops.included.f3.desc":
+            "Twee weken lang kun je al je vragen stellen via e-mail.",
+          "workshops.pricing.title": "Investering",
+          "workshops.pricing.sub":
+            "Betaalbaar, praktisch en direct toepasbaar.",
+          "workshops.pricing.single.label": "Losse workshop",
+          "workshops.pricing.single.per": "/persoon",
+          "workshops.pricing.single.f1": "1 workshop naar keuze",
+          "workshops.pricing.single.f2": "Werkboek inbegrepen",
+          "workshops.pricing.single.f3": "Koffie & thee",
+          "workshops.pricing.single.cta": "Schrijf je in",
+          "workshops.pricing.popular": "Meest gekozen",
+          "workshops.pricing.bundle.label": "Workshop-bundel",
+          "workshops.pricing.bundle.per": "/3 workshops",
+          "workshops.pricing.bundle.f1": "3 workshops naar keuze",
+          "workshops.pricing.bundle.f2": "€38 korting t.o.v. los",
+          "workshops.pricing.bundle.f3": "Video-opnames inbegrepen",
+          "workshops.pricing.bundle.f4": "2 weken nazorg",
+          "workshops.pricing.bundle.cta": "Kies deze bundel",
+          "workshops.pricing.company.label": "In-company",
+          "workshops.pricing.company.sub": "Voor teams van 5+ personen",
+          "workshops.pricing.company.f1": "Workshop op jouw locatie",
+          "workshops.pricing.company.f2": "Op maat gemaakt",
+          "workshops.pricing.company.f3": "Incl. presentatie + materiaal",
+          "workshops.pricing.company.cta": "Neem contact op",
+          "workshops.signup.title": "Schrijf je in",
+          "workshops.signup.desc":
+            "Kies een workshop en meld je aan. Wij nemen binnen een werkdag contact met je op.",
+          "workshops.signup.name": "Naam",
+          "workshops.signup.email": "E-mail",
+          "workshops.signup.workshop": "Welke workshop?",
+          "workshops.signup.ws_placeholder": "Kies een workshop...",
+          "workshops.signup.ws_wordpress": "WordPress voor beginners",
+          "workshops.signup.ws_seo": "SEO voor lokale ondernemers",
+          "workshops.signup.ws_social": "Social media voor MKB",
+          "workshops.signup.ws_analytics": "Google Analytics uitleggen",
+          "workshops.signup.ws_other": "Weet ik nog niet / Anders",
+          "workshops.signup.message": "Bericht (optioneel)",
+          "workshops.signup.submit": "Meld je aan",
+          "workshops.signup.or_email": "Of mail direct naar",
+          "footer.slogan": "Jouw website. Klaar in 5 dagen.",
+        },
+        en: {
+          "nav.home": "Home",
+          "nav.packages": "Packages",
+          "nav.forwhom": "Who we serve",
+          "nav.process": "Process",
+          "nav.apps": "Apps",
+          "nav.contact": "Contact",
+          "nav.cta": "Request a quote",
+          "workshops.hero.headline": "Learn to manage<br>your website.",
+          "workshops.hero.sub":
+            "Practical workshops for entrepreneurs who want to learn more about websites, SEO and online visibility.",
+          "workshops.hero.cta1": "View workshops",
+          "workshops.hero.cta2": "Sign up",
+          "workshops.list.title": "Our workshops",
+          "workshops.list.sub":
+            "Short, practical sessions you can apply directly to your business.",
+          "workshops.w1.title": "WordPress for beginners",
+          "workshops.w1.desc":
+            "Learn the basics of WordPress: creating pages, uploading images, setting up menus and adjusting basic settings.",
+          "workshops.w1.duration": "3 hours",
+          "workshops.w1.level": "Beginner",
+          "workshops.w1.group": "Max 8 people",
+          "workshops.w2.title": "SEO for local businesses",
+          "workshops.w2.desc":
+            "How do you make sure your business is found in Google? Learn the basics of search engine optimization for local businesses.",
+          "workshops.w2.duration": "2.5 hours",
+          "workshops.w2.level": "Beginner to intermediate",
+          "workshops.w2.group": "Max 6 people",
+          "workshops.w3.title": "Social media for SMBs",
+          "workshops.w3.desc":
+            "Create an effective social media strategy for your business. From content planning to advertising on Instagram and Facebook.",
+          "workshops.w3.duration": "3 hours",
+          "workshops.w3.level": "All levels",
+          "workshops.w3.group": "Max 10 people",
+          "workshops.w4.title": "Google Analytics explained",
+          "workshops.w4.desc":
+            "Discover who visits your website, where they come from and what they do. Learn to read and interpret the most important reports.",
+          "workshops.w4.duration": "2 hours",
+          "workshops.w4.level": "Beginner",
+          "workshops.w4.group": "Max 8 people",
+          "workshops.included.title": "What's included with every workshop?",
+          "workshops.included.f1.title": "Workbook",
+          "workshops.included.f1.desc":
+            "A clear workbook with all the steps you've learned.",
+          "workshops.included.f2.title": "Recording",
+          "workshops.included.f2.desc":
+            "You'll receive a video recording so you can review everything at your own pace.",
+          "workshops.included.f3.title": "Follow-up support",
+          "workshops.included.f3.desc":
+            "For two weeks you can ask all your questions via email.",
+          "workshops.pricing.title": "Investment",
+          "workshops.pricing.sub":
+            "Affordable, practical and immediately applicable.",
+          "workshops.pricing.single.label": "Single workshop",
+          "workshops.pricing.single.per": "/person",
+          "workshops.pricing.single.f1": "1 workshop of your choice",
+          "workshops.pricing.single.f2": "Workbook included",
+          "workshops.pricing.single.f3": "Coffee & tea",
+          "workshops.pricing.single.cta": "Sign up",
+          "workshops.pricing.popular": "Most popular",
+          "workshops.pricing.bundle.label": "Workshop bundle",
+          "workshops.pricing.bundle.per": "/3 workshops",
+          "workshops.pricing.bundle.f1": "3 workshops of your choice",
+          "workshops.pricing.bundle.f2": "€38 discount vs. single",
+          "workshops.pricing.bundle.f3": "Video recordings included",
+          "workshops.pricing.bundle.f4": "2 weeks follow-up support",
+          "workshops.pricing.bundle.cta": "Choose this bundle",
+          "workshops.pricing.company.label": "In-company",
+          "workshops.pricing.company.sub": "For teams of 5+ people",
+          "workshops.pricing.company.f1": "Workshop at your location",
+          "workshops.pricing.company.f2": "Customized content",
+          "workshops.pricing.company.f3": "Incl. presentation + materials",
+          "workshops.pricing.company.cta": "Get in touch",
+          "workshops.signup.title": "Sign up",
+          "workshops.signup.desc":
+            "Choose a workshop and register. We'll contact you within one business day.",
+          "workshops.signup.name": "Name",
+          "workshops.signup.email": "Email",
+          "workshops.signup.workshop": "Which workshop?",
+          "workshops.signup.ws_placeholder": "Choose a workshop...",
+          "workshops.signup.ws_wordpress": "WordPress for beginners",
+          "workshops.signup.ws_seo": "SEO for local businesses",
+          "workshops.signup.ws_social": "Social media for SMBs",
+          "workshops.signup.ws_analytics": "Google Analytics explained",
+          "workshops.signup.ws_other": "Not sure yet / Other",
+          "workshops.signup.message": "Message (optional)",
+          "workshops.signup.submit": "Sign up",
+          "workshops.signup.or_email": "Or email us directly at",
+          "footer.slogan": "Your website. Ready in 5 days.",
+        },
+      };
+
+      let currentLang = localStorage.getItem("nuxio-lang") || "nl";
+
+      function setLanguage(lang) {
+        currentLang = lang;
+        localStorage.setItem("nuxio-lang", lang);
+        document.documentElement.lang = lang;
+        const t = translations[lang];
+
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          const key = el.getAttribute("data-i18n");
+          if (t[key] !== undefined) el.textContent = t[key];
+        });
+        document.querySelectorAll("[data-i18n-html]").forEach((el) => {
+          const key = el.getAttribute("data-i18n-html");
+          if (t[key] !== undefined) el.innerHTML = t[key];
+        });
+        document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+          const key = el.getAttribute("data-i18n-placeholder");
+          if (t[key] !== undefined) el.placeholder = t[key];
+        });
+
+        document.querySelectorAll("[data-lang]").forEach((btn) => {
+          btn.classList.toggle(
+            "active",
+            btn.getAttribute("data-lang") === lang,
+          );
+        });
+
+        document.title =
+          lang === "en"
+            ? "Nuxio — Workshops for entrepreneurs"
+            : "Nuxio — Workshops voor ondernemers";
+      }
+
+      document.querySelectorAll("[data-lang]").forEach((btn) => {
+        btn.addEventListener("click", () =>
+          setLanguage(btn.getAttribute("data-lang")),
+        );
+      });
+
+      setLanguage(currentLang);
+      lucide.createIcons();
+
+      const navbar = document.getElementById("navbar");
+      window.addEventListener(
+        "scroll",
+        () => {
+          navbar.classList.toggle("scrolled", window.scrollY > 10);
+        },
+        { passive: true },
+      );
+
+      const menuToggle = document.getElementById("menu-toggle");
+      const mobileMenu = document.getElementById("mobile-menu");
+      let menuOpen = false;
+      menuToggle.addEventListener("click", () => {
+        menuOpen = !menuOpen;
+        mobileMenu.classList.toggle("hidden", !menuOpen);
+        menuToggle.setAttribute("aria-expanded", menuOpen.toString());
+      });
+      mobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          menuOpen = false;
+          mobileMenu.classList.add("hidden");
+          menuToggle.setAttribute("aria-expanded", "false");
+        });
+      });
+
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      if (!prefersReducedMotion) {
+        document.querySelectorAll(".hero-item").forEach((item, i) => {
+          setTimeout(() => item.classList.add("show"), 200 + i * 150);
+        });
+        const revealObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                revealObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
+        );
+        document
+          .querySelectorAll(".reveal")
+          .forEach((el) => revealObserver.observe(el));
+      } else {
+        document.querySelectorAll(".hero-item, .reveal").forEach((el) => {
+          el.classList.add("show");
+          el.classList.add("visible");
+        });
+      }
+
+      if (window.location.search.includes("submitted=true")) {
+        const form = document.getElementById("workshop-form");
+        if (form) {
+          const banner = document.createElement("div");
+          banner.className =
+            "mb-6 bg-accent/10 border-2 border-accent/30 rounded-xl p-5 text-center";
+          banner.innerHTML =
+            currentLang === "en"
+              ? '<p class="font-display font-bold text-lg text-accent">Registration sent!</p><p class="mt-1 text-sm text-ink/70">We will contact you within one business day.</p>'
+              : '<p class="font-display font-bold text-lg text-accent">Inschrijving verzonden!</p><p class="mt-1 text-sm text-ink/70">Wij nemen binnen een werkdag contact met je op.</p>';
+          form.parentNode.insertBefore(banner, form);
+          history.replaceState(null, "", window.location.pathname);
+        }
+      }
+
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({
+              behavior: prefersReducedMotion ? "auto" : "smooth",
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

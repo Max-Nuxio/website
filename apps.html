@@ -1,0 +1,1676 @@
+<!doctype html>
+<html lang="nl" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nuxio — Apps op maat</title>
+    <meta
+      name="description"
+      content="Nuxio bouwt apps voor lokale ondernemers. Van mobiele apps tot webapps, op maat gemaakt voor jouw bedrijf."
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: "#F7F5F0",
+              ink: "#1A1A1A",
+              accent: "#2A5C45",
+              "accent-light": "#3A7A5C",
+              "accent-dark": "#1E4534",
+              muted: "#6B6B6B",
+            },
+            fontFamily: {
+              display: ["Outfit", "sans-serif"],
+              body: ["Figtree", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      * {
+        cursor: default;
+      }
+      a,
+      button,
+      [role="button"],
+      input[type="submit"],
+      label {
+        cursor: pointer;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(32px);
+        transition:
+          opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .reveal-delay-1 {
+        transition-delay: 0.1s;
+      }
+      .reveal-delay-2 {
+        transition-delay: 0.2s;
+      }
+      .reveal-delay-3 {
+        transition-delay: 0.3s;
+      }
+
+      .hero-item {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .hero-item.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .reveal,
+        .hero-item {
+          opacity: 1 !important;
+          transform: none !important;
+          transition: none !important;
+        }
+        html {
+          scroll-behavior: auto !important;
+        }
+      }
+
+      .noise-bg::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        opacity: 0.035;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        background-repeat: repeat;
+        background-size: 200px 200px;
+        pointer-events: none;
+      }
+
+      .grid-pattern::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(42, 92, 69, 0.06) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(42, 92, 69, 0.06) 1px, transparent 1px);
+        background-size: 64px 64px;
+        pointer-events: none;
+      }
+
+      *:focus-visible {
+        outline: 2px solid #2a5c45;
+        outline-offset: 2px;
+      }
+
+      #navbar.scrolled {
+        border-bottom: 1px solid rgba(26, 26, 26, 0.1);
+        background: rgba(247, 245, 240, 0.95);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+
+      .card-hover {
+        transition:
+          transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .card-hover:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px rgba(26, 26, 26, 0.1);
+      }
+
+      .btn-primary {
+        transition:
+          background-color 0.18s ease,
+          transform 0.18s ease,
+          box-shadow 0.18s ease;
+      }
+      .btn-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 16px rgba(42, 92, 69, 0.25);
+      }
+      .btn-primary:active {
+        transform: translateY(0);
+      }
+
+      .btn-secondary {
+        transition:
+          background-color 0.18s ease,
+          border-color 0.18s ease;
+      }
+      .btn-secondary:hover {
+        background-color: rgba(26, 26, 26, 0.06);
+        border-color: #1a1a1a;
+      }
+
+      .lang-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 0;
+        border: 1.5px solid rgba(26, 26, 26, 0.15);
+        border-radius: 8px;
+        overflow: hidden;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        line-height: 1;
+        transition: border-color 0.18s ease;
+      }
+      .lang-toggle:hover {
+        border-color: rgba(26, 26, 26, 0.3);
+      }
+      .lang-toggle button {
+        padding: 6px 10px;
+        cursor: pointer;
+        transition:
+          background-color 0.18s ease,
+          color 0.18s ease;
+        background: transparent;
+        color: #6b6b6b;
+        border: none;
+        font-size: 0.75rem;
+        font-weight: 600;
+        line-height: 1;
+      }
+      .lang-toggle button.active {
+        background-color: #2a5c45;
+        color: #ffffff;
+      }
+      .lang-toggle button:not(.active):hover {
+        background-color: rgba(26, 26, 26, 0.06);
+        color: #1a1a1a;
+      }
+    </style>
+  </head>
+
+  <body class="bg-cream text-ink font-body antialiased">
+    <!-- ===== NAVIGATION ===== -->
+    <nav
+      id="navbar"
+      class="fixed top-0 left-0 right-0 z-50 bg-cream/80 backdrop-blur-sm transition-all duration-300"
+      role="navigation"
+      aria-label="Hoofdnavigatie"
+    >
+      <div class="max-w-6xl mx-auto px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16 lg:h-20">
+          <a
+            href="index.html"
+            class="font-display font-extrabold text-2xl tracking-tight text-ink cursor-pointer"
+            aria-label="Nuxio home"
+            >Nuxio</a
+          >
+
+          <div class="hidden md:flex items-center gap-8">
+            <a
+              href="index.html"
+              class="text-sm font-medium text-ink hover:text-accent transition-colors duration-180 cursor-pointer"
+              data-i18n="nav.home"
+              >Home</a
+            >
+            <a
+              href="index.html#pakketten"
+              class="text-sm font-medium text-ink hover:text-accent transition-colors duration-180 cursor-pointer"
+              data-i18n="nav.packages"
+              >Pakketten</a
+            >
+            <a
+              href="workshops.html"
+              class="text-sm font-medium text-ink hover:text-accent transition-colors duration-180 cursor-pointer"
+              data-i18n="nav.workshops"
+              >Workshops</a
+            >
+            <a
+              href="apps.html"
+              class="text-sm font-medium text-accent transition-colors duration-180 cursor-pointer font-semibold"
+              aria-current="page"
+              >Apps</a
+            >
+            <a
+              href="index.html#contact"
+              class="text-sm font-medium text-ink hover:text-accent transition-colors duration-180 cursor-pointer"
+              data-i18n="nav.contact"
+              >Contact</a
+            >
+            <div class="lang-toggle" role="group" aria-label="Taal selectie">
+              <button
+                id="lang-nl"
+                class="active"
+                aria-label="Nederlands"
+                data-lang="nl"
+              >
+                NL
+              </button>
+              <button id="lang-en" aria-label="English" data-lang="en">
+                EN
+              </button>
+            </div>
+            <a
+              href="mailto:support@nuxio.nl"
+              class="inline-flex items-center gap-2 bg-accent text-white text-sm font-semibold px-5 py-2.5 rounded-lg btn-primary cursor-pointer"
+            >
+              <span data-i18n="nav.cta">Vraag een offerte aan</span>
+            </a>
+          </div>
+
+          <button
+            id="menu-toggle"
+            class="md:hidden flex items-center justify-center w-10 h-10 cursor-pointer"
+            aria-label="Open menu"
+            aria-expanded="false"
+          >
+            <i data-lucide="menu" class="w-6 h-6 text-ink"></i>
+          </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden pb-4" role="menu">
+          <div class="flex flex-col gap-1 pt-2 border-t border-ink/10">
+            <a
+              href="index.html"
+              class="block px-3 py-2.5 text-sm font-medium text-ink hover:text-accent hover:bg-accent/5 rounded-lg transition-colors duration-180 cursor-pointer"
+              role="menuitem"
+              data-i18n="nav.home"
+              >Home</a
+            >
+            <a
+              href="index.html#pakketten"
+              class="block px-3 py-2.5 text-sm font-medium text-ink hover:text-accent hover:bg-accent/5 rounded-lg transition-colors duration-180 cursor-pointer"
+              role="menuitem"
+              data-i18n="nav.packages"
+              >Pakketten</a
+            >
+            <a
+              href="workshops.html"
+              class="block px-3 py-2.5 text-sm font-medium text-ink hover:text-accent hover:bg-accent/5 rounded-lg transition-colors duration-180 cursor-pointer"
+              role="menuitem"
+              data-i18n="nav.workshops"
+              >Workshops</a
+            >
+            <a
+              href="apps.html"
+              class="block px-3 py-2.5 text-sm font-medium text-accent bg-accent/5 rounded-lg transition-colors duration-180 cursor-pointer"
+              role="menuitem"
+              aria-current="page"
+              >Apps</a
+            >
+            <a
+              href="index.html#contact"
+              class="block px-3 py-2.5 text-sm font-medium text-ink hover:text-accent hover:bg-accent/5 rounded-lg transition-colors duration-180 cursor-pointer"
+              role="menuitem"
+              data-i18n="nav.contact"
+              >Contact</a
+            >
+            <div class="px-3 py-2">
+              <div class="lang-toggle" role="group" aria-label="Taal selectie">
+                <button
+                  id="lang-nl-mobile"
+                  class="active"
+                  aria-label="Nederlands"
+                  data-lang="nl"
+                >
+                  NL
+                </button>
+                <button id="lang-en-mobile" aria-label="English" data-lang="en">
+                  EN
+                </button>
+              </div>
+            </div>
+            <a
+              href="mailto:support@nuxio.nl"
+              class="mt-2 flex items-center justify-center gap-2 bg-accent text-white text-sm font-semibold px-5 py-2.5 rounded-lg btn-primary cursor-pointer"
+              role="menuitem"
+            >
+              <span data-i18n="nav.cta">Vraag een offerte aan</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section
+      id="hero"
+      class="relative min-h-screen flex items-center noise-bg grid-pattern overflow-hidden"
+      aria-label="Hero"
+    >
+      <div class="relative z-10 max-w-6xl mx-auto px-6 lg:px-8 py-32 lg:py-0">
+        <div class="max-w-3xl">
+          <h1
+            class="hero-item font-display font-extrabold text-5xl sm:text-6xl lg:text-7xl leading-[1.05] tracking-tight text-ink"
+            data-i18n-html="apps.hero.headline"
+          >
+            Apps die jouw<br />bedrijf laten groeien.
+          </h1>
+          <p
+            class="hero-item mt-6 text-lg sm:text-xl lg:text-2xl text-muted max-w-xl leading-relaxed"
+            data-i18n="apps.hero.sub"
+          >
+            Van mobiele apps tot webapps — op maat gemaakt voor jouw
+            onderneming. Wij bouwen wat jij nodig hebt.
+          </p>
+          <div class="hero-item mt-10 flex flex-col sm:flex-row gap-4">
+            <a
+              href="#diensten"
+              class="inline-flex items-center justify-center gap-2 bg-accent text-white text-base font-semibold px-7 py-3.5 rounded-lg btn-primary"
+              data-i18n="apps.hero.cta1"
+            >
+              Bekijk onze diensten
+            </a>
+            <a
+              href="#contact"
+              class="inline-flex items-center justify-center gap-2 border-2 border-ink/20 text-ink text-base font-semibold px-7 py-3.5 rounded-lg btn-secondary"
+              data-i18n="apps.hero.cta2"
+            >
+              Vraag een offerte aan
+            </a>
+          </div>
+        </div>
+      </div>
+      <div
+        class="hidden lg:block absolute top-1/2 -translate-y-1/2 right-12 xl:right-24 w-64 h-64 border-2 border-accent/15 rounded-full"
+        aria-hidden="true"
+      ></div>
+      <div
+        class="hidden lg:block absolute top-1/2 -translate-y-[40%] right-20 xl:right-32 w-40 h-40 border-2 border-accent/10 rotate-45"
+        aria-hidden="true"
+      ></div>
+    </section>
+
+    <!-- ===== DIENSTEN ===== -->
+    <section
+      id="diensten"
+      class="py-24 lg:py-32"
+      aria-labelledby="diensten-title"
+    >
+      <div class="max-w-6xl mx-auto px-6 lg:px-8">
+        <h2
+          id="diensten-title"
+          class="reveal font-display font-bold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-ink text-center"
+          data-i18n="apps.diensten.title"
+        >
+          Wat wij bouwen
+        </h2>
+        <p
+          class="reveal reveal-delay-1 mt-4 text-center text-muted text-lg max-w-2xl mx-auto"
+          data-i18n="apps.diensten.sub"
+        >
+          Elke app is anders — daarom luisteren we eerst naar jouw wensen
+          voordat we iets bouwen.
+        </p>
+
+        <div
+          class="reveal reveal-delay-1 mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          <!-- Mobile App -->
+          <div
+            class="card-hover bg-white border-2 border-ink/10 rounded-2xl p-7"
+          >
+            <div
+              class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-accent/10 mb-5"
+            >
+              <i data-lucide="smartphone" class="w-6 h-6 text-accent"></i>
+            </div>
+            <h3
+              class="font-display font-bold text-xl text-ink"
+              data-i18n="apps.diensten.s1.title"
+            >
+              Mobiele apps
+            </h3>
+            <p
+              class="mt-2 text-sm text-muted leading-relaxed"
+              data-i18n="apps.diensten.s1.desc"
+            >
+              iOS en Android apps voor jouw klanten. Denk aan een boekings-app,
+              bestel-app of loyaliteitsprogramma.
+            </p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span
+                class="text-xs font-semibold text-accent bg-accent/10 px-2.5 py-1 rounded-full"
+                >React Native</span
+              >
+              <span
+                class="text-xs font-semibold text-accent bg-accent/10 px-2.5 py-1 rounded-full"
+                >Flutter</span
+              >
+              <span
+                class="text-xs font-semibold text-accent bg-accent/10 px-2.5 py-1 rounded-full"
+                >iOS</span
+              >
+              <span
+                class="text-xs font-semibold text-accent bg-accent/10 px-2.5 py-1 rounded-full"
+                >Android</span
+              >
+            </div>
+          </div>
+
+          <!-- Web App -->
+          <div
+            class="card-hover bg-white border-2 border-ink/10 rounded-2xl p-7"
+          >
+            <div
+              class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-accent/10 mb-5"
+            >
+              <i data-lucide="globe" class="w-6 h-6 text-accent"></i>
+            </div>
+            <h3
+              class="font-display font-bold text-xl text-ink"
+              data-i18n="apps.diensten.s2.title"
+            >
+              Webapps
+            </h3>
+            <p
+              class="mt-2 text-sm text-muted leading-relaxed"
+              data-i18n="apps.diensten.s2.desc"
+            >
+              Krachtige web-applicaties die in de browser werken. Van
+              klantenportaal tot administratiesysteem.
+            </p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span
+                class="text-xs font-semibold text-accent bg-accent/10 px-2.5 py-1 rounded-full"
+                >React</span
+              >
+              <span
+                class="text-xs font-semibold text-accent bg-accent/10 px-2.5 py-1 rounded-full"
+                >Next.js</span
+              >
+              <span
+                class="text-xs font-semibold text-accent bg-accent/10 px-2.5 py-1 rounded-full"
+                >Node.js</span
+              >
+            </div>
+          </div>
+
+          <!-- Custom Software -->
+          <div
+            class="card-hover bg-white border-2 border-ink/10 rounded-2xl p-7"
+          >
+            <div
+              class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-accent/10 mb-5"
+            >
+              <i data-lucide="settings" class="w-6 h-6 text-accent"></i>
+            </div>
+            <h3
+              class="font-display font-bold text-xl text-ink"
+              data-i18n="apps.diensten.s3.title"
+            >
+              Maatwerk software
+            </h3>
+            <p
+              class="mt-2 text-sm text-muted leading-relaxed"
+              data-i18n="apps.diensten.s3.desc"
+            >
+              Specifieke problemen vragen om specifieke oplossingen. Wij bouwen
+              wat jij nodig hebt, niets meer, niets minder.
+            </p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span
+                class="text-xs font-semibold text-accent bg-accent/10 px-2.5 py-1 rounded-full"
+                >API's</span
+              >
+              <span
+                class="text-xs font-semibold text-accent bg-accent/10 px-2.5 py-1 rounded-full"
+                >Integraties</span
+              >
+              <span
+                class="text-xs font-semibold text-accent bg-accent/10 px-2.5 py-1 rounded-full"
+                >Automatisering</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== WERKWIJZE ===== -->
+    <section
+      id="werkwijze"
+      class="py-24 lg:py-32 bg-white"
+      aria-labelledby="werkwijze-title"
+    >
+      <div class="max-w-6xl mx-auto px-6 lg:px-8">
+        <h2
+          id="werkwijze-title"
+          class="reveal font-display font-bold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-ink text-center"
+          data-i18n="apps.process.title"
+        >
+          Hoe het werkt
+        </h2>
+
+        <div
+          class="reveal reveal-delay-1 mt-16 grid grid-cols-1 md:grid-cols-4 gap-8"
+        >
+          <div class="relative text-center px-4">
+            <div
+              class="reveal reveal-delay-1 inline-flex items-center justify-center w-14 h-14 rounded-full bg-accent text-white font-display font-bold text-xl mb-6"
+            >
+              1
+            </div>
+            <h3
+              class="reveal reveal-delay-1 font-display font-bold text-xl text-ink mb-3"
+              data-i18n="apps.process.s1.title"
+            >
+              Intake
+            </h3>
+            <p
+              class="reveal reveal-delay-1 text-sm text-muted leading-relaxed"
+              data-i18n="apps.process.s1.desc"
+            >
+              Vertel ons wat je nodig hebt. Wij stellen de juiste vragen.
+            </p>
+          </div>
+
+          <div class="relative text-center px-4">
+            <div
+              class="reveal reveal-delay-2 inline-flex items-center justify-center w-14 h-14 rounded-full bg-accent text-white font-display font-bold text-xl mb-6"
+            >
+              2
+            </div>
+            <h3
+              class="reveal reveal-delay-2 font-display font-bold text-xl text-ink mb-3"
+              data-i18n="apps.process.s2.title"
+            >
+              Ontwerp
+            </h3>
+            <p
+              class="reveal reveal-delay-2 text-sm text-muted leading-relaxed"
+              data-i18n="apps.process.s2.desc"
+            >
+              Je krijgt een ontwerp ter goedkeuring voordat we gaan bouwen.
+            </p>
+          </div>
+
+          <div class="relative text-center px-4">
+            <div
+              class="reveal reveal-delay-3 inline-flex items-center justify-center w-14 h-14 rounded-full bg-accent text-white font-display font-bold text-xl mb-6"
+            >
+              3
+            </div>
+            <h3
+              class="reveal reveal-delay-3 font-display font-bold text-xl text-ink mb-3"
+              data-i18n="apps.process.s3.title"
+            >
+              Development
+            </h3>
+            <p
+              class="reveal reveal-delay-3 text-sm text-muted leading-relaxed"
+              data-i18n="apps.process.s3.desc"
+            >
+              Max bouwt jouw app met bewezen technologie en frameworks.
+            </p>
+          </div>
+
+          <div class="relative text-center px-4">
+            <div
+              class="reveal reveal-delay-4 inline-flex items-center justify-center w-14 h-14 rounded-full bg-accent text-white font-display font-bold text-xl mb-6"
+            >
+              4
+            </div>
+            <h3
+              class="reveal reveal-delay-4 font-display font-bold text-xl text-ink mb-3"
+              data-i18n="apps.process.s4.title"
+            >
+              Lancering
+            </h3>
+            <p
+              class="reveal reveal-delay-4 text-sm text-muted leading-relaxed"
+              data-i18n="apps.process.s4.desc"
+            >
+              Wij helpen met lancering, hosting en onderhoud.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== VOORBEELDEN ===== -->
+    <section
+      id="voorbeelden"
+      class="py-24 lg:py-32"
+      aria-labelledby="voorbeelden-title"
+    >
+      <div class="max-w-6xl mx-auto px-6 lg:px-8">
+        <h2
+          id="voorbeelden-title"
+          class="reveal font-display font-bold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-ink text-center"
+          data-i18n="apps.examples.title"
+        >
+          Voorbeelden
+        </h2>
+        <p
+          class="reveal reveal-delay-1 mt-4 text-center text-muted text-lg max-w-2xl mx-auto"
+          data-i18n="apps.examples.sub"
+        >
+          Projecten die wij hebben gebouwd voor lokale ondernemers.
+        </p>
+
+        <div
+          class="reveal reveal-delay-1 mt-16 grid grid-cols-1 md:grid-cols-2 gap-6"
+        >
+          <!-- Example 1 -->
+          <div
+            class="card-hover bg-white border-2 border-ink/10 rounded-2xl overflow-hidden"
+          >
+            <div
+              class="h-48 bg-gradient-to-br from-accent/10 to-accent/5 flex items-center justify-center"
+            >
+              <i data-lucide="utensils" class="w-16 h-16 text-accent/30"></i>
+            </div>
+            <div class="p-7">
+              <div class="flex items-center gap-2 mb-2">
+                <span
+                  class="text-xs font-semibold text-accent bg-accent/10 px-2.5 py-1 rounded-full"
+                  >Bestel-app</span
+                >
+                <span
+                  class="text-xs font-semibold text-ink/50 bg-ink/5 px-2.5 py-1 rounded-full"
+                  data-i18n="apps.examples.e1.type"
+                  >Restaurant</span
+                >
+              </div>
+              <h3
+                class="font-display font-bold text-xl text-ink"
+                data-i18n="apps.examples.e1.title"
+              >
+                Bestel-app voor takeaway
+              </h3>
+              <p
+                class="mt-2 text-sm text-muted leading-relaxed"
+                data-i18n="apps.examples.e1.desc"
+              >
+                Een mobiele bestel-app voor een lokaal restaurant. Klanten
+                kunnen eenvoudig bestellen en betalen via hun telefoon.
+              </p>
+            </div>
+          </div>
+
+          <!-- Example 2 -->
+          <div
+            class="card-hover bg-white border-2 border-ink/10 rounded-2xl overflow-hidden"
+          >
+            <div
+              class="h-48 bg-gradient-to-br from-accent/10 to-accent/5 flex items-center justify-center"
+            >
+              <i
+                data-lucide="calendar-check"
+                class="w-16 h-16 text-accent/30"
+              ></i>
+            </div>
+            <div class="p-7">
+              <div class="flex items-center gap-2 mb-2">
+                <span
+                  class="text-xs font-semibold text-accent bg-accent/10 px-2.5 py-1 rounded-full"
+                  >Boekings-systeem</span
+                >
+                <span
+                  class="text-xs font-semibold text-ink/50 bg-ink/5 px-2.5 py-1 rounded-full"
+                  data-i18n="apps.examples.e2.type"
+                  >Fysiotherapie</span
+                >
+              </div>
+              <h3
+                class="font-display font-bold text-xl text-ink"
+                data-i18n="apps.examples.e2.title"
+              >
+                Online afspraken maken
+              </h3>
+              <p
+                class="mt-2 text-sm text-muted leading-relaxed"
+                data-i18n="apps.examples.e2.desc"
+              >
+                Een webapp waarmee patiënten 24/7 afspraken kunnen inplannen.
+                Geïntegreerd met de agenda van de praktijk.
+              </p>
+            </div>
+          </div>
+
+          <!-- Example 3 -->
+          <div
+            class="card-hover bg-white border-2 border-ink/10 rounded-2xl overflow-hidden"
+          >
+            <div
+              class="h-48 bg-gradient-to-br from-accent/10 to-accent/5 flex items-center justify-center"
+            >
+              <i data-lucide="users" class="w-16 h-16 text-accent/30"></i>
+            </div>
+            <div class="p-7">
+              <div class="flex items-center gap-2 mb-2">
+                <span
+                  class="text-xs font-semibold text-accent bg-accent/10 px-2.5 py-1 rounded-full"
+                  >Klantenportaal</span
+                >
+                <span
+                  class="text-xs font-semibold text-ink/50 bg-ink/5 px-2.5 py-1 rounded-full"
+                  data-i18n="apps.examples.e3.type"
+                  >Sportclub</span
+                >
+              </div>
+              <h3
+                class="font-display font-bold text-xl text-ink"
+                data-i18n="apps.examples.e3.title"
+              >
+                Ledenportaal
+              </h3>
+              <p
+                class="mt-2 text-sm text-muted leading-relaxed"
+                data-i18n="apps.examples.e3.desc"
+              >
+                Een webapp voor leden om trainingen te bekijken, zich in te
+                schrijven en hun voortgang bij te houden.
+              </p>
+            </div>
+          </div>
+
+          <!-- Example 4 -->
+          <div
+            class="card-hover bg-white border-2 border-ink/10 rounded-2xl overflow-hidden"
+          >
+            <div
+              class="h-48 bg-gradient-to-br from-accent/10 to-accent/5 flex items-center justify-center"
+            >
+              <i data-lucide="truck" class="w-16 h-16 text-accent/30"></i>
+            </div>
+            <div class="p-7">
+              <div class="flex items-center gap-2 mb-2">
+                <span
+                  class="text-xs font-semibold text-accent bg-accent/10 px-2.5 py-1 rounded-full"
+                  >Bezorg-app</span
+                >
+                <span
+                  class="text-xs font-semibold text-ink/50 bg-ink/5 px-2.5 py-1 rounded-full"
+                  data-i18n="apps.examples.e4.type"
+                  >Lokale winkel</span
+                >
+              </div>
+              <h3
+                class="font-display font-bold text-xl text-ink"
+                data-i18n="apps.examples.e4.title"
+              >
+                Lokale bezorgservice
+              </h3>
+              <p
+                class="mt-2 text-sm text-muted leading-relaxed"
+                data-i18n="apps.examples.e4.desc"
+              >
+                Een mobiele app voor een lokale winkel waarmee klanten producten
+                kunnen bestellen en laten bezorgen.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PRIJZEN ===== -->
+    <section
+      id="prijzen"
+      class="py-24 lg:py-32 bg-white"
+      aria-labelledby="pricing-title"
+    >
+      <div class="max-w-6xl mx-auto px-6 lg:px-8 text-center">
+        <h2
+          id="pricing-title"
+          class="reveal font-display font-bold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-ink"
+          data-i18n="apps.pricing.title"
+        >
+          Investering
+        </h2>
+        <p
+          class="reveal reveal-delay-1 mt-4 text-lg text-muted max-w-2xl mx-auto"
+          data-i18n="apps.pricing.sub"
+        >
+          Elke app is maatwerk. Hieronder een indicatie van wat je kunt
+          verwachten.
+        </p>
+
+        <div
+          class="reveal reveal-delay-2 mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto items-start"
+        >
+          <!-- Starter -->
+          <div
+            class="card-hover bg-white border-2 border-ink/10 rounded-2xl p-7 text-left"
+          >
+            <span
+              class="text-sm font-semibold text-muted uppercase tracking-wider"
+              data-i18n="apps.pricing.s1.label"
+              >Starter</span
+            >
+            <div class="mt-3 flex items-baseline gap-1">
+              <span
+                class="font-display font-extrabold text-4xl text-ink"
+                data-i18n="apps.pricing.s1.price"
+                >Vanaf €2.500</span
+              >
+            </div>
+            <p class="mt-2 text-xs text-muted" data-i18n="apps.pricing.s1.sub">
+              Eenvoudige app of webapp
+            </p>
+            <ul class="mt-6 space-y-3">
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i
+                  data-lucide="check"
+                  class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"
+                ></i>
+                <span data-i18n="apps.pricing.s1.f1"
+                  >1 platform (iOS of Android)</span
+                >
+              </li>
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i
+                  data-lucide="check"
+                  class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"
+                ></i>
+                <span data-i18n="apps.pricing.s1.f2"
+                  >Basis functionaliteit</span
+                >
+              </li>
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i
+                  data-lucide="check"
+                  class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"
+                ></i>
+                <span data-i18n="apps.pricing.s1.f3"
+                  >Oplevering in 4-6 weken</span
+                >
+              </li>
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i
+                  data-lucide="check"
+                  class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"
+                ></i>
+                <span data-i18n="apps.pricing.s1.f4">3 maanden garantie</span>
+              </li>
+            </ul>
+            <a
+              href="#contact"
+              class="mt-8 block w-full text-center border-2 border-ink/15 text-ink text-sm font-semibold px-5 py-3 rounded-lg btn-secondary cursor-pointer"
+              data-i18n="apps.pricing.s1.cta"
+            >
+              Vraag offerte aan
+            </a>
+          </div>
+
+          <!-- Professional (popular) -->
+          <div
+            class="card-hover bg-white border-2 border-accent rounded-2xl p-7 text-left relative shadow-lg shadow-accent/5"
+          >
+            <div
+              class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-accent text-white text-xs font-bold uppercase tracking-wider px-4 py-1 rounded-full whitespace-nowrap"
+              data-i18n="apps.pricing.popular"
+            >
+              Meest gekozen
+            </div>
+            <span
+              class="text-sm font-semibold text-accent uppercase tracking-wider"
+              data-i18n="apps.pricing.s2.label"
+              >Professional</span
+            >
+            <div class="mt-3 flex items-baseline gap-1">
+              <span
+                class="font-display font-extrabold text-4xl text-ink"
+                data-i18n="apps.pricing.s2.price"
+                >€5.000 – €10.000</span
+              >
+            </div>
+            <p class="mt-2 text-xs text-muted" data-i18n="apps.pricing.s2.sub">
+              Complete app met meerdere functies
+            </p>
+            <ul class="mt-6 space-y-3">
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i
+                  data-lucide="check"
+                  class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"
+                ></i>
+                <span data-i18n="apps.pricing.s2.f1"
+                  >iOS + Android (of webapp)</span
+                >
+              </li>
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i
+                  data-lucide="check"
+                  class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"
+                ></i>
+                <span data-i18n="apps.pricing.s2.f2"
+                  >Gebruikersaccounts & login</span
+                >
+              </li>
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i
+                  data-lucide="check"
+                  class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"
+                ></i>
+                <span data-i18n="apps.pricing.s2.f3"
+                  >Integraties met bestaande systemen</span
+                >
+              </li>
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i
+                  data-lucide="check"
+                  class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"
+                ></i>
+                <span data-i18n="apps.pricing.s2.f4"
+                  >Oplevering in 6-10 weken</span
+                >
+              </li>
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i
+                  data-lucide="check"
+                  class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"
+                ></i>
+                <span data-i18n="apps.pricing.s2.f5">6 maanden garantie</span>
+              </li>
+            </ul>
+            <a
+              href="#contact"
+              class="mt-8 block w-full text-center bg-accent text-white text-sm font-semibold px-5 py-3 rounded-lg btn-primary cursor-pointer"
+              data-i18n="apps.pricing.s2.cta"
+            >
+              Vraag offerte aan
+            </a>
+          </div>
+
+          <!-- Enterprise -->
+          <div
+            class="card-hover bg-white border-2 border-ink/10 rounded-2xl p-7 text-left"
+          >
+            <span
+              class="text-sm font-semibold text-muted uppercase tracking-wider"
+              data-i18n="apps.pricing.s3.label"
+              >Enterprise</span
+            >
+            <div class="mt-3 flex items-baseline gap-1">
+              <span
+                class="font-display font-extrabold text-4xl text-ink"
+                data-i18n="apps.pricing.s3.price"
+                >Op maat</span
+              >
+            </div>
+            <p class="mt-2 text-xs text-muted" data-i18n="apps.pricing.s3.sub">
+              Complexe applicatie of platform
+            </p>
+            <ul class="mt-6 space-y-3">
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i
+                  data-lucide="check"
+                  class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"
+                ></i>
+                <span data-i18n="apps.pricing.s3.f1"
+                  >Alles van Professional</span
+                >
+              </li>
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i
+                  data-lucide="check"
+                  class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"
+                ></i>
+                <span data-i18n="apps.pricing.s3.f2"
+                  >Geavanceerde functionaliteit</span
+                >
+              </li>
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i
+                  data-lucide="check"
+                  class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"
+                ></i>
+                <span data-i18n="apps.pricing.s3.f3"
+                  >Schaalbaarheid & performance</span
+                >
+              </li>
+              <li class="flex items-start gap-3 text-sm text-ink/80">
+                <i
+                  data-lucide="check"
+                  class="w-4.5 h-4.5 mt-0.5 text-accent flex-shrink-0"
+                ></i>
+                <span data-i18n="apps.pricing.s3.f4"
+                  >Prioriteit support & onderhoud</span
+                >
+              </li>
+            </ul>
+            <a
+              href="#contact"
+              class="mt-8 block w-full text-center border-2 border-ink/15 text-ink text-sm font-semibold px-5 py-3 rounded-lg btn-secondary cursor-pointer"
+              data-i18n="apps.pricing.s3.cta"
+            >
+              Neem contact op
+            </a>
+          </div>
+        </div>
+
+        <p
+          class="reveal reveal-delay-3 mt-10 text-sm text-muted max-w-2xl mx-auto"
+          data-i18n="apps.pricing.note"
+        >
+          Prijzen zijn indicatief. Na het intakegesprek ontvang je een
+          gedetailleerde offerte op maat.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section
+      id="contact"
+      class="py-24 lg:py-32"
+      aria-labelledby="contact-title"
+    >
+      <div class="max-w-6xl mx-auto px-6 lg:px-8 text-center">
+        <h2
+          id="contact-title"
+          class="reveal font-display font-bold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-ink"
+          data-i18n="apps.contact.title"
+        >
+          Klaar om te starten?
+        </h2>
+        <p
+          class="reveal reveal-delay-1 mt-4 text-lg text-muted max-w-xl mx-auto"
+          data-i18n="apps.contact.desc"
+        >
+          Vertel ons over jouw project. Wij nemen binnen een werkdag contact met
+          je op.
+        </p>
+
+        <form
+          id="app-form"
+          class="reveal reveal-delay-2 mt-12 max-w-xl mx-auto text-left"
+          action="https://api.web3forms.com/submit"
+          method="POST"
+        >
+          <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+          <input
+            type="hidden"
+            name="subject"
+            value="App offerte via nuxio.nl"
+          />
+          <input type="hidden" name="from_name" value="Nuxio Website" />
+          <input
+            type="hidden"
+            name="redirect"
+            value="apps.html?submitted=true"
+          />
+          <input
+            type="checkbox"
+            name="botcheck"
+            class="hidden"
+            style="display: none"
+            tabindex="-1"
+            autocomplete="off"
+          />
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+              <label
+                for="app-name"
+                class="block text-sm font-semibold text-ink mb-1.5"
+                data-i18n="apps.contact.name"
+                >Naam</label
+              >
+              <input
+                type="text"
+                id="app-name"
+                name="name"
+                required
+                placeholder="Jouw naam"
+                class="w-full px-4 py-3 rounded-lg border-2 border-ink/15 bg-cream text-ink text-sm placeholder:text-muted/60 focus:border-accent focus:ring-0 focus:outline-none transition-colors duration-180"
+              />
+            </div>
+            <div>
+              <label
+                for="app-email"
+                class="block text-sm font-semibold text-ink mb-1.5"
+                data-i18n="apps.contact.email"
+                >E-mail</label
+              >
+              <input
+                type="email"
+                id="app-email"
+                name="email"
+                required
+                placeholder="jouw@email.nl"
+                class="w-full px-4 py-3 rounded-lg border-2 border-ink/15 bg-cream text-ink text-sm placeholder:text-muted/60 focus:border-accent focus:ring-0 focus:outline-none transition-colors duration-180"
+              />
+            </div>
+          </div>
+
+          <div class="mt-5">
+            <label
+              for="app-type"
+              class="block text-sm font-semibold text-ink mb-1.5"
+              data-i18n="apps.contact.type"
+              >Soort app</label
+            >
+            <select
+              id="app-type"
+              name="app_type"
+              class="w-full px-4 py-3 rounded-lg border-2 border-ink/15 bg-cream text-ink text-sm focus:border-accent focus:ring-0 focus:outline-none transition-colors duration-180 appearance-none cursor-pointer"
+              style="
+                background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B6B6B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E&quot;);
+                background-repeat: no-repeat;
+                background-position: right 12px center;
+                background-size: 16px;
+              "
+            >
+              <option value="" data-i18n="apps.contact.type_placeholder">
+                Kies een optie...
+              </option>
+              <option value="mobiel" data-i18n="apps.contact.type_mobile">
+                Mobiele app (iOS/Android)
+              </option>
+              <option value="webapp" data-i18n="apps.contact.type_web">
+                Webapp
+              </option>
+              <option value="maatwerk" data-i18n="apps.contact.type_custom">
+                Maatwerk software
+              </option>
+              <option value="anders" data-i18n="apps.contact.type_other">
+                Weet ik nog niet / Anders
+              </option>
+            </select>
+          </div>
+
+          <div class="mt-5">
+            <label
+              for="app-budget"
+              class="block text-sm font-semibold text-ink mb-1.5"
+              data-i18n="apps.contact.budget"
+              >Indicatie budget
+              <span class="text-muted font-normal">(optioneel)</span></label
+            >
+            <select
+              id="app-budget"
+              name="budget"
+              class="w-full px-4 py-3 rounded-lg border-2 border-ink/15 bg-cream text-ink text-sm focus:border-accent focus:ring-0 focus:outline-none transition-colors duration-180 appearance-none cursor-pointer"
+              style="
+                background-image: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B6B6B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E&quot;);
+                background-repeat: no-repeat;
+                background-position: right 12px center;
+                background-size: 16px;
+              "
+            >
+              <option value="" data-i18n="apps.contact.budget_placeholder">
+                Kies een budget...
+              </option>
+              <option value="2500" data-i18n="apps.contact.budget_1">
+                Onder €2.500
+              </option>
+              <option value="2500-5000" data-i18n="apps.contact.budget_2">
+                €2.500 – €5.000
+              </option>
+              <option value="5000-10000" data-i18n="apps.contact.budget_3">
+                €5.000 – €10.000
+              </option>
+              <option value="10000+" data-i18n="apps.contact.budget_4">
+                Meer dan €10.000
+              </option>
+              <option
+                value="weet-ik-nog-niet"
+                data-i18n="apps.contact.budget_unknown"
+              >
+                Weet ik nog niet
+              </option>
+            </select>
+          </div>
+
+          <div class="mt-5">
+            <label
+              for="app-message"
+              class="block text-sm font-semibold text-ink mb-1.5"
+              data-i18n="apps.contact.message"
+              >Vertel ons over jouw project</label
+            >
+            <textarea
+              id="app-message"
+              name="message"
+              rows="4"
+              required
+              placeholder="Wat wil je laten bouwen? Welke problemen los je op?"
+              class="w-full px-4 py-3 rounded-lg border-2 border-ink/15 bg-cream text-ink text-sm placeholder:text-muted/60 focus:border-accent focus:ring-0 focus:outline-none transition-colors duration-180 resize-none"
+            ></textarea>
+          </div>
+
+          <div class="mt-8">
+            <button
+              type="submit"
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-accent text-white text-base font-semibold px-8 py-3.5 rounded-lg btn-primary cursor-pointer"
+            >
+              <i data-lucide="send" class="w-4.5 h-4.5"></i>
+              <span data-i18n="apps.contact.submit">Verstuur aanvraag</span>
+            </button>
+          </div>
+
+          <p class="mt-4 text-xs text-muted">
+            <span data-i18n="apps.contact.or_email">Of mail direct naar</span>
+            <a
+              href="mailto:support@nuxio.nl"
+              class="underline hover:text-ink transition-colors duration-180"
+              >support@nuxio.nl</a
+            >.
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="border-t border-ink/10 py-12 lg:py-16" role="contentinfo">
+      <div class="max-w-6xl mx-auto px-6 lg:px-8">
+        <div
+          class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8"
+        >
+          <div>
+            <a
+              href="index.html"
+              class="font-display font-extrabold text-2xl tracking-tight text-ink cursor-pointer"
+              aria-label="Nuxio home"
+              >Nuxio</a
+            >
+            <p class="mt-2 text-sm text-muted" data-i18n="footer.slogan">
+              Jouw website. Klaar in 5 dagen.
+            </p>
+          </div>
+          <div
+            class="flex flex-col sm:flex-row items-start sm:items-center gap-6"
+          >
+            <nav aria-label="Footer navigatie" class="flex gap-6">
+              <a
+                href="#prijzen"
+                class="text-sm text-muted hover:text-ink transition-colors duration-180 cursor-pointer"
+                data-i18n="nav.packages"
+                >Pakketten</a
+              >
+              <a
+                href="workshops.html"
+                class="text-sm text-muted hover:text-ink transition-colors duration-180 cursor-pointer"
+                data-i18n="nav.workshops"
+                >Workshops</a
+              >
+              <a
+                href="apps.html"
+                class="text-sm text-muted hover:text-ink transition-colors duration-180 cursor-pointer"
+                >Apps</a
+              >
+              <a
+                href="index.html#contact"
+                class="text-sm text-muted hover:text-ink transition-colors duration-180 cursor-pointer"
+                data-i18n="nav.contact"
+                >Contact</a
+              >
+            </nav>
+            <a
+              href="mailto:support@nuxio.nl"
+              class="text-sm text-muted hover:text-ink transition-colors duration-180 flex items-center gap-1.5 cursor-pointer"
+            >
+              <i data-lucide="mail" class="w-4 h-4"></i> support@nuxio.nl
+            </a>
+          </div>
+        </div>
+        <div class="mt-10 pt-6 border-t border-ink/10">
+          <p class="text-xs text-muted">
+            &copy; 2025 Nuxio — VOF | Max &amp; Raman
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+      const translations = {
+        nl: {
+          "nav.home": "Home",
+          "nav.packages": "Pakketten",
+          "nav.workshops": "Workshops",
+          "nav.contact": "Contact",
+          "nav.cta": "Vraag een offerte aan",
+          "apps.hero.headline": "Apps die jouw<br>bedrijf laten groeien.",
+          "apps.hero.sub":
+            "Van mobiele apps tot webapps — op maat gemaakt voor jouw onderneming. Wij bouwen wat jij nodig hebt.",
+          "apps.hero.cta1": "Bekijk onze diensten",
+          "apps.hero.cta2": "Vraag een offerte aan",
+          "apps.diensten.title": "Wat wij bouwen",
+          "apps.diensten.sub":
+            "Elke app is anders — daarom luisteren we eerst naar jouw wensen voordat we iets bouwen.",
+          "apps.diensten.s1.title": "Mobiele apps",
+          "apps.diensten.s1.desc":
+            "iOS en Android apps voor jouw klanten. Denk aan een boekings-app, bestel-app of loyaliteitsprogramma.",
+          "apps.diensten.s2.title": "Webapps",
+          "apps.diensten.s2.desc":
+            "Krachtige web-applicaties die in de browser werken. Van klantenportaal tot administratiesysteem.",
+          "apps.diensten.s3.title": "Maatwerk software",
+          "apps.diensten.s3.desc":
+            "Specifieke problemen vragen om specifieke oplossingen. Wij bouwen wat jij nodig hebt, niets meer, niets minder.",
+          "apps.process.title": "Hoe het werkt",
+          "apps.process.s1.title": "Intake",
+          "apps.process.s1.desc":
+            "Vertel ons wat je nodig hebt. Wij stellen de juiste vragen.",
+          "apps.process.s2.title": "Ontwerp",
+          "apps.process.s2.desc":
+            "Je krijgt een ontwerp ter goedkeuring voordat we gaan bouwen.",
+          "apps.process.s3.title": "Development",
+          "apps.process.s3.desc":
+            "Max bouwt jouw app met bewezen technologie en frameworks.",
+          "apps.process.s4.title": "Lancering",
+          "apps.process.s4.desc":
+            "Wij helpen met lancering, hosting en onderhoud.",
+          "apps.examples.title": "Voorbeelden",
+          "apps.examples.sub":
+            "Projecten die wij hebben gebouwd voor lokale ondernemers.",
+          "apps.examples.e1.type": "Restaurant",
+          "apps.examples.e1.title": "Bestel-app voor takeaway",
+          "apps.examples.e1.desc":
+            "Een mobiele bestel-app voor een lokaal restaurant. Klanten kunnen eenvoudig bestellen en betalen via hun telefoon.",
+          "apps.examples.e2.type": "Fysiotherapie",
+          "apps.examples.e2.title": "Online afspraken maken",
+          "apps.examples.e2.desc":
+            "Een webapp waarmee patiënten 24/7 afspraken kunnen inplannen. Geïntegreerd met de agenda van de praktijk.",
+          "apps.examples.e3.type": "Sportclub",
+          "apps.examples.e3.title": "Ledenportaal",
+          "apps.examples.e3.desc":
+            "Een webapp voor leden om trainingen te bekijken, zich in te schrijven en hun voortgang bij te houden.",
+          "apps.examples.e4.type": "Lokale winkel",
+          "apps.examples.e4.title": "Lokale bezorgservice",
+          "apps.examples.e4.desc":
+            "Een mobiele app voor een lokale winkel waarmee klanten producten kunnen bestellen en laten bezorgen.",
+          "apps.pricing.title": "Investering",
+          "apps.pricing.sub":
+            "Elke app is maatwerk. Hieronder een indicatie van wat je kunt verwachten.",
+          "apps.pricing.popular": "Meest gekozen",
+          "apps.pricing.s1.label": "Starter",
+          "apps.pricing.s1.price": "Vanaf €2.500",
+          "apps.pricing.s1.sub": "Eenvoudige app of webapp",
+          "apps.pricing.s1.f1": "1 platform (iOS of Android)",
+          "apps.pricing.s1.f2": "Basis functionaliteit",
+          "apps.pricing.s1.f3": "Oplevering in 4-6 weken",
+          "apps.pricing.s1.f4": "3 maanden garantie",
+          "apps.pricing.s1.cta": "Vraag offerte aan",
+          "apps.pricing.s2.label": "Professional",
+          "apps.pricing.s2.price": "€5.000 – €10.000",
+          "apps.pricing.s2.sub": "Complete app met meerdere functies",
+          "apps.pricing.s2.f1": "iOS + Android (of webapp)",
+          "apps.pricing.s2.f2": "Gebruikersaccounts & login",
+          "apps.pricing.s2.f3": "Integraties met bestaande systemen",
+          "apps.pricing.s2.f4": "Oplevering in 6-10 weken",
+          "apps.pricing.s2.f5": "6 maanden garantie",
+          "apps.pricing.s2.cta": "Vraag offerte aan",
+          "apps.pricing.s3.label": "Enterprise",
+          "apps.pricing.s3.price": "Op maat",
+          "apps.pricing.s3.sub": "Complexe applicatie of platform",
+          "apps.pricing.s3.f1": "Alles van Professional",
+          "apps.pricing.s3.f2": "Geavanceerde functionaliteit",
+          "apps.pricing.s3.f3": "Schalebaarheid & performance",
+          "apps.pricing.s3.f4": "Prioriteit support & onderhoud",
+          "apps.pricing.s3.cta": "Neem contact op",
+          "apps.pricing.note":
+            "Prijzen zijn indicatief. Na het intakegesprek ontvang je een gedetailleerde offerte op maat.",
+          "apps.contact.title": "Klaar om te starten?",
+          "apps.contact.desc":
+            "Vertel ons over jouw project. Wij nemen binnen een werkdag contact met je op.",
+          "apps.contact.name": "Naam",
+          "apps.contact.email": "E-mail",
+          "apps.contact.type": "Soort app",
+          "apps.contact.type_placeholder": "Kies een optie...",
+          "apps.contact.type_mobile": "Mobiele app (iOS/Android)",
+          "apps.contact.type_web": "Webapp",
+          "apps.contact.type_custom": "Maatwerk software",
+          "apps.contact.type_other": "Weet ik nog niet / Anders",
+          "apps.contact.budget": "Indicatie budget (optioneel)",
+          "apps.contact.budget_placeholder": "Kies een budget...",
+          "apps.contact.budget_1": "Onder €2.500",
+          "apps.contact.budget_2": "€2.500 – €5.000",
+          "apps.contact.budget_3": "€5.000 – €10.000",
+          "apps.contact.budget_4": "Meer dan €10.000",
+          "apps.contact.budget_unknown": "Weet ik nog niet",
+          "apps.contact.message": "Vertel ons over jouw project",
+          "apps.contact.submit": "Verstuur aanvraag",
+          "apps.contact.or_email": "Of mail direct naar",
+          "footer.slogan": "Jouw website. Klaar in 5 dagen.",
+        },
+        en: {
+          "nav.home": "Home",
+          "nav.packages": "Packages",
+          "nav.workshops": "Workshops",
+          "nav.contact": "Contact",
+          "nav.cta": "Request a quote",
+          "apps.hero.headline": "Apps that grow<br>your business.",
+          "apps.hero.sub":
+            "From mobile apps to web apps — custom-built for your business. We build what you need.",
+          "apps.hero.cta1": "View our services",
+          "apps.hero.cta2": "Request a quote",
+          "apps.diensten.title": "What we build",
+          "apps.diensten.sub":
+            "Every app is different — that's why we listen to your needs first.",
+          "apps.diensten.s1.title": "Mobile apps",
+          "apps.diensten.s1.desc":
+            "iOS and Android apps for your customers. Think of a booking app, ordering app or loyalty program.",
+          "apps.diensten.s2.title": "Web apps",
+          "apps.diensten.s2.desc":
+            "Powerful web applications that work in the browser. From customer portals to admin systems.",
+          "apps.diensten.s3.title": "Custom software",
+          "apps.diensten.s3.desc":
+            "Specific problems require specific solutions. We build what you need, nothing more, nothing less.",
+          "apps.process.title": "How it works",
+          "apps.process.s1.title": "Intake",
+          "apps.process.s1.desc":
+            "Tell us what you need. We ask the right questions.",
+          "apps.process.s2.title": "Design",
+          "apps.process.s2.desc":
+            "You receive a design for approval before we start building.",
+          "apps.process.s3.title": "Development",
+          "apps.process.s3.desc":
+            "Max builds your app with proven technology and frameworks.",
+          "apps.process.s4.title": "Launch",
+          "apps.process.s4.desc":
+            "We help with launch, hosting and maintenance.",
+          "apps.examples.title": "Examples",
+          "apps.examples.sub": "Projects we've built for local businesses.",
+          "apps.examples.e1.type": "Restaurant",
+          "apps.examples.e1.title": "Takeaway ordering app",
+          "apps.examples.e1.desc":
+            "A mobile ordering app for a local restaurant. Customers can easily order and pay via their phone.",
+          "apps.examples.e2.type": "Physiotherapy",
+          "apps.examples.e2.title": "Online appointment booking",
+          "apps.examples.e2.desc":
+            "A web app allowing patients to schedule appointments 24/7. Integrated with the practice's calendar.",
+          "apps.examples.e3.type": "Sports club",
+          "apps.examples.e3.title": "Member portal",
+          "apps.examples.e3.desc":
+            "A web app for members to view training sessions, register and track their progress.",
+          "apps.examples.e4.type": "Local shop",
+          "apps.examples.e4.title": "Local delivery service",
+          "apps.examples.e4.desc":
+            "A mobile app for a local shop allowing customers to order and have products delivered.",
+          "apps.pricing.title": "Investment",
+          "apps.pricing.sub":
+            "Every app is custom. Below is an indication of what to expect.",
+          "apps.pricing.popular": "Most popular",
+          "apps.pricing.s1.label": "Starter",
+          "apps.pricing.s1.price": "From €2,500",
+          "apps.pricing.s1.sub": "Simple app or web app",
+          "apps.pricing.s1.f1": "1 platform (iOS or Android)",
+          "apps.pricing.s1.f2": "Basic functionality",
+          "apps.pricing.s1.f3": "Delivery in 4-6 weeks",
+          "apps.pricing.s1.f4": "3 months warranty",
+          "apps.pricing.s1.cta": "Request quote",
+          "apps.pricing.s2.label": "Professional",
+          "apps.pricing.s2.price": "€5,000 – €10,000",
+          "apps.pricing.s2.sub": "Complete app with multiple features",
+          "apps.pricing.s2.f1": "iOS + Android (or web app)",
+          "apps.pricing.s2.f2": "User accounts & login",
+          "apps.pricing.s2.f3": "Integrations with existing systems",
+          "apps.pricing.s2.f4": "Delivery in 6-10 weeks",
+          "apps.pricing.s2.f5": "6 months warranty",
+          "apps.pricing.s2.cta": "Request quote",
+          "apps.pricing.s3.label": "Enterprise",
+          "apps.pricing.s3.price": "Custom",
+          "apps.pricing.s3.sub": "Complex application or platform",
+          "apps.pricing.s3.f1": "Everything in Professional",
+          "apps.pricing.s3.f2": "Advanced functionality",
+          "apps.pricing.s3.f3": "Scalability & performance",
+          "apps.pricing.s3.f4": "Priority support & maintenance",
+          "apps.pricing.s3.cta": "Get in touch",
+          "apps.pricing.note":
+            "Prices are indicative. After the intake conversation you'll receive a detailed custom quote.",
+          "apps.contact.title": "Ready to get started?",
+          "apps.contact.desc":
+            "Tell us about your project. We'll contact you within one business day.",
+          "apps.contact.name": "Name",
+          "apps.contact.email": "Email",
+          "apps.contact.type": "Type of app",
+          "apps.contact.type_placeholder": "Choose an option...",
+          "apps.contact.type_mobile": "Mobile app (iOS/Android)",
+          "apps.contact.type_web": "Web app",
+          "apps.contact.type_custom": "Custom software",
+          "apps.contact.type_other": "Not sure yet / Other",
+          "apps.contact.budget": "Budget indication (optional)",
+          "apps.contact.budget_placeholder": "Choose a budget...",
+          "apps.contact.budget_1": "Under €2,500",
+          "apps.contact.budget_2": "€2,500 – €5,000",
+          "apps.contact.budget_3": "€5,000 – €10,000",
+          "apps.contact.budget_4": "More than €10,000",
+          "apps.contact.budget_unknown": "Not sure yet",
+          "apps.contact.message": "Tell us about your project",
+          "apps.contact.submit": "Send request",
+          "apps.contact.or_email": "Or email us directly at",
+          "footer.slogan": "Your website. Ready in 5 days.",
+        },
+      };
+
+      let currentLang = localStorage.getItem("nuxio-lang") || "nl";
+
+      function setLanguage(lang) {
+        currentLang = lang;
+        localStorage.setItem("nuxio-lang", lang);
+        document.documentElement.lang = lang;
+        const t = translations[lang];
+
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          const key = el.getAttribute("data-i18n");
+          if (t[key] !== undefined) el.textContent = t[key];
+        });
+        document.querySelectorAll("[data-i18n-html]").forEach((el) => {
+          const key = el.getAttribute("data-i18n-html");
+          if (t[key] !== undefined) el.innerHTML = t[key];
+        });
+        document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+          const key = el.getAttribute("data-i18n-placeholder");
+          if (t[key] !== undefined) el.placeholder = t[key];
+        });
+
+        document.querySelectorAll("[data-lang]").forEach((btn) => {
+          btn.classList.toggle(
+            "active",
+            btn.getAttribute("data-lang") === lang,
+          );
+        });
+
+        document.title =
+          lang === "en" ? "Nuxio — Custom apps" : "Nuxio — Apps op maat";
+      }
+
+      document.querySelectorAll("[data-lang]").forEach((btn) => {
+        btn.addEventListener("click", () =>
+          setLanguage(btn.getAttribute("data-lang")),
+        );
+      });
+
+      setLanguage(currentLang);
+      lucide.createIcons();
+
+      const navbar = document.getElementById("navbar");
+      window.addEventListener(
+        "scroll",
+        () => {
+          navbar.classList.toggle("scrolled", window.scrollY > 10);
+        },
+        { passive: true },
+      );
+
+      const menuToggle = document.getElementById("menu-toggle");
+      const mobileMenu = document.getElementById("mobile-menu");
+      let menuOpen = false;
+      menuToggle.addEventListener("click", () => {
+        menuOpen = !menuOpen;
+        mobileMenu.classList.toggle("hidden", !menuOpen);
+        menuToggle.setAttribute("aria-expanded", menuOpen.toString());
+      });
+      mobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          menuOpen = false;
+          mobileMenu.classList.add("hidden");
+          menuToggle.setAttribute("aria-expanded", "false");
+        });
+      });
+
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      if (!prefersReducedMotion) {
+        document.querySelectorAll(".hero-item").forEach((item, i) => {
+          setTimeout(() => item.classList.add("show"), 200 + i * 150);
+        });
+        const revealObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                revealObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
+        );
+        document
+          .querySelectorAll(".reveal")
+          .forEach((el) => revealObserver.observe(el));
+      } else {
+        document.querySelectorAll(".hero-item, .reveal").forEach((el) => {
+          el.classList.add("show");
+          el.classList.add("visible");
+        });
+      }
+
+      if (window.location.search.includes("submitted=true")) {
+        const form = document.getElementById("app-form");
+        if (form) {
+          const banner = document.createElement("div");
+          banner.className =
+            "mb-6 bg-accent/10 border-2 border-accent/30 rounded-xl p-5 text-center";
+          banner.innerHTML =
+            currentLang === "en"
+              ? '<p class="font-display font-bold text-lg text-accent">Request sent!</p><p class="mt-1 text-sm text-ink/70">We will contact you within one business day.</p>'
+              : '<p class="font-display font-bold text-lg text-accent">Aanvraag verzonden!</p><p class="mt-1 text-sm text-ink/70">Wij nemen binnen een werkdag contact met je op.</p>';
+          form.parentNode.insertBefore(banner, form);
+          history.replaceState(null, "", window.location.pathname);
+        }
+      }
+
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({
+              behavior: prefersReducedMotion ? "auto" : "smooth",
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
